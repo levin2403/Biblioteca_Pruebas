@@ -1,0 +1,7 @@
+dao\LibroDAO.class
+dominio\Usuario.class
+dao\Pruebas.class
+dao\UsuarioDAO.class
+dao\PrestamoDAO.class
+dominio\Prestamo.class
+dominio\Libro.class
