@@ -1,4 +1,4 @@
-package dominio;
+package entityes;
 
 /**
  * Clase que representa un libro en un sistema de gestión de biblioteca.

@@ -4,7 +4,7 @@
  */
 package dao;
 
-import dominio.Libro;
+import entityes.Libro;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;

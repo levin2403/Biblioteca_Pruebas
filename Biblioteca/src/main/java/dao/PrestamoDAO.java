@@ -4,8 +4,8 @@
  */
 package dao;
 
-import dominio.Libro;
-import dominio.Prestamo;
+import entityes.Libro;
+import entityes.Prestamo;
 import java.util.ArrayList;
 import java.util.List;
 

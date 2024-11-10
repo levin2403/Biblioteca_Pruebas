@@ -4,9 +4,9 @@
  */
 package dao;
 
-import dominio.Libro;
-import dominio.Prestamo;
-import dominio.Usuario;
+import entityes.Libro;
+import entityes.Prestamo;
+import entityes.Usuario;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;

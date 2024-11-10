@@ -1,4 +1,4 @@
-package dominio;
+package entityes;
 
 /**
  * Clase que representa un usuario en el sistema.

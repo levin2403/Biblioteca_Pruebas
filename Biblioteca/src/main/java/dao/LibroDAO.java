@@ -1,7 +1,7 @@
 package dao;
 
 
-import dominio.Libro;
+import entityes.Libro;
 
 /**
  * Clase que actúa como el Data Access Object (DAO) para la entidad Libro.

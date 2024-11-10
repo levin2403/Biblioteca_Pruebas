@@ -1,7 +1,7 @@
 dao\LibroDAO.class
-dominio\Usuario.class
-dao\Pruebas.class
+entityes\Usuario.class
 dao\UsuarioDAO.class
+entityes\Prestamo.class
+entityes\Libro.class
+utilities\hasher.class
 dao\PrestamoDAO.class
-dominio\Prestamo.class
-dominio\Libro.class
