@@ -12,10 +12,11 @@ import java.util.List;
  *
  * @author skevi
  */
-public interface IBlibliotecarioDAO {
+public interface IBibliotecarioDAO {
     
     public void addLibrarian(Bibliotecario bibliotecario) throws DAOException;
     public boolean loggin(String correo, String contrasena) throws DAOException;
     public List<Bibliotecario> getLibrarians() throws DAOException;
+    public Bibliotecario findByMail(String mail) throws DAOException;
     
 }

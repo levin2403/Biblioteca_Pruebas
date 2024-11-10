@@ -20,5 +20,6 @@ public interface ILibroDAO {
     public void agregarLibro(Libro libro) throws DAOException;
     public void actualizarLibro(Libro libro) throws DAOException;
     public void eliminarLibro(Libro libro) throws DAOException;
+    public List<Libro> obtenerLibros() throws DAOException;
     
 }

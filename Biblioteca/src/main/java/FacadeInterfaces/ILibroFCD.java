@@ -4,10 +4,12 @@
  */
 package FacadeInterfaces;
 
+import exceptions.FacadeException;
+
 /**
  *
  * @author skevi
  */
-public interface BibliotecarioFCD {
+public interface ILibroFCD {
     
 }

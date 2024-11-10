@@ -4,7 +4,14 @@
  */
 package presentation;
 
+import FacadeInterfaces.IBibliotecarioFCD;
+import exceptions.FacadeException;
+import fabricas.FabricaBibliotecarios;
+import fabricas.FabricaLibros;
+import fabricas.FabricaUsuarios;
+import facade.BibliotecarioFCD;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import utilities.RoundedBorder;
 
 
@@ -14,15 +21,32 @@ import utilities.RoundedBorder;
  */
 public class FrmLogin extends javax.swing.JFrame {
   
+    private IBibliotecarioFCD librarianFacade;
+    
     public FrmLogin() {
         initComponents();
+        intialConfig();
+        styles();
+        loadFactories();
     }
     
-    public void intialConfig(){
+    private void loadFactories(){
+        FabricaBibliotecarios fabrica1 = new FabricaBibliotecarios();
+        FabricaLibros fabrica2 = new FabricaLibros();
+        FabricaUsuarios fabrica3 = new FabricaUsuarios();
+        
+        fabrica1.fabricarBibliotecarios();
+        fabrica2.fabricarLibros();
+        fabrica3.fabricarUsuarios();
+      
+    }
+    
+    private void intialConfig(){
         this.setLocationRelativeTo(this);
+        this.librarianFacade = new BibliotecarioFCD();
     }
     
-    public void styles(){
+    private void styles(){
         
         RoundedBorder border = new RoundedBorder(30);
         RoundedBorder border2 = new RoundedBorder(30);
@@ -46,12 +70,10 @@ public class FrmLogin extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         btnIngresar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txfCorreo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        lblLogo = new javax.swing.JLabel();
         psfContrasena = new javax.swing.JPasswordField();
         chbContrasena = new javax.swing.JCheckBox();
 
@@ -75,32 +97,30 @@ public class FrmLogin extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("¿Aun no tienes una cuenta? presiona para registrarte. ");
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-        });
-
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Contraseña:");
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel3.setText("Inicio de sesion");
 
-        txfCorreo.setBackground(new java.awt.Color(62, 160, 236));
         txfCorreo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txfCorreo.setForeground(new java.awt.Color(0, 0, 0));
+        txfCorreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfCorreoActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setText("Correo:");
 
-        lblLogo.setToolTipText("");
-
-        psfContrasena.setBackground(new java.awt.Color(0, 0, 0));
         psfContrasena.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         psfContrasena.setForeground(new java.awt.Color(0, 0, 0));
+        psfContrasena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                psfContrasenaActionPerformed(evt);
+            }
+        });
 
         chbContrasena.setText("Ver");
         chbContrasena.addActionListener(new java.awt.event.ActionListener() {
@@ -113,52 +133,49 @@ public class FrmLogin extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txfCorreo)
-                    .addComponent(jLabel2)
-                    .addComponent(psfContrasena))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(chbContrasena)
-                .addContainerGap(15, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(116, 116, 116)
                 .addComponent(jLabel3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(113, 113, 113)
+                .addGap(52, 52, 52)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txfCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(psfContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addComponent(chbContrasena)
+                        .addGap(21, 21, 21))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(127, 127, 127)
                 .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(53, 53, 53)
                 .addComponent(jLabel3)
-                .addGap(38, 38, 38)
+                .addGap(48, 48, 48)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(txfCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(psfContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chbContrasena))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(jLabel1)
-                .addGap(46, 46, 46))
+                .addGap(24, 24, 24))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -176,7 +193,27 @@ public class FrmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        
+        try{
+            System.out.println(this.txfCorreo.getText());
+            
+            String mail = this.txfCorreo.getText();
+            
+            char[] passwordChars = psfContrasena.getPassword();
+
+            
+            String password = new String(passwordChars);
+            
+            System.out.println(password);
+            
+            if(librarianFacade.loggin(mail, password)){
+                FrmMenu menu = new FrmMenu();
+                menu.setVisible(true);
+            }
+                
+        }
+        catch(FacadeException fe){
+            JOptionPane.showMessageDialog(this, fe.getMessage());
+        }
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnIngresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresarMouseEntered
@@ -186,10 +223,6 @@ public class FrmLogin extends javax.swing.JFrame {
     private void btnIngresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresarMouseExited
         this.btnIngresar.setForeground( Color.BLACK);
     }//GEN-LAST:event_btnIngresarMouseExited
-
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-
-    }//GEN-LAST:event_jLabel1MouseClicked
 
     private void chbContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbContrasenaActionPerformed
         if (chbContrasena.isSelected()) {
@@ -201,24 +234,28 @@ public class FrmLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_chbContrasenaActionPerformed
 
+    private void txfCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfCorreoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfCorreoActionPerformed
+
+    private void psfContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_psfContrasenaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_psfContrasenaActionPerformed
+
     
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmLogin().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new FrmLogin().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
     private javax.swing.JCheckBox chbContrasena;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblLogo;
     private javax.swing.JPasswordField psfContrasena;
     private javax.swing.JTextField txfCorreo;
     // End of variables declaration//GEN-END:variables

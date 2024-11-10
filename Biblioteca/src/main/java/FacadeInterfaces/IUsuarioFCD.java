@@ -8,6 +8,6 @@ package FacadeInterfaces;
  *
  * @author skevi
  */
-public interface UsuarioFCD {
+public interface IUsuarioFCD {
     
 }

@@ -20,6 +20,12 @@ public class UsuarioDAO implements IUsuarioDAO {
      * Representa la base de datos en esta implementación.
      */
     private static List<Usuario> usuarios = new ArrayList<>();
+
+    /**
+     * 
+     */
+    public UsuarioDAO() {
+    }
     
     /**
      * Obtiene un usuario por su ID.

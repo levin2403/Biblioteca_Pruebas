@@ -23,6 +23,12 @@ public class PrestamoDAO implements IPrestamoDAO{
      * Representa la base de datos en esta implementación.
      */
     private static List<Prestamo> prestamos = new ArrayList<>();
+
+    /**
+     * 
+     */
+    public PrestamoDAO() {
+    }
     
     /**
      * Registra un préstamo de un libro a un usuario.

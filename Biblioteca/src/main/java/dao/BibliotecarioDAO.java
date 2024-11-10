@@ -4,20 +4,26 @@
  */
 package dao;
 
-import daoInterfaces.IBlibliotecarioDAO;
 import entityes.Bibliotecario;
 import exceptions.DAOException;
 import java.util.ArrayList;
 import java.util.List;
+import daoInterfaces.IBibliotecarioDAO;
 
 
 /**
  *
  * @author skevi
  */
-public class BibliotecarioDAO implements IBlibliotecarioDAO {
+public class BibliotecarioDAO implements IBibliotecarioDAO {
 
-    private static List<Bibliotecario> bibliotecarios;
+    private static List<Bibliotecario> bibliotecarios = new ArrayList<>();
+
+    /**
+     * 
+     */
+    public BibliotecarioDAO() {
+    }
     
     /**
      * 
@@ -62,7 +68,7 @@ public class BibliotecarioDAO implements IBlibliotecarioDAO {
         }
 
         try {
-            BibliotecarioDAO.bibliotecarios.add(bibliotecario);
+            bibliotecarios.add(bibliotecario);
 
         } catch (UnsupportedOperationException ex) {
             throw new DAOException("La lista de bibliotecarios es inmodificable", ex);
@@ -80,6 +86,21 @@ public class BibliotecarioDAO implements IBlibliotecarioDAO {
                     + "está inicializada");
         }
         return new ArrayList<>(BibliotecarioDAO.bibliotecarios); 
+    }
+
+    @Override
+    public Bibliotecario findByMail(String mail) throws DAOException {
+        try{
+            for (Bibliotecario bibliotecario : bibliotecarios) {
+                if (bibliotecario.getCorreo().equalsIgnoreCase(mail)) {
+                    return bibliotecario;
+                }
+            }
+        }
+        catch(Exception ex){
+            throw new DAOException("Error al buscar por email", ex);
+        }
+        return null;
     }
 
     

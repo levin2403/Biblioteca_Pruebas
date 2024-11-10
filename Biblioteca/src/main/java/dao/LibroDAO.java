@@ -30,6 +30,12 @@ public class LibroDAO implements ILibroDAO {
     private static List<Libro> libros = new ArrayList<>(); 
 
     /**
+     * 
+     */
+    public LibroDAO() {
+    }
+
+    /**
      * Devuelve el libro con el titulo mas coincidente.
      * 
      * @param titulo El título del libro a buscar.
