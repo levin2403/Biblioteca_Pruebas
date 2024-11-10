@@ -4,6 +4,8 @@
  */
 package entityes;
 
+import java.time.LocalDate;
+
 /**
  * Clase que representa un préstamo de un libro a un usuario.
  * Esta clase permite registrar un préstamo y su correspondiente devolución.
@@ -11,11 +13,6 @@ package entityes;
  * @author skevi
  */
 public class Prestamo {
-    
-    /**
-     * Identificador del prestamo.
-     */
-    private int id;
     
     /**
      * El usuario que toma prestado el libro.
@@ -28,6 +25,11 @@ public class Prestamo {
     private Libro libro;
 
     /**
+     * Fecha de devolucion del libro;
+     */
+    private LocalDate fechaDevolucion;
+    
+    /**
      * Constructor por defecto de la clase.
      */
     public Prestamo() {
@@ -37,23 +39,13 @@ public class Prestamo {
      * 
      * constructor para inicializar ambos atributos de la clase.
      * 
-     * @param id identificador del prestamo.
      * @param usuario Usuario del prestamo.
      * @param libro Libro del prestamo.
      */
-    public Prestamo(int id, Usuario usuario, Libro libro) {
-        this.id = id;
+    public Prestamo(Usuario usuario, Libro libro,LocalDate fechaDevolucion) {
         this.usuario = usuario;
         this.libro = libro;
-    }
-
-    /**
-     * Metodo para obtener el id del Usuario;
-     * 
-     * @return id del usuario. 
-     */
-    public int getId() {
-        return id;
+        this.fechaDevolucion = fechaDevolucion;
     }
 
     /**
@@ -89,6 +81,24 @@ public class Prestamo {
      */
     public void setLibro(Libro libro) {
         this.libro = libro;
+    }
+
+    /**
+     * Metodo para obtener la fecha para la devolucion del libro.
+     * 
+     * @return Fecha de devolucion de un libro.
+     */
+    public LocalDate getFechaDevolucion() {
+        return fechaDevolucion;
+    }
+
+    /**
+     * Metodo para establecer la fecha de devolucion del libro
+     * 
+     * @param fechaDevolucion fecha de devolucion a establecer para el libro.
+     */
+    public void setFechaDevolucion(LocalDate fechaDevolucion) {
+        this.fechaDevolucion = fechaDevolucion;
     }
 
     /**

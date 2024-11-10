@@ -4,8 +4,10 @@
  */
 package dao;
 
+import daoInterfaces.IPrestamoDAO;
 import entityes.Libro;
 import entityes.Prestamo;
+import exceptions.DAOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,7 @@ import java.util.List;
  * Esta clase proporciona métodos para gestionar los préstamos de libros.
  * 
  */
-public class PrestamoDAO {
+public class PrestamoDAO implements IPrestamoDAO{
     
     /**
      * Lista que almacena los préstamos en memoria.
@@ -27,8 +29,10 @@ public class PrestamoDAO {
      * Establece el estado del libro como prestado.
      * 
      * @param prestamo El objeto Prestamo que se desea registrar.
+     * @throws exceptions.DAOException
      */
-    public void registrarPrestamo(Prestamo prestamo) {
+    @Override
+    public void registrarPrestamo(Prestamo prestamo) throws DAOException {
         // Establecer el estado del libro como prestado
         Libro libro = prestamo.getLibro();
         libro.setPrestado(true); // Cambia el estado del libro a prestado
@@ -42,23 +46,23 @@ public class PrestamoDAO {
      * Establece el estado del libro como no prestado.
      * 
      * @param prestamo El objeto Prestamo que se desea registrar como devuelto.
+     * @throws exceptions.DAOException
      */
-    public void registrarDevolucion(Prestamo prestamo) {
+    @Override
+    public void registrarDevolucion(Prestamo prestamo) throws DAOException {
         // Establecer el estado del libro como no prestado
         Libro libro = prestamo.getLibro();
         libro.setPrestado(false); // Cambia el estado del libro a no prestado
         
     }
     
-    public Prestamo obtenerPrestamo(int id){
-        for (Prestamo prestamo : prestamos) {
-            if (prestamo.getId() == id) {
-                return prestamo;
-            }
-        }
-        return null;
+    /**
+     * 
+     * @return 
+     */
+    public List<Prestamo> listaPrestamos(){
+        return PrestamoDAO.prestamos;
     }
-    
 }
 
 

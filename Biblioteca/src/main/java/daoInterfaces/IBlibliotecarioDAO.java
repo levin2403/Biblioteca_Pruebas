@@ -4,7 +4,7 @@
  */
 package daoInterfaces;
 
-import entityes.Usuario;
+import entityes.Bibliotecario;
 import exceptions.DAOException;
 import java.util.List;
 
@@ -12,11 +12,10 @@ import java.util.List;
  *
  * @author skevi
  */
-public interface IUsuarioDAO {
+public interface IBlibliotecarioDAO {
     
-    public Usuario obten(int id) throws DAOException;
-    public void registrarUsuario(Usuario usuario) throws DAOException;
-    public void actualizarUsuario(Usuario usuario) throws DAOException;
-    public List<Usuario> listaUsuarios() throws DAOException;
+    public void addLibrarian(Bibliotecario bibliotecario) throws DAOException;
+    public boolean loggin(String correo, String contrasena) throws DAOException;
+    public List<Bibliotecario> getLibrarians() throws DAOException;
     
 }
