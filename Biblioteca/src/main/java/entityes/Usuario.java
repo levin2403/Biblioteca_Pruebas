@@ -19,6 +19,11 @@ public class Usuario {
     private String nombre;
     
     /**
+     * 
+     */
+    private String correo;
+    
+    /**
      * La contraseña del usuario.
      */
     private String contraseña;
@@ -30,9 +35,10 @@ public class Usuario {
      * @param nombre El nombre del usuario.
      * @param contraseña La contraseña del usuario.
      */
-    public Usuario(int id, String nombre, String contraseña) {
+    public Usuario(int id, String nombre, String correo, String contraseña) {
         this.id = id;
         this.nombre = nombre;
+        this.correo = correo;
         this.contraseña = contraseña;
     }
 
@@ -70,6 +76,24 @@ public class Usuario {
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    /**
+     * Metodo para obtener el correo del usuario;
+     * 
+     * @return Cadena con el correo del usuario;
+     */
+    public String getCorreo() {
+        return correo;
+    }
+
+    /**
+     * Metodo para establecer el correo del usuario;
+     * 
+     * @param correo Correo a establecer.
+     */
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     /**
