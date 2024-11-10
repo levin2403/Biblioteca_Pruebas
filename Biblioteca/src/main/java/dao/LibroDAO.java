@@ -13,10 +13,12 @@ import exceptions.DAOException;
  */
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Clase que actúa como el Data Access Object (DAO) para la entidad Libro.
- * Esta clase proporciona métodos para gestionar libros, incluyendo búsqueda, adición, actualización y eliminación.
+ * Esta clase proporciona métodos para gestionar libros, incluyendo búsqueda, 
+ * adición, actualización y eliminación.
  * 
  */
 public class LibroDAO implements ILibroDAO {
@@ -36,21 +38,28 @@ public class LibroDAO implements ILibroDAO {
      */
     @Override
     public List<Libro> buscarPorTitulo(String titulo) throws DAOException {
-        if (titulo == null || titulo.isEmpty()) {
-            throw new DAOException("El título no puede ser nulo o vacío");
-        }
-        
-        List<Libro> resultados = new ArrayList<>();
-        String regex = ".*" + titulo + ".*"; 
-        
-        for (Libro libro : libros) {
-            if (libro.getTitulo().matches(regex)) {
-                resultados.add(libro);
+        try {
+            if (titulo == null || titulo.isEmpty()) {
+                throw new DAOException("El título no puede ser nulo o vacío");
             }
+
+            List<Libro> resultados = new ArrayList<>();
+            String regex = ".*" + Pattern.quote(titulo) + ".*"; 
+            Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE); 
+
+            for (Libro libro : libros) {
+                if (pattern.matcher(libro.getTitulo()).matches()) {
+                    resultados.add(libro);
+                }
+            }
+
+            return resultados;
+
+        } catch (Exception ex) {
+            throw new DAOException("Error al buscar libros por título", ex);
         }
-        
-        return resultados;
     }
+
     
     /**
      * Devuelve el libro con el autor mas coincidente.
@@ -60,22 +69,29 @@ public class LibroDAO implements ILibroDAO {
      * @throws exceptions.DAOException
      */
     @Override
-    public List<Libro> buscarPorAutor(String autor) throws DAOException { 
-        if (autor == null || autor.isEmpty()) {
-            throw new DAOException("El autor no puede ser nulo o vacío");
-        }
-        
-        List<Libro> resultados = new ArrayList<>();
-        String regex = ".*" + autor + ".*"; 
-        
-        for (Libro libro : libros) {
-            if (libro.getAutor().matches(regex)) {
-                resultados.add(libro);
+    public List<Libro> buscarPorAutor(String autor) throws DAOException {
+        try {
+            if (autor == null || autor.isEmpty()) {
+                throw new DAOException("El autor no puede ser nulo o vacío");
             }
+
+            List<Libro> resultados = new ArrayList<>();
+            String regex = ".*" + Pattern.quote(autor) + ".*"; 
+            Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE); 
+
+            for (Libro libro : libros) {
+                if (pattern.matcher(libro.getAutor()).matches()) {
+                    resultados.add(libro);
+                }
+            }
+
+            return resultados;
+
+        } catch (Exception ex) {
+            throw new DAOException("Error al buscar libros por autor", ex);
         }
-        
-        return resultados;
     }
+
     
     /**
      * Devuelve el libro con el ISBN mas coincidente.
@@ -86,13 +102,24 @@ public class LibroDAO implements ILibroDAO {
      */
     @Override
     public Libro buscarPorISBN(String isbn) throws DAOException {
-        for (Libro libro : libros) {
-            if (libro.getIsbn().equals(isbn)) {
-                return libro; // Devuelve el libro si el ISBN coincide.
+        try {
+            if (isbn == null || isbn.isEmpty()) {
+                throw new DAOException("El ISBN no puede ser nulo o vacío");
             }
+
+            for (Libro libro : libros) {
+                if (libro.getIsbn().equals(isbn)) {
+                    return libro; 
+                }
+            }
+
+            return null; 
+
+        } catch (Exception ex) {
+            throw new DAOException("Error al buscar libro por ISBN", ex);
         }
-        return null; // Retorna null si no se encuentra el libro.
     }
+
     
     /**
      * Agrega un nuevo libro a la lista de libros.
@@ -102,7 +129,12 @@ public class LibroDAO implements ILibroDAO {
      */
     @Override
     public void agregarLibro(Libro libro) throws DAOException {
-        libros.add(libro); // Añade el libro a la lista.
+        try{
+        libros.add(libro); 
+        
+        }catch(Exception ex){
+            throw new DAOException();
+        }
     }
     
     /**
@@ -113,13 +145,29 @@ public class LibroDAO implements ILibroDAO {
      */
     @Override
     public void actualizarLibro(Libro libro) throws DAOException {
-        // Buscamos el libro en la lista usando el ISBN.
-        Libro libroExistente = buscarPorISBN(libro.getIsbn());
-        if (libroExistente != null) {
-            // Actualizamos los atributos del libro existente.
-            libroExistente.setTitulo(libro.getTitulo());
-            libroExistente.setAutor(libro.getAutor());
-            libroExistente.setPrestado(libro.isPrestado());
+        try {
+            if (libro == null) {
+                throw new DAOException("El libro no puede ser nulo");
+            }
+
+            if (libro.getIsbn() == null || libro.getIsbn().isEmpty()) {
+                throw new DAOException("El ISBN del libro no puede ser "
+                        + "nulo o vacío");
+            }
+
+            Libro libroExistente = buscarPorISBN(libro.getIsbn());
+            if (libroExistente != null) {
+                // Actualizamos los atributos del libro existente
+                libroExistente.setTitulo(libro.getTitulo());
+                libroExistente.setAutor(libro.getAutor());
+                libroExistente.setPrestado(libro.isPrestado());
+            } else {
+                throw new DAOException("El libro con ISBN " + libro.getIsbn() 
+                        + " no existe en el catálogo");
+            }
+
+        } catch (Exception ex) {
+            throw new DAOException("Error al actualizar el libro", ex);
         }
     }
     
@@ -131,17 +179,45 @@ public class LibroDAO implements ILibroDAO {
      */
     @Override
     public void eliminarLibro(Libro libro) throws DAOException {
-        libros.remove(libro); // Elimina el libro de la lista.
+        try {
+            if (libro == null) {
+                throw new DAOException("El libro no puede ser nulo");
+            }
+
+            if (!libros.contains(libro)) {
+                throw new DAOException("El libro no existe en el catálogo y "
+                        + "no puede ser eliminado");
+            }
+
+            libros.remove(libro); // Elimina el libro de la lista
+
+        } catch (Exception ex) {
+            throw new DAOException("Error al intentar eliminar el libro", ex);
+        }
     }
+
     
     /**
      * Metodo para obtener los libros exitstentes.
      * 
      * @return Lista con los libros existentes.
+     * @throws exceptions.DAOException
      */
-    public List<Libro> obtenerLibros(){
-       return LibroDAO.libros;
+    public List<Libro> obtenerLibros() throws DAOException {
+        try {
+            if (LibroDAO.libros == null) {
+                throw new DAOException("La lista de libros "
+                        + "no está inicializada.");
+            }
+
+            return LibroDAO.libros; 
+
+        } catch (Exception ex) {
+            throw new DAOException("Error al obtener los libros", ex);
+        }
     }
+
+    
 }
 
 

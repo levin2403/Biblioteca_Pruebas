@@ -7,6 +7,7 @@ package dao;
 import daoInterfaces.IBlibliotecarioDAO;
 import entityes.Bibliotecario;
 import exceptions.DAOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,17 +19,35 @@ public class BibliotecarioDAO implements IBlibliotecarioDAO {
 
     private static List<Bibliotecario> bibliotecarios;
     
+    /**
+     * 
+     * @param correo
+     * @param contrasena
+     * @return
+     * @throws DAOException 
+     */
     @Override
-    public boolean loggin(String correo, String contrasena) 
-            throws DAOException {
-        for (Bibliotecario usuario : bibliotecarios) {
-            // Compara el nombre de usuario y la contraseña.
-            if (usuario.getCorreo().equals(correo) && 
-                    usuario.getContrasena().equals(contrasena)) {
-                return true; // Inicio de sesión exitoso.
-            }
+    public boolean loggin(String correo, String contrasena) throws DAOException {
+        if (correo == null || contrasena == null) {
+            throw new DAOException("Correo y contraseña no pueden ser nulos");
         }
-        return false; // Inicio de sesión fallido.
+
+        try {
+            if (bibliotecarios == null) {
+                throw new DAOException("La lista de bibliotecarios no está inicializada");
+            }
+
+            for (Bibliotecario usuario : bibliotecarios) {
+                // Compara el nombre de usuario y la contraseña.
+                if (correo.equals(usuario.getCorreo()) && contrasena.equals(usuario.getContrasena())) {
+                    return true; // Inicio de sesión exitoso.
+                }
+            }
+            return false; // Inicio de sesión fallido.
+
+        } catch (NullPointerException ex) {
+            throw new DAOException("Error de acceso a datos: algún campo es nulo", ex);
+        } 
     }
 
     /**
@@ -38,9 +57,17 @@ public class BibliotecarioDAO implements IBlibliotecarioDAO {
      */
     @Override
     public void addLibrarian(Bibliotecario bibliotecario) throws DAOException {
-        BibliotecarioDAO.bibliotecarios.add(bibliotecario);
-    }
+        if (bibliotecario == null) {
+            throw new DAOException("El bibliotecario no puede ser nulo");
+        }
 
+        try {
+            BibliotecarioDAO.bibliotecarios.add(bibliotecario);
+
+        } catch (UnsupportedOperationException ex) {
+            throw new DAOException("La lista de bibliotecarios es inmodificable", ex);
+        } 
+    }
     /**
      * 
      * @return
@@ -48,7 +75,12 @@ public class BibliotecarioDAO implements IBlibliotecarioDAO {
      */
     @Override
     public List<Bibliotecario> getLibrarians() throws DAOException {
-        return BibliotecarioDAO.bibliotecarios;
+        if (BibliotecarioDAO.bibliotecarios == null) {
+            throw new DAOException("La lista de bibliotecarios no "
+                    + "está inicializada");
+        }
+        return new ArrayList<>(BibliotecarioDAO.bibliotecarios); 
     }
+
     
 }
