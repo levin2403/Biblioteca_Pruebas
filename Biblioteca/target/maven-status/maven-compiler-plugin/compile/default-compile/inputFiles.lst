@@ -6,6 +6,7 @@ C:\Users\skevi\Documents\GitHub\Biblioteca_Pruebas\Biblioteca\src\main\java\enti
 C:\Users\skevi\Documents\GitHub\Biblioteca_Pruebas\Biblioteca\src\main\java\exceptions\DAOException.java
 C:\Users\skevi\Documents\GitHub\Biblioteca_Pruebas\Biblioteca\src\main\java\exceptions\FacadeException.java
 C:\Users\skevi\Documents\GitHub\Biblioteca_Pruebas\Biblioteca\src\main\java\presentation\panels\PnlUpdateUser.java
+C:\Users\skevi\Documents\GitHub\Biblioteca_Pruebas\Biblioteca\src\main\java\facade\loginFCD.java
 C:\Users\skevi\Documents\GitHub\Biblioteca_Pruebas\Biblioteca\src\main\java\dao\BibliotecarioDAO.java
 C:\Users\skevi\Documents\GitHub\Biblioteca_Pruebas\Biblioteca\src\main\java\dao\PrestamoDAO.java
 C:\Users\skevi\Documents\GitHub\Biblioteca_Pruebas\Biblioteca\src\main\java\FacadeInterfaces\ILibroFCD.java
@@ -29,7 +30,6 @@ C:\Users\skevi\Documents\GitHub\Biblioteca_Pruebas\Biblioteca\src\main\java\daoI
 C:\Users\skevi\Documents\GitHub\Biblioteca_Pruebas\Biblioteca\src\main\java\entityes\Usuario.java
 C:\Users\skevi\Documents\GitHub\Biblioteca_Pruebas\Biblioteca\src\main\java\presentation\FrmMenu.java
 C:\Users\skevi\Documents\GitHub\Biblioteca_Pruebas\Biblioteca\src\main\java\daoInterfaces\IBibliotecarioDAO.java
-C:\Users\skevi\Documents\GitHub\Biblioteca_Pruebas\Biblioteca\src\main\java\facade\BibliotecarioFCD.java
 C:\Users\skevi\Documents\GitHub\Biblioteca_Pruebas\Biblioteca\src\main\java\entityes\Bibliotecario.java
 C:\Users\skevi\Documents\GitHub\Biblioteca_Pruebas\Biblioteca\src\main\java\presentation\panels\PnlUser.java
 C:\Users\skevi\Documents\GitHub\Biblioteca_Pruebas\Biblioteca\src\main\java\fabricas\FabricaLibros.java

@@ -9,7 +9,6 @@ presentation\FrmLogin$2.class
 fabricas\FabricaBibliotecarios.class
 presentation\panels\PnlAddUser.class
 entityes\Prestamo.class
-facade\BibliotecarioFCD.class
 presentation\panels\PnlBuy$1.class
 presentation\panels\PnlBuy.class
 presentation\panels\PnlBooks.class
@@ -47,4 +46,5 @@ presentation\panels\PnlAddBook.class
 presentation\panels\PnlUpdateUser.class
 daoInterfaces\ILibroDAO.class
 presentation\FrmMenu$2.class
+facade\loginFCD.class
 dao\PrestamoDAO.class

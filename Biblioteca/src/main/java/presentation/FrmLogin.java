@@ -9,7 +9,7 @@ import exceptions.FacadeException;
 import fabricas.FabricaBibliotecarios;
 import fabricas.FabricaLibros;
 import fabricas.FabricaUsuarios;
-import facade.BibliotecarioFCD;
+import facade.loginFCD;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import utilities.RoundedBorder;
@@ -43,7 +43,7 @@ public class FrmLogin extends javax.swing.JFrame {
     
     private void intialConfig(){
         this.setLocationRelativeTo(this);
-        this.librarianFacade = new BibliotecarioFCD();
+        this.librarianFacade = new loginFCD();
     }
     
     private void styles(){
@@ -208,7 +208,7 @@ public class FrmLogin extends javax.swing.JFrame {
             if(librarianFacade.loggin(mail, password)){
                 FrmMenu menu = new FrmMenu();
                 menu.setVisible(true);
-            }
+                this.dispose();            }
                 
         }
         catch(FacadeException fe){

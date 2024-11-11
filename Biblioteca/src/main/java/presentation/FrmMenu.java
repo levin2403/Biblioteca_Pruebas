@@ -4,6 +4,9 @@
  */
 package presentation;
 
+import fabricas.FabricaBibliotecarios;
+import fabricas.FabricaLibros;
+import fabricas.FabricaUsuarios;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
@@ -21,29 +24,25 @@ public class FrmMenu extends javax.swing.JFrame {
     
     public FrmMenu() {
         initComponents();
-        loadIcons();
         loadPanel();
     }
 
+    private void loadFactories(){
+        FabricaBibliotecarios fabrica1 = new FabricaBibliotecarios();
+        FabricaLibros fabrica2 = new FabricaLibros();
+        FabricaUsuarios fabrica3 = new FabricaUsuarios();
+        
+        fabrica1.fabricarBibliotecarios();
+        fabrica2.fabricarLibros();
+        fabrica3.fabricarUsuarios();
+      
+    }
+    
     /**
      * 
      */
     private void loadPanel(){
  
-    }
-    
-    
-    /**
-     * Load the icos on their respective labels 
-     */
-    private void loadIcons(){
-//      this.lblComprar.setIcon(createImageIcon("cart", 30, 30, "png"));
-//      this.lblVender.setIcon(createImageIcon("hand", 30, 30, "png"));
-//      this.lblHistorial.setIcon(createImageIcon("history", 30, 30, "png"));
-//      this.lblApartados.setIcon(createImageIcon("save", 30, 30, "png"));
-//      this.lblWizardIcon.setIcon(createImageIcon("mobile-logo", 60, 60, "png"));
-//      this.lblMoney.setIcon(createImageIcon("money-bag", 40, 40, "png"));
-//      this.lblUser.setIcon(createImageIcon("user", 40, 40, "png"));
     }
     
     /**
@@ -91,7 +90,6 @@ public class FrmMenu extends javax.swing.JFrame {
         lblVender = new javax.swing.JLabel();
         lblHistorial = new javax.swing.JLabel();
         lblApartados = new javax.swing.JLabel();
-        lblWizardIcon = new javax.swing.JLabel();
         PnlWindow = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -111,19 +109,19 @@ public class FrmMenu extends javax.swing.JFrame {
         PnlHeaderLayout.setHorizontalGroup(
             PnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlHeaderLayout.createSequentialGroup()
-                .addContainerGap(361, Short.MAX_VALUE)
+                .addContainerGap(270, Short.MAX_VALUE)
                 .addComponent(lblTitle)
-                .addGap(344, 344, 344))
+                .addGap(235, 235, 235))
         );
         PnlHeaderLayout.setVerticalGroup(
             PnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlHeaderLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(21, 21, 21)
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        background.add(PnlHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 860, 70));
+        background.add(PnlHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 660, 70));
 
         PnlSideBar.setBackground(new java.awt.Color(153, 153, 153));
         PnlSideBar.setForeground(new java.awt.Color(204, 204, 204));
@@ -131,7 +129,8 @@ public class FrmMenu extends javax.swing.JFrame {
         lblComprar.setBackground(new java.awt.Color(153, 153, 153));
         lblComprar.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         lblComprar.setForeground(new java.awt.Color(0, 0, 0));
-        lblComprar.setText("  Comprar");
+        lblComprar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblComprar.setText("Gestion usuarios");
         lblComprar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblComprar.setOpaque(true);
         lblComprar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -149,6 +148,7 @@ public class FrmMenu extends javax.swing.JFrame {
         lblVender.setBackground(new java.awt.Color(153, 153, 153));
         lblVender.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         lblVender.setForeground(new java.awt.Color(0, 0, 0));
+        lblVender.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblVender.setText("  Vender");
         lblVender.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblVender.setOpaque(true);
@@ -167,6 +167,7 @@ public class FrmMenu extends javax.swing.JFrame {
         lblHistorial.setBackground(new java.awt.Color(153, 153, 153));
         lblHistorial.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         lblHistorial.setForeground(new java.awt.Color(0, 0, 0));
+        lblHistorial.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHistorial.setText("  Historial");
         lblHistorial.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblHistorial.setOpaque(true);
@@ -185,6 +186,7 @@ public class FrmMenu extends javax.swing.JFrame {
         lblApartados.setBackground(new java.awt.Color(153, 153, 153));
         lblApartados.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         lblApartados.setForeground(new java.awt.Color(0, 0, 0));
+        lblApartados.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblApartados.setText("  Apartados");
         lblApartados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblApartados.setOpaque(true);
@@ -204,21 +206,15 @@ public class FrmMenu extends javax.swing.JFrame {
         PnlSideBar.setLayout(PnlSideBarLayout);
         PnlSideBarLayout.setHorizontalGroup(
             PnlSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblApartados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblApartados, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
             .addComponent(lblHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lblComprar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lblVender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(PnlSideBarLayout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(lblWizardIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+            .addComponent(lblComprar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         PnlSideBarLayout.setVerticalGroup(
             PnlSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlSideBarLayout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addComponent(lblWizardIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addGap(119, 119, 119)
                 .addComponent(lblComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblVender, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -226,23 +222,23 @@ public class FrmMenu extends javax.swing.JFrame {
                 .addComponent(lblHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblApartados, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(233, Short.MAX_VALUE))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
 
-        background.add(PnlSideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 600));
+        background.add(PnlSideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 490));
 
         PnlWindow.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        background.add(PnlWindow, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 860, 530));
+        background.add(PnlWindow, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 660, 420));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -312,6 +308,11 @@ public class FrmMenu extends javax.swing.JFrame {
 //        paintPanel(saved); 
     }//GEN-LAST:event_lblApartadosMouseClicked
 
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(() -> {
+            new FrmMenu().setVisible(true);
+        });
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -324,6 +325,5 @@ public class FrmMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lblHistorial;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblVender;
-    private javax.swing.JLabel lblWizardIcon;
     // End of variables declaration//GEN-END:variables
 }

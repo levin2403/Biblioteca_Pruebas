@@ -16,7 +16,7 @@ import utilities.Hasher;
  *
  * @author skevi
  */
-public class BibliotecarioFCD implements IBibliotecarioFCD{
+public class loginFCD implements IBibliotecarioFCD{
 
     /**
      * 
@@ -36,7 +36,7 @@ public class BibliotecarioFCD implements IBibliotecarioFCD{
     /**
      * 
      */
-    public BibliotecarioFCD() {
+    public loginFCD() {
         this.bibliotecarioDAO = new BibliotecarioDAO();
         this.hasher = new Hasher();
     }
@@ -89,12 +89,16 @@ public class BibliotecarioFCD implements IBibliotecarioFCD{
      * @param password
      * @return 
      */
-    private boolean verifyPassword(String password){
+    private boolean verifyPassword(String password) throws FacadeException{
         
         String storedHash = bibliotecario.getContrasena();
-        System.out.println("");
         
-        return hasher.verificarContrasena(password, storedHash);
+        if (hasher.verificarContrasena(password, storedHash)) {
+            return true;
+        }
+        else{
+            throw new FacadeException("Contraseña incorrecte intente de nuevo");
+        }
     }
     
 }
