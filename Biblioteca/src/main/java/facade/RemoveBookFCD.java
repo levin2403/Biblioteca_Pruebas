@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author skevi
  */
-public class UpdateBookFCD {
+public class RemoveBookFCD {
     
     /**
      * 
@@ -24,7 +24,7 @@ public class UpdateBookFCD {
     /**
      * 
      */
-    public UpdateBookFCD() {
+    public RemoveBookFCD() {
         this.bookDAO = new LibroDAO();
     }
     
@@ -36,10 +36,11 @@ public class UpdateBookFCD {
     public void removeBook(Libro book) throws FacadeException{
         try{
             bookDAO.eliminarLibro(book);
-            JOptionPane.showMessageDialog(null, "Exito al actualizar el libro");
+            JOptionPane.showMessageDialog(null, "Exito al eliminar el libro");
         }
         catch(DAOException de){
             throw new FacadeException(de.getMessage());
         }
     }
+    
 }

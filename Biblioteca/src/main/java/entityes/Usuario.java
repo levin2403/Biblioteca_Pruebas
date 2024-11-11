@@ -26,20 +26,20 @@ public class Usuario {
     /**
      * La contraseña del usuario.
      */
-    private String contraseña;
+    private String contrasena;
 
     /**
      * Constructor que inicializa un usuario con un ID, nombre y contraseña.
      * 
      * @param id El identificador único del usuario.
      * @param nombre El nombre del usuario.
-     * @param contraseña La contraseña del usuario.
+     * @param contrasena La contraseña del usuario.
      */
-    public Usuario(int id, String nombre, String correo, String contraseña) {
+    public Usuario(int id, String nombre, String correo, String contrasena) {
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;
-        this.contraseña = contraseña;
+        this.contrasena = contrasena;
     }
 
     /**
@@ -101,17 +101,17 @@ public class Usuario {
      * 
      * @return La contraseña del usuario.
      */
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
 
     /**
      * Establece la contraseña del usuario.
      * 
-     * @param contraseña La nueva contraseña del usuario.
+     * @param contrasena La nueva contraseña del usuario.
      */
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContraseña(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     /**
@@ -123,7 +123,7 @@ public class Usuario {
     @Override
     public String toString() {
         return "Usuario{" + "id=" + id + ", nombre=" + nombre + 
-                ", contrase\u00f1a=" + contraseña + '}';
+                ", contrase\u00f1a=" + contrasena + '}';
     }
 }
 

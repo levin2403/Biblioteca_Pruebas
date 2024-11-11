@@ -9,6 +9,7 @@ import dao.UsuarioDAO;
 import entityes.Usuario;
 import exceptions.DAOException;
 import exceptions.FacadeException;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,7 +46,15 @@ public class AddUserFCD implements IAddUserFCD {
      * Verifies that no field in the object is null or empty.
      */
     private void verifyFields() throws FacadeException {
-        
+        if (user.getNombre().isEmpty()) {
+            throw new FacadeException("El nombre no puede estar vacio");
+        }
+        else if(user.getCorreo().isEmpty()){
+            throw new FacadeException("El nombre no puede estar vacio");
+        }
+        else if(user.getContrasena().isEmpty()){
+            throw new FacadeException("El nombre no puede estar vacio");
+        }
     }
     
     /**
@@ -53,7 +62,14 @@ public class AddUserFCD implements IAddUserFCD {
      * we use this method to calculate what the id will be.
      */
     private void determinateId() throws FacadeException {
+        try{
+        int users = userDAO.listaUsuarios().size();
         
+        this.user.setId(users + 1);
+        
+        }catch(DAOException de){
+            throw new FacadeException(de.getMessage());   
+        }
     }
     
     /**
@@ -61,7 +77,19 @@ public class AddUserFCD implements IAddUserFCD {
      * to avoid a duplicity couse the mail is a unique atribute.
      */
     private void verifyMailduplicity() throws FacadeException {
+        try{
+        List<Usuario> users = userDAO.listaUsuarios();
         
+            for (Usuario user : users) {
+                if (this.user.getCorreo().equalsIgnoreCase(user.getCorreo())) {
+                    throw new FacadeException("El mail proporcionado ya "
+                            + "existe");
+                }
+            }
+        
+        }catch(DAOException de){
+            throw new FacadeException(de.getMessage());   
+        }
     }
     
     /**
