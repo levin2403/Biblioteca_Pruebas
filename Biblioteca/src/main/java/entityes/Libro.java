@@ -24,11 +24,6 @@ public class Libro {
     private String autor;
 
     /**
-     * 
-     */
-    private String review;
-    
-    /**
      * Indica si el libro está prestado o disponible.
      */
     private boolean prestado;
@@ -45,13 +40,11 @@ public class Libro {
      * @param isbn   Código ISBN del libro.
      * @param titulo Título del libro.
      * @param autor  Autor del libro.
-     * @param review Reseña del libro.
      */
-    public Libro(String isbn, String titulo, String autor, String review) {
+    public Libro(String isbn, String titulo, String autor) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.autor = autor;
-        this.review = review;
         this.prestado = false; // Inicialmente, el libro no está prestado.
     }
 
@@ -108,25 +101,6 @@ public class Libro {
     public void setAutor(String autor) {
         this.autor = autor;
     }
-
-    /**
-     * Metodo que devuelve la reseña del libro.
-     * 
-     * @return Reseña del libro
-     */
-    public String getReview() {
-        return review;
-    }
-
-    /**
-     * Metodo que establece la reseña del libro.
-     * 
-     * @param review Cadena a establecer como reseña.
-     */
-    public void setReview(String review) {
-        this.review = review;
-    }
-
     
     /**
      * Establece el estado de préstamo del libro.

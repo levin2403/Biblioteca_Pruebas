@@ -35,44 +35,34 @@ public class FabricaLibros {
         try {
             libroDAO.agregarLibro(new Libro("978-3-16", 
                                             "Cien años de soledad", 
-                                            "Gabriel García Márquez", 
-                                            "Un libro triste y con gran reflexion"));
+                                            "Gabriel García Márquez"));
             libroDAO.agregarLibro(new Libro("978-0-452", 
                                             "Orgullo y prejuicio", 
-                                            "Jane Austen", 
-                                            "Muy romantico y con clase"));
+                                            "Jane Austen"));
             libroDAO.agregarLibro(new Libro("978-1-566", 
                                             "1984", 
-                                            "George Orwell", 
-                                            "Muy buen libro"));
+                                            "George Orwell"));
             libroDAO.agregarLibro(new Libro("978-0-743", 
                                             "El gran Gatsby", 
-                                            "F. Scott Fitzgerald", 
-                                            "Emocionante, muy recomendado"));
+                                            "F. Scott Fitzgerald"));
             libroDAO.agregarLibro(new Libro("978-0-670", 
                                             "Matar a un ruiseñor", 
-                                            "Harper Lee", 
-                                            "Un libro interesante y cargado de impacto social"));
+                                            "Harper Lee"));
             libroDAO.agregarLibro(new Libro("978-0-525", 
                                             "Don Quijote de la Mancha", 
-                                            "Miguel de Cervantes", 
-                                            "Altamente recomendado"));
+                                            "Miguel de Cervantes"));
             libroDAO.agregarLibro(new Libro("978-0-394", 
                                             "El guardián entre el centeno", 
-                                            "J.D. Salinger", 
-                                            "Cargado de fantasia y emocionante"));
+                                            "J.D. Salinger"));
             libroDAO.agregarLibro(new Libro("978-0-7432", 
                                             "El código Da Vinci", 
-                                            "Dan Brown", 
-                                            "Intrigante y con mucha accion"));
+                                            "Dan Brown"));
             libroDAO.agregarLibro(new Libro("978-1-4767", 
                                             "Inferno", 
-                                            "Dan Brown", 
-                                            "No echo para cualquiera"));
+                                            "Dan Brown"));
             libroDAO.agregarLibro(new Libro("978-0-141", 
                                             "Crimen y castigo", 
-                                            "Fiódor Dostoyevski", 
-                                            "Cargado de accion y grandes momentos emocionantes"));
+                                            "Fiódor Dostoyevski"));
                 
             //imprimimos para verificar.
             for (Libro libro : libroDAO.obtenerLibros()) {
