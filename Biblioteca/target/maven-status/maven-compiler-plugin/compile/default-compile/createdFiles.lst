@@ -9,6 +9,7 @@ presentation\FrmLogin$2.class
 fabricas\FabricaBibliotecarios.class
 presentation\panels\PnlAddUser.class
 entityes\Prestamo.class
+presentation\FrmMenu$6.class
 presentation\panels\PnlBuy$1.class
 presentation\panels\PnlBuy.class
 presentation\panels\PnlBooks.class
@@ -25,6 +26,7 @@ fabricas\FabricaLibros.class
 exceptions\FacadeException.class
 presentation\FrmLogin.class
 daoInterfaces\IBibliotecarioDAO.class
+presentation\FrmMenu$5.class
 dao\BibliotecarioDAO.class
 presentation\FrmMenu$1.class
 daoInterfaces\IPrestamoDAO.class

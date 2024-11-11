@@ -10,10 +10,8 @@ import fabricas.FabricaUsuarios;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
-import java.math.BigDecimal;
 import java.net.URL;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -35,7 +33,6 @@ public class FrmMenu extends javax.swing.JFrame {
         fabrica1.fabricarBibliotecarios();
         fabrica2.fabricarLibros();
         fabrica3.fabricarUsuarios();
-      
     }
     
     /**
@@ -86,10 +83,12 @@ public class FrmMenu extends javax.swing.JFrame {
         PnlHeader = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
         PnlSideBar = new javax.swing.JPanel();
-        lblComprar = new javax.swing.JLabel();
-        lblVender = new javax.swing.JLabel();
-        lblHistorial = new javax.swing.JLabel();
-        lblApartados = new javax.swing.JLabel();
+        lblGestionUsuarios = new javax.swing.JLabel();
+        lblGestionLibros = new javax.swing.JLabel();
+        lblPrestarLibro = new javax.swing.JLabel();
+        lblBusquedas = new javax.swing.JLabel();
+        lblDevolverLibro = new javax.swing.JLabel();
+        lblResenarLibros = new javax.swing.JLabel();
         PnlWindow = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -126,79 +125,117 @@ public class FrmMenu extends javax.swing.JFrame {
         PnlSideBar.setBackground(new java.awt.Color(153, 153, 153));
         PnlSideBar.setForeground(new java.awt.Color(204, 204, 204));
 
-        lblComprar.setBackground(new java.awt.Color(153, 153, 153));
-        lblComprar.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        lblComprar.setForeground(new java.awt.Color(0, 0, 0));
-        lblComprar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblComprar.setText("Gestion usuarios");
-        lblComprar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblComprar.setOpaque(true);
-        lblComprar.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblGestionUsuarios.setBackground(new java.awt.Color(153, 153, 153));
+        lblGestionUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        lblGestionUsuarios.setForeground(new java.awt.Color(0, 0, 0));
+        lblGestionUsuarios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblGestionUsuarios.setText("Gestion usuarios");
+        lblGestionUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblGestionUsuarios.setOpaque(true);
+        lblGestionUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblComprarMouseClicked(evt);
+                lblGestionUsuariosMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblComprarMouseEntered(evt);
+                lblGestionUsuariosMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblComprarMouseExited(evt);
+                lblGestionUsuariosMouseExited(evt);
             }
         });
 
-        lblVender.setBackground(new java.awt.Color(153, 153, 153));
-        lblVender.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        lblVender.setForeground(new java.awt.Color(0, 0, 0));
-        lblVender.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblVender.setText("  Vender");
-        lblVender.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblVender.setOpaque(true);
-        lblVender.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblGestionLibros.setBackground(new java.awt.Color(153, 153, 153));
+        lblGestionLibros.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        lblGestionLibros.setForeground(new java.awt.Color(0, 0, 0));
+        lblGestionLibros.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblGestionLibros.setText("  Gestion libros");
+        lblGestionLibros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblGestionLibros.setOpaque(true);
+        lblGestionLibros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblVenderMouseClicked(evt);
+                lblGestionLibrosMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblVenderMouseEntered(evt);
+                lblGestionLibrosMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblVenderMouseExited(evt);
+                lblGestionLibrosMouseExited(evt);
             }
         });
 
-        lblHistorial.setBackground(new java.awt.Color(153, 153, 153));
-        lblHistorial.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        lblHistorial.setForeground(new java.awt.Color(0, 0, 0));
-        lblHistorial.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblHistorial.setText("  Historial");
-        lblHistorial.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblHistorial.setOpaque(true);
-        lblHistorial.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblPrestarLibro.setBackground(new java.awt.Color(153, 153, 153));
+        lblPrestarLibro.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        lblPrestarLibro.setForeground(new java.awt.Color(0, 0, 0));
+        lblPrestarLibro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPrestarLibro.setText("Prestamar libro");
+        lblPrestarLibro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblPrestarLibro.setOpaque(true);
+        lblPrestarLibro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblHistorialMouseClicked(evt);
+                lblPrestarLibroMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblHistorialMouseEntered(evt);
+                lblPrestarLibroMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblHistorialMouseExited(evt);
+                lblPrestarLibroMouseExited(evt);
             }
         });
 
-        lblApartados.setBackground(new java.awt.Color(153, 153, 153));
-        lblApartados.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        lblApartados.setForeground(new java.awt.Color(0, 0, 0));
-        lblApartados.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblApartados.setText("  Apartados");
-        lblApartados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblApartados.setOpaque(true);
-        lblApartados.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblBusquedas.setBackground(new java.awt.Color(153, 153, 153));
+        lblBusquedas.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        lblBusquedas.setForeground(new java.awt.Color(0, 0, 0));
+        lblBusquedas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBusquedas.setText("Busquedas");
+        lblBusquedas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBusquedas.setOpaque(true);
+        lblBusquedas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblApartadosMouseClicked(evt);
+                lblBusquedasMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblApartadosMouseEntered(evt);
+                lblBusquedasMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblApartadosMouseExited(evt);
+                lblBusquedasMouseExited(evt);
+            }
+        });
+
+        lblDevolverLibro.setBackground(new java.awt.Color(153, 153, 153));
+        lblDevolverLibro.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        lblDevolverLibro.setForeground(new java.awt.Color(0, 0, 0));
+        lblDevolverLibro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDevolverLibro.setText("Devolver libro");
+        lblDevolverLibro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblDevolverLibro.setOpaque(true);
+        lblDevolverLibro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblDevolverLibroMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblDevolverLibroMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblDevolverLibroMouseExited(evt);
+            }
+        });
+
+        lblResenarLibros.setBackground(new java.awt.Color(153, 153, 153));
+        lblResenarLibros.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        lblResenarLibros.setForeground(new java.awt.Color(0, 0, 0));
+        lblResenarLibros.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblResenarLibros.setText("Reseñar libro");
+        lblResenarLibros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblResenarLibros.setOpaque(true);
+        lblResenarLibros.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblResenarLibrosMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblResenarLibrosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblResenarLibrosMouseExited(evt);
             }
         });
 
@@ -206,23 +243,29 @@ public class FrmMenu extends javax.swing.JFrame {
         PnlSideBar.setLayout(PnlSideBarLayout);
         PnlSideBarLayout.setHorizontalGroup(
             PnlSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblApartados, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-            .addComponent(lblHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lblVender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lblComprar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblPrestarLibro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblGestionLibros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblGestionUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblDevolverLibro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblBusquedas, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+            .addComponent(lblResenarLibros, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         PnlSideBarLayout.setVerticalGroup(
             PnlSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlSideBarLayout.createSequentialGroup()
-                .addGap(119, 119, 119)
-                .addComponent(lblComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblVender, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblApartados, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addGap(94, 94, 94)
+                .addComponent(lblGestionUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblGestionLibros, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblPrestarLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblDevolverLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblBusquedas, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblResenarLibros, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         background.add(PnlSideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 490));
@@ -244,69 +287,97 @@ public class FrmMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblComprarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblComprarMouseEntered
-        this.lblComprar.setBackground(new Color(45, 44, 34));
-        this.lblComprar.setForeground(Color.WHITE);
-    }//GEN-LAST:event_lblComprarMouseEntered
+    private void lblGestionUsuariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblGestionUsuariosMouseEntered
+        this.lblGestionUsuarios.setBackground(new Color(45, 44, 34));
+        this.lblGestionUsuarios.setForeground(Color.WHITE);
+    }//GEN-LAST:event_lblGestionUsuariosMouseEntered
 
-    private void lblComprarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblComprarMouseExited
-        this.lblComprar.setBackground(new Color(153, 153, 153));
-        this.lblComprar.setForeground(Color.BLACK);
-    }//GEN-LAST:event_lblComprarMouseExited
+    private void lblGestionUsuariosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblGestionUsuariosMouseExited
+        this.lblGestionUsuarios.setBackground(new Color(153, 153, 153));
+        this.lblGestionUsuarios.setForeground(Color.BLACK);
+    }//GEN-LAST:event_lblGestionUsuariosMouseExited
 
-    private void lblVenderMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVenderMouseEntered
-        this.lblVender.setBackground(new Color(45, 44, 34));
-        this.lblVender.setForeground(Color.WHITE);
-    }//GEN-LAST:event_lblVenderMouseEntered
+    private void lblGestionLibrosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblGestionLibrosMouseEntered
+        this.lblGestionLibros.setBackground(new Color(45, 44, 34));
+        this.lblGestionLibros.setForeground(Color.WHITE);
+    }//GEN-LAST:event_lblGestionLibrosMouseEntered
 
-    private void lblVenderMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVenderMouseExited
-        this.lblVender.setBackground(new Color(153, 153, 153));
-        this.lblVender.setForeground(Color.BLACK);
-    }//GEN-LAST:event_lblVenderMouseExited
+    private void lblGestionLibrosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblGestionLibrosMouseExited
+        this.lblGestionLibros.setBackground(new Color(153, 153, 153));
+        this.lblGestionLibros.setForeground(Color.BLACK);
+    }//GEN-LAST:event_lblGestionLibrosMouseExited
 
-    private void lblHistorialMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHistorialMouseEntered
-        this.lblHistorial.setBackground(new Color(45, 44, 34));
-        this.lblHistorial.setForeground(Color.WHITE);
-    }//GEN-LAST:event_lblHistorialMouseEntered
+    private void lblPrestarLibroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPrestarLibroMouseEntered
+        this.lblPrestarLibro.setBackground(new Color(45, 44, 34));
+        this.lblPrestarLibro.setForeground(Color.WHITE);
+    }//GEN-LAST:event_lblPrestarLibroMouseEntered
 
-    private void lblHistorialMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHistorialMouseExited
-        this.lblHistorial.setBackground(new Color(153, 153, 153));
-        this.lblHistorial.setForeground(Color.BLACK);
-    }//GEN-LAST:event_lblHistorialMouseExited
+    private void lblPrestarLibroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPrestarLibroMouseExited
+        this.lblPrestarLibro.setBackground(new Color(153, 153, 153));
+        this.lblPrestarLibro.setForeground(Color.BLACK);
+    }//GEN-LAST:event_lblPrestarLibroMouseExited
 
-    private void lblApartadosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblApartadosMouseEntered
-        this.lblApartados.setBackground(new Color(45, 44, 34));
-        this.lblApartados.setForeground(Color.WHITE);
-    }//GEN-LAST:event_lblApartadosMouseEntered
+    private void lblBusquedasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBusquedasMouseEntered
+        this.lblBusquedas.setBackground(new Color(45, 44, 34));
+        this.lblBusquedas.setForeground(Color.WHITE);
+    }//GEN-LAST:event_lblBusquedasMouseEntered
 
-    private void lblApartadosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblApartadosMouseExited
-        this.lblApartados.setBackground(new Color(153, 153, 153));
-        this.lblApartados.setForeground(Color.BLACK);
-    }//GEN-LAST:event_lblApartadosMouseExited
+    private void lblBusquedasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBusquedasMouseExited
+        this.lblBusquedas.setBackground(new Color(153, 153, 153));
+        this.lblBusquedas.setForeground(Color.BLACK);
+    }//GEN-LAST:event_lblBusquedasMouseExited
 
-    private void lblComprarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblComprarMouseClicked
+    private void lblGestionUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblGestionUsuariosMouseClicked
 //        PnlBuy comprar = new PnlBuy();
 //        
 //        paintPanel(comprar); //paint the panel
-    }//GEN-LAST:event_lblComprarMouseClicked
+    }//GEN-LAST:event_lblGestionUsuariosMouseClicked
 
-    private void lblVenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVenderMouseClicked
+    private void lblGestionLibrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblGestionLibrosMouseClicked
 //        PnlSelling vender = new PnlSelling();
 //        
 //        paintPanel(vender); //paint the panel
-    }//GEN-LAST:event_lblVenderMouseClicked
+    }//GEN-LAST:event_lblGestionLibrosMouseClicked
 
-    private void lblHistorialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHistorialMouseClicked
+    private void lblPrestarLibroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPrestarLibroMouseClicked
 //        PnlRecords historial = new PnlRecords();
 //        
 //        paintPanel(historial); //paint the panel
-    }//GEN-LAST:event_lblHistorialMouseClicked
+    }//GEN-LAST:event_lblPrestarLibroMouseClicked
 
-    private void lblApartadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblApartadosMouseClicked
+    private void lblBusquedasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBusquedasMouseClicked
 //        PnlSavedSell saved = new PnlSavedSell();
 //        
 //        paintPanel(saved); 
-    }//GEN-LAST:event_lblApartadosMouseClicked
+    }//GEN-LAST:event_lblBusquedasMouseClicked
+
+    private void lblDevolverLibroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDevolverLibroMouseClicked
+        
+    }//GEN-LAST:event_lblDevolverLibroMouseClicked
+
+    private void lblDevolverLibroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDevolverLibroMouseEntered
+        this.lblDevolverLibro.setBackground(new Color(45, 44, 34));
+        this.lblDevolverLibro.setForeground(Color.WHITE);
+    }//GEN-LAST:event_lblDevolverLibroMouseEntered
+
+    private void lblDevolverLibroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDevolverLibroMouseExited
+        this.lblDevolverLibro.setBackground(new Color(153, 153, 153));
+        this.lblDevolverLibro.setForeground(Color.BLACK);
+    }//GEN-LAST:event_lblDevolverLibroMouseExited
+
+    private void lblResenarLibrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblResenarLibrosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblResenarLibrosMouseClicked
+
+    private void lblResenarLibrosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblResenarLibrosMouseEntered
+        this.lblResenarLibros.setBackground(new Color(45, 44, 34));
+        this.lblResenarLibros.setForeground(Color.WHITE);
+    }//GEN-LAST:event_lblResenarLibrosMouseEntered
+
+    private void lblResenarLibrosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblResenarLibrosMouseExited
+        this.lblResenarLibros.setBackground(new Color(153, 153, 153));
+        this.lblResenarLibros.setForeground(Color.BLACK);
+    }//GEN-LAST:event_lblResenarLibrosMouseExited
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
@@ -320,10 +391,12 @@ public class FrmMenu extends javax.swing.JFrame {
     private javax.swing.JPanel PnlSideBar;
     private javax.swing.JPanel PnlWindow;
     private javax.swing.JPanel background;
-    private javax.swing.JLabel lblApartados;
-    private javax.swing.JLabel lblComprar;
-    private javax.swing.JLabel lblHistorial;
+    private javax.swing.JLabel lblBusquedas;
+    private javax.swing.JLabel lblDevolverLibro;
+    private javax.swing.JLabel lblGestionLibros;
+    private javax.swing.JLabel lblGestionUsuarios;
+    private javax.swing.JLabel lblPrestarLibro;
+    private javax.swing.JLabel lblResenarLibros;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JLabel lblVender;
     // End of variables declaration//GEN-END:variables
 }

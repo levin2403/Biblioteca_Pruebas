@@ -4,12 +4,10 @@
  */
 package FacadeInterfaces;
 
-import exceptions.FacadeException;
-
 /**
  *
  * @author skevi
  */
-public interface ILibroFCD {
+public interface IUpdateUserFCD {
     
 }

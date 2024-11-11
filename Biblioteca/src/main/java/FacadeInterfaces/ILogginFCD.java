@@ -4,10 +4,14 @@
  */
 package FacadeInterfaces;
 
+import exceptions.FacadeException;
+
 /**
  *
  * @author skevi
  */
-public interface IPrestamoFCD {
+public interface ILogginFCD {
+    
+    public boolean loggin(String correo, String contrasena) throws FacadeException;
     
 }

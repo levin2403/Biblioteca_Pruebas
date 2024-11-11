@@ -4,15 +4,15 @@
  */
 package presentation;
 
-import FacadeInterfaces.IBibliotecarioFCD;
 import exceptions.FacadeException;
 import fabricas.FabricaBibliotecarios;
 import fabricas.FabricaLibros;
 import fabricas.FabricaUsuarios;
-import facade.loginFCD;
+import facade.LoginFCD;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import utilities.RoundedBorder;
+import FacadeInterfaces.ILogginFCD;
 
 
 /**
@@ -21,7 +21,7 @@ import utilities.RoundedBorder;
  */
 public class FrmLogin extends javax.swing.JFrame {
   
-    private IBibliotecarioFCD librarianFacade;
+    private ILogginFCD librarianFacade;
     
     public FrmLogin() {
         initComponents();
@@ -43,7 +43,7 @@ public class FrmLogin extends javax.swing.JFrame {
     
     private void intialConfig(){
         this.setLocationRelativeTo(this);
-        this.librarianFacade = new loginFCD();
+        this.librarianFacade = new LoginFCD();
     }
     
     private void styles(){

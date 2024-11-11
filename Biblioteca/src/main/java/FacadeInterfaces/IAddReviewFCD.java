@@ -8,6 +8,6 @@ package FacadeInterfaces;
  *
  * @author skevi
  */
-public interface IUsuarioFCD {
+public interface IAddReviewFCD {
     
 }

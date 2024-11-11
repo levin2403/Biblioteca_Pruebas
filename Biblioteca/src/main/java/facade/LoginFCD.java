@@ -4,19 +4,19 @@
  */
 package facade;
 
-import FacadeInterfaces.IBibliotecarioFCD;
 import dao.BibliotecarioDAO;
 import daoInterfaces.IBibliotecarioDAO;
 import entityes.Bibliotecario;
 import exceptions.DAOException;
 import exceptions.FacadeException;
 import utilities.Hasher;
+import FacadeInterfaces.ILogginFCD;
 
 /**
  *
  * @author skevi
  */
-public class loginFCD implements IBibliotecarioFCD{
+public class LoginFCD implements ILogginFCD{
 
     /**
      * 
@@ -36,7 +36,7 @@ public class loginFCD implements IBibliotecarioFCD{
     /**
      * 
      */
-    public loginFCD() {
+    public LoginFCD() {
         this.bibliotecarioDAO = new BibliotecarioDAO();
         this.hasher = new Hasher();
     }

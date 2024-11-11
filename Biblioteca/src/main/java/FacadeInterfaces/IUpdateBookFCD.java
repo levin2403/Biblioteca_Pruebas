@@ -4,14 +4,10 @@
  */
 package FacadeInterfaces;
 
-import exceptions.FacadeException;
-
 /**
  *
  * @author skevi
  */
-public interface IBibliotecarioFCD {
-    
-    public boolean loggin(String correo, String contrasena) throws FacadeException;
+public interface IUpdateBookFCD {
     
 }
