@@ -6,7 +6,7 @@ package entityes;
  * 
  * @author skevi
  */
-public class Usuario {
+public class User {
     
     /**
      * El identificador único del usuario.
@@ -35,7 +35,7 @@ public class Usuario {
      * @param nombre El nombre del usuario.
      * @param contrasena La contraseña del usuario.
      */
-    public Usuario(int id, String nombre, String correo, String contrasena) {
+    public User(int id, String nombre, String correo, String contrasena) {
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;

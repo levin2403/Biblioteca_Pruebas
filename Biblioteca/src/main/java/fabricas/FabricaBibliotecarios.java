@@ -4,12 +4,12 @@
  */
 package fabricas;
 
-import dao.BibliotecarioDAO;
-import daoInterfaces.IBibliotecarioDAO;
-import entityes.Bibliotecario;
+import dao.LibrarianDAO;
+import entityes.Librarian;
 import exceptions.DAOException;
 import java.util.List;
 import utilities.Hasher;
+import daoInterfaces.ILibrarianDAO;
 
 /**
  *
@@ -20,7 +20,7 @@ public class FabricaBibliotecarios {
     /**
      * 
      */
-    private IBibliotecarioDAO bibliotecarioDAO;
+    private ILibrarianDAO bibliotecarioDAO;
     
     /**
      * 
@@ -28,10 +28,10 @@ public class FabricaBibliotecarios {
     private Hasher hasher;
 
     /**
-     * Constructor que inicializa la instancia de BibliotecarioDAO.
+     * Constructor que inicializa la instancia de LibrarianDAO.
      */
     public FabricaBibliotecarios() {
-        this.bibliotecarioDAO = new BibliotecarioDAO();
+        this.bibliotecarioDAO = new LibrarianDAO();
         this.hasher = hasher = new Hasher();
     }
 
@@ -43,17 +43,17 @@ public class FabricaBibliotecarios {
     public void fabricarBibliotecarios(){
         try{    
         for (int i = 1; i <= 5; i++) {
-            // Crear una instancia de Bibliotecario con datos ficticios
-            Bibliotecario bibliotecario = new Bibliotecario(
+            // Crear una instancia de Librarian con datos ficticios
+            Librarian bibliotecario = new Librarian(
                     "bibliotecario" + i + "@biblioteca.com", // Correo ficticio
                     hasher.hashearContrasena("contrasena123")
             );
-            // Agregar el bibliotecario a la lista en BibliotecarioDAO
+            // Agregar el bibliotecario a la lista en LibrarianDAO
             bibliotecarioDAO.addLibrarian(bibliotecario);
             }
         
             //imprimimos la lista de bibliotecarios para verificar 
-            for (Bibliotecario bibliotecariolist : bibliotecarioDAO.getLibrarians()) {
+            for (Librarian bibliotecariolist : bibliotecarioDAO.getLibrarians()) {
                 System.out.println(bibliotecariolist.toString());
             }
         }catch(DAOException ex){

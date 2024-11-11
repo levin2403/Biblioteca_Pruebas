@@ -4,10 +4,10 @@
  */
 package fabricas;
 
-import dao.LibroDAO;
-import daoInterfaces.ILibroDAO;
-import entityes.Libro;
+import dao.BookDAO;
+import entityes.Book;
 import exceptions.DAOException;
+import daoInterfaces.IBookDAO;
 
 /**
  *
@@ -18,14 +18,14 @@ public class FabricaLibros {
     /**
      * DAO para gestionar los libros.
      */
-    private ILibroDAO libroDAO;
+    private IBookDAO libroDAO;
 
     /**
-     * Constructor que inicializa la instancia de LibroDAO.
+     * Constructor que inicializa la instancia de BookDAO.
      * 
      */
     public FabricaLibros() {
-        this.libroDAO = new LibroDAO();
+        this.libroDAO = new BookDAO();
     }
 
     /**
@@ -33,39 +33,39 @@ public class FabricaLibros {
      */
     public void fabricarLibros() {
         try {
-            libroDAO.agregarLibro(new Libro("978-3-16", 
+            libroDAO.addBook(new Book("978-3-16", 
                                             "Cien años de soledad", 
                                             "Gabriel García Márquez"));
-            libroDAO.agregarLibro(new Libro("978-0-452", 
+            libroDAO.addBook(new Book("978-0-452", 
                                             "Orgullo y prejuicio", 
                                             "Jane Austen"));
-            libroDAO.agregarLibro(new Libro("978-1-566", 
+            libroDAO.addBook(new Book("978-1-566", 
                                             "1984", 
                                             "George Orwell"));
-            libroDAO.agregarLibro(new Libro("978-0-743", 
+            libroDAO.addBook(new Book("978-0-743", 
                                             "El gran Gatsby", 
                                             "F. Scott Fitzgerald"));
-            libroDAO.agregarLibro(new Libro("978-0-670", 
+            libroDAO.addBook(new Book("978-0-670", 
                                             "Matar a un ruiseñor", 
                                             "Harper Lee"));
-            libroDAO.agregarLibro(new Libro("978-0-525", 
+            libroDAO.addBook(new Book("978-0-525", 
                                             "Don Quijote de la Mancha", 
                                             "Miguel de Cervantes"));
-            libroDAO.agregarLibro(new Libro("978-0-394", 
+            libroDAO.addBook(new Book("978-0-394", 
                                             "El guardián entre el centeno", 
                                             "J.D. Salinger"));
-            libroDAO.agregarLibro(new Libro("978-0-7432", 
+            libroDAO.addBook(new Book("978-0-7432", 
                                             "El código Da Vinci", 
                                             "Dan Brown"));
-            libroDAO.agregarLibro(new Libro("978-1-4767", 
+            libroDAO.addBook(new Book("978-1-4767", 
                                             "Inferno", 
                                             "Dan Brown"));
-            libroDAO.agregarLibro(new Libro("978-0-141", 
+            libroDAO.addBook(new Book("978-0-141", 
                                             "Crimen y castigo", 
                                             "Fiódor Dostoyevski"));
                 
             //imprimimos para verificar.
-            for (Libro libro : libroDAO.obtenerLibros()) {
+            for (Book libro : libroDAO.getBooks()) {
                 System.out.println(libro.toString());
             }
             

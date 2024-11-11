@@ -8,7 +8,7 @@ package entityes;
  *
  * @author skevi
  */
-public class Bibliotecario {
+public class Librarian {
     
     /**
      * 
@@ -23,7 +23,7 @@ public class Bibliotecario {
     /**
      * 
      */
-    public Bibliotecario() {
+    public Librarian() {
     }
 
     /**
@@ -31,7 +31,7 @@ public class Bibliotecario {
      * @param correo
      * @param contrasena 
      */
-    public Bibliotecario(String correo, String contrasena) {
+    public Librarian(String correo, String contrasena) {
         this.correo = correo;
         this.contrasena = contrasena;
     }

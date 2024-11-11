@@ -1,8 +1,7 @@
 package dao;
 
 
-import daoInterfaces.ILibroDAO;
-import entityes.Libro;
+import entityes.Book;
 import exceptions.DAOException;
 
 /**
@@ -14,6 +13,7 @@ import exceptions.DAOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+import daoInterfaces.IBookDAO;
 
 /**
  * Clase que actúa como el Data Access Object (DAO) para la entidad Libro.
@@ -21,39 +21,39 @@ import java.util.regex.Pattern;
  * adición, actualización y eliminación.
  * 
  */
-public class LibroDAO implements ILibroDAO {
+public class BookDAO implements IBookDAO {
     
     /**
      * Lista que almacena los libros en memoria.
      * Representa la base de datos en esta implementación.
      */
-    private static List<Libro> libros = new ArrayList<>(); 
+    private static List<Book> books = new ArrayList<>(); 
 
     /**
      * 
      */
-    public LibroDAO() {
+    public BookDAO() {
     }
 
     /**
      * Devuelve el libro con el titulo mas coincidente.
      * 
-     * @param titulo El título del libro a buscar.
+     * @param title El título del libro a buscar.
      * @return El libro encontrado o null si no se encuentra.
      * @throws exceptions.DAOException
      */
     @Override
-    public List<Libro> buscarPorTitulo(String titulo) throws DAOException {
+    public List<Book> searchByTitle(String title) throws DAOException {
         try {
-            if (titulo == null || titulo.isEmpty()) {
+            if (title == null || title.isEmpty()) {
                 throw new DAOException("El título no puede ser nulo o vacío");
             }
 
-            List<Libro> resultados = new ArrayList<>();
-            String regex = ".*" + Pattern.quote(titulo) + ".*"; 
+            List<Book> resultados = new ArrayList<>();
+            String regex = ".*" + Pattern.quote(title) + ".*"; 
             Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE); 
 
-            for (Libro libro : libros) {
+            for (Book libro : books) {
                 if (pattern.matcher(libro.getTitulo()).matches()) {
                     resultados.add(libro);
                 }
@@ -70,22 +70,22 @@ public class LibroDAO implements ILibroDAO {
     /**
      * Devuelve el libro con el autor mas coincidente.
      * 
-     * @param autor El autor del libro a buscar.
+     * @param author El autor del libro a buscar.
      * @return El libro encontrado o null si no se encuentra.
      * @throws exceptions.DAOException
      */
     @Override
-    public List<Libro> buscarPorAutor(String autor) throws DAOException {
+    public List<Book> searchByAuthor(String author) throws DAOException {
         try {
-            if (autor == null || autor.isEmpty()) {
+            if (author == null || author.isEmpty()) {
                 throw new DAOException("El autor no puede ser nulo o vacío");
             }
 
-            List<Libro> resultados = new ArrayList<>();
-            String regex = ".*" + Pattern.quote(autor) + ".*"; 
+            List<Book> resultados = new ArrayList<>();
+            String regex = ".*" + Pattern.quote(author) + ".*"; 
             Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE); 
 
-            for (Libro libro : libros) {
+            for (Book libro : books) {
                 if (pattern.matcher(libro.getAutor()).matches()) {
                     resultados.add(libro);
                 }
@@ -107,13 +107,13 @@ public class LibroDAO implements ILibroDAO {
      * @throws exceptions.DAOException
      */
     @Override
-    public Libro buscarPorISBN(String isbn) throws DAOException {
+    public Book searchByISBN(String isbn) throws DAOException {
         try {
             if (isbn == null || isbn.isEmpty()) {
                 throw new DAOException("El ISBN no puede ser nulo o vacío");
             }
 
-            for (Libro libro : libros) {
+            for (Book libro : books) {
                 if (libro.getIsbn().equals(isbn)) {
                     return libro; 
                 }
@@ -130,13 +130,13 @@ public class LibroDAO implements ILibroDAO {
     /**
      * Agrega un nuevo libro a la lista de libros.
      * 
-     * @param libro El libro que se desea agregar.
+     * @param book El libro que se desea agregar.
      * @throws exceptions.DAOException
      */
     @Override
-    public void agregarLibro(Libro libro) throws DAOException {
+    public void addBook(Book book) throws DAOException {
         try{
-        libros.add(libro); 
+        books.add(book); 
         
         }catch(Exception ex){
             throw new DAOException();
@@ -146,29 +146,29 @@ public class LibroDAO implements ILibroDAO {
     /**
      * Actualiza la información de un libro existente en la lista.
      * 
-     * @param libro El libro con la información actualizada.
+     * @param book El libro con la información actualizada.
      * @throws exceptions.DAOException
      */
     @Override
-    public void actualizarLibro(Libro libro) throws DAOException {
+    public void updateBook(Book book) throws DAOException {
         try {
-            if (libro == null) {
+            if (book == null) {
                 throw new DAOException("El libro no puede ser nulo");
             }
 
-            if (libro.getIsbn() == null || libro.getIsbn().isEmpty()) {
+            if (book.getIsbn() == null || book.getIsbn().isEmpty()) {
                 throw new DAOException("El ISBN del libro no puede ser "
                         + "nulo o vacío");
             }
 
-            Libro libroExistente = buscarPorISBN(libro.getIsbn());
+            Book libroExistente = searchByISBN(book.getIsbn());
             if (libroExistente != null) {
                 // Actualizamos los atributos del libro existente
-                libroExistente.setTitulo(libro.getTitulo());
-                libroExistente.setAutor(libro.getAutor());
-                libroExistente.setPrestado(libro.isPrestado());
+                libroExistente.setTitulo(book.getTitulo());
+                libroExistente.setAutor(book.getAutor());
+                libroExistente.setPrestado(book.isPrestado());
             } else {
-                throw new DAOException("El libro con ISBN " + libro.getIsbn() 
+                throw new DAOException("El libro con ISBN " + book.getIsbn() 
                         + " no existe en el catálogo");
             }
 
@@ -180,22 +180,22 @@ public class LibroDAO implements ILibroDAO {
     /**
      * Elimina un libro de la lista.
      * 
-     * @param libro El libro que se desea eliminar.
+     * @param book El libro que se desea eliminar.
      * @throws exceptions.DAOException
      */
     @Override
-    public void eliminarLibro(Libro libro) throws DAOException {
+    public void removeBook(Book book) throws DAOException {
         try {
-            if (libro == null) {
+            if (book == null) {
                 throw new DAOException("El libro no puede ser nulo");
             }
 
-            if (!libros.contains(libro)) {
+            if (!books.contains(book)) {
                 throw new DAOException("El libro no existe en el catálogo y "
                         + "no puede ser eliminado");
             }
 
-            libros.remove(libro); // Elimina el libro de la lista
+            books.remove(book); // Elimina el libro de la lista
 
         } catch (Exception ex) {
             throw new DAOException("Error al intentar eliminar el libro", ex);
@@ -209,14 +209,15 @@ public class LibroDAO implements ILibroDAO {
      * @return Lista con los libros existentes.
      * @throws exceptions.DAOException
      */
-    public List<Libro> obtenerLibros() throws DAOException {
+    @Override
+    public List<Book> getBooks() throws DAOException {
         try {
-            if (LibroDAO.libros == null) {
+            if (BookDAO.books == null) {
                 throw new DAOException("La lista de libros "
                         + "no está inicializada.");
             }
 
-            return LibroDAO.libros; 
+            return BookDAO.books; 
 
         } catch (Exception ex) {
             throw new DAOException("Error al obtener los libros", ex);

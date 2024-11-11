@@ -4,13 +4,13 @@
  */
 package facade;
 
-import dao.BibliotecarioDAO;
-import daoInterfaces.IBibliotecarioDAO;
-import entityes.Bibliotecario;
+import dao.LibrarianDAO;
+import entityes.Librarian;
 import exceptions.DAOException;
 import exceptions.FacadeException;
 import utilities.Hasher;
 import FacadeInterfaces.ILogginFCD;
+import daoInterfaces.ILibrarianDAO;
 
 /**
  *
@@ -21,12 +21,12 @@ public class LoginFCD implements ILogginFCD{
     /**
      * 
      */
-    IBibliotecarioDAO bibliotecarioDAO;
+    ILibrarianDAO bibliotecarioDAO;
     
     /**
      * 
      */
-    private Bibliotecario bibliotecario;
+    private Librarian bibliotecario;
     
     /**
      * 
@@ -37,7 +37,7 @@ public class LoginFCD implements ILogginFCD{
      * 
      */
     public LoginFCD() {
-        this.bibliotecarioDAO = new BibliotecarioDAO();
+        this.bibliotecarioDAO = new LibrarianDAO();
         this.hasher = new Hasher();
     }
     
@@ -70,7 +70,7 @@ public class LoginFCD implements ILogginFCD{
      */
     private void VerifyMailExistence(String mail) throws FacadeException {
        try{
-        Bibliotecario bibliotecario = bibliotecarioDAO.findByMail(mail);
+        Librarian bibliotecario = bibliotecarioDAO.findByMail(mail);
         
            if (bibliotecario == null) {
                throw new FacadeException("El correo ingresado es incorrecto");

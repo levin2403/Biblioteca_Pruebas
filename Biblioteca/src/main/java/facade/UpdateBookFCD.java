@@ -4,8 +4,8 @@
  */
 package facade;
 
-import dao.LibroDAO;
-import entityes.Libro;
+import dao.BookDAO;
+import entityes.Book;
 import exceptions.DAOException;
 import exceptions.FacadeException;
 import javax.swing.JOptionPane;
@@ -19,13 +19,13 @@ public class UpdateBookFCD {
     /**
      * 
      */
-    LibroDAO bookDAO;
+    BookDAO bookDAO;
 
     /**
      * 
      */
     public UpdateBookFCD() {
-        this.bookDAO = new LibroDAO();
+        this.bookDAO = new BookDAO();
     }
     
     /**
@@ -33,9 +33,9 @@ public class UpdateBookFCD {
      * @param book 
      * @throws exceptions.FacadeException 
      */
-    public void removeBook(Libro book) throws FacadeException{
+    public void UpdateBook(Book book) throws FacadeException{
         try{
-            bookDAO.eliminarLibro(book);
+            bookDAO.updateBook(book);
             JOptionPane.showMessageDialog(null, "Exito al actualizar el libro");
         }
         catch(DAOException de){

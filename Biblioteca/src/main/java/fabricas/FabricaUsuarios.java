@@ -4,10 +4,10 @@
  */
 package fabricas;
 
-import dao.UsuarioDAO;
-import daoInterfaces.IUsuarioDAO;
-import entityes.Usuario;
+import dao.UserDAO;
+import entityes.User;
 import exceptions.DAOException;
+import daoInterfaces.IUserDAO;
 
 /**
  *
@@ -18,29 +18,29 @@ public class FabricaUsuarios {
     /**
      * DAO para gestionar los usuarios.
      */
-    private IUsuarioDAO usuarioDAO;
+    private IUserDAO usuarioDAO;
 
     /**
-     * Constructor que inicializa la instancia de UsuarioDAO.
+     * Constructor que inicializa la instancia de UserDAO.
      */
     public FabricaUsuarios() {
-        this.usuarioDAO = new UsuarioDAO();
+        this.usuarioDAO = new UserDAO();
     }
 
     /**
      * Fabrica 5 distintos usuarios y los agrega a la lista de usuarios 
-     * de UsuarioDAO.
+ de UserDAO.
      */
     public void fabricarUsuarios() {
         try {
-            // Crear instancias de Usuario con información única
-            usuarioDAO.registrarUsuario(new Usuario(1, "Carlos Gómez", "carlos.gomez@example.com", "password123"));
-            usuarioDAO.registrarUsuario(new Usuario(2, "Ana Martínez", "ana.martinez@example.com", "securepass456"));
-            usuarioDAO.registrarUsuario(new Usuario(3, "Luis Ramírez", "luis.ramirez@example.com", "mypassword789"));
-            usuarioDAO.registrarUsuario(new Usuario(4, "María Fernández", "maria.fernandez@example.com", "pass1234"));
-            usuarioDAO.registrarUsuario(new Usuario(5, "Jorge López", "jorge.lopez@example.com", "password5678"));
+            // Crear instancias de User con información única
+            usuarioDAO.addUser(new User(1, "Carlos Gómez", "carlos.gomez@example.com", "password123"));
+            usuarioDAO.addUser(new User(2, "Ana Martínez", "ana.martinez@example.com", "securepass456"));
+            usuarioDAO.addUser(new User(3, "Luis Ramírez", "luis.ramirez@example.com", "mypassword789"));
+            usuarioDAO.addUser(new User(4, "María Fernández", "maria.fernandez@example.com", "pass1234"));
+            usuarioDAO.addUser(new User(5, "Jorge López", "jorge.lopez@example.com", "password5678"));
             
-            for (Usuario usuario : usuarioDAO.listaUsuarios()) {
+            for (User usuario : usuarioDAO.getUsers()) {
                 System.out.println(usuario.toString());
             }
             

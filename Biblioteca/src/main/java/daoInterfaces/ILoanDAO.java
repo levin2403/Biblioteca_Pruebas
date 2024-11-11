@@ -4,16 +4,16 @@
  */
 package daoInterfaces;
 
-import entityes.Prestamo;
+import entityes.Loan;
 import exceptions.DAOException;
 
 /**
  *
  * @author skevi
  */
-public interface IPrestamoDAO {
+public interface ILoanDAO {
     
-    public void registrarPrestamo(Prestamo prestamo) throws DAOException;
-    public void registrarDevolucion(Prestamo prestamo) throws DAOException;
+    public void addLoan(Loan loan) throws DAOException;
+    public void registerReturn(Loan loan) throws DAOException;
             
 }

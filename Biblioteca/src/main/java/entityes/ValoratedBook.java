@@ -13,7 +13,7 @@ public class ValoratedBook {
     /**
      * 
      */
-    private Libro book;
+    private Book book;
     
     /**
      * 
@@ -37,7 +37,7 @@ public class ValoratedBook {
      * @param valoration
      * @param review 
      */
-    public ValoratedBook(Libro book, int valoration, String review) {
+    public ValoratedBook(Book book, int valoration, String review) {
         this.book = book;
         this.valoration = valoration;
         this.review = review;
@@ -47,7 +47,7 @@ public class ValoratedBook {
      * 
      * @return 
      */
-    public Libro getBook() {
+    public Book getBook() {
         return book;
     }
 
@@ -55,7 +55,7 @@ public class ValoratedBook {
      * 
      * @param book 
      */
-    public void setBook(Libro book) {
+    public void setBook(Book book) {
         this.book = book;
     }
 

@@ -6,7 +6,7 @@ package entityes;
  * 
  * @author skevi
  */
-public class Libro {
+public class Book {
 
     /**
      * Código ISBN del libro, que sirve como identificador único.
@@ -31,7 +31,7 @@ public class Libro {
     /**
      * Constructor por defecto que inicializa un nuevo objeto Libro.
      */
-    public Libro() {
+    public Book() {
     }
 
     /**
@@ -41,7 +41,7 @@ public class Libro {
      * @param titulo Título del libro.
      * @param autor  Autor del libro.
      */
-    public Libro(String isbn, String titulo, String autor) {
+    public Book(String isbn, String titulo, String autor) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.autor = autor;
@@ -121,7 +121,7 @@ public class Libro {
     }
 
     /**
-     * Devuelve una representación en forma de cadena del objeto Libro.
+     * Devuelve una representación en forma de cadena del objeto Book.
      *
      * @return String que representa el libro con sus atributos.
      */

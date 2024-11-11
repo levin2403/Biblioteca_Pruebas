@@ -5,8 +5,8 @@
 package facade;
 
 import FacadeInterfaces.IUpdateUserFCD;
-import dao.UsuarioDAO;
-import entityes.Usuario;
+import dao.UserDAO;
+import entityes.User;
 import exceptions.DAOException;
 import exceptions.FacadeException;
 import javax.swing.JOptionPane;
@@ -20,19 +20,19 @@ public class UpdateUserFCD implements IUpdateUserFCD {
     /**
      * 
      */
-    private UsuarioDAO userDAO;
+    private UserDAO userDAO;
     
     /**
      * 
      * @param user 
      */
-    private Usuario user; 
+    private User user; 
     
     /**
      * 
      * @param user 
      */
-    public void UpdateUser(Usuario user) throws FacadeException {
+    public void UpdateUser(User user) throws FacadeException {
         this.user = user;
         verifyFields();
         update();
@@ -60,7 +60,7 @@ public class UpdateUserFCD implements IUpdateUserFCD {
      */
     private void update() throws FacadeException {
         try{
-            userDAO.actualizarUsuario(user);
+            userDAO.updateUser(user);
             JOptionPane.showMessageDialog(null, "Exito al actualizar el "
                     + "usuario");
         }

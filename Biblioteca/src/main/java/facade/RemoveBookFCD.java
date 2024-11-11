@@ -4,8 +4,8 @@
  */
 package facade;
 
-import dao.LibroDAO;
-import entityes.Libro;
+import dao.BookDAO;
+import entityes.Book;
 import exceptions.DAOException;
 import exceptions.FacadeException;
 import javax.swing.JOptionPane;
@@ -19,13 +19,13 @@ public class RemoveBookFCD {
     /**
      * 
      */
-    LibroDAO bookDAO;
+    BookDAO bookDAO;
 
     /**
      * 
      */
     public RemoveBookFCD() {
-        this.bookDAO = new LibroDAO();
+        this.bookDAO = new BookDAO();
     }
     
     /**
@@ -33,9 +33,9 @@ public class RemoveBookFCD {
      * @param book 
      * @throws exceptions.FacadeException 
      */
-    public void removeBook(Libro book) throws FacadeException{
+    public void removeBook(Book book) throws FacadeException{
         try{
-            bookDAO.eliminarLibro(book);
+            bookDAO.removeBook(book);
             JOptionPane.showMessageDialog(null, "Exito al eliminar el libro");
         }
         catch(DAOException de){

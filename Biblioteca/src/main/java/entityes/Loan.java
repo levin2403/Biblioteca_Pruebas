@@ -12,17 +12,17 @@ import java.time.LocalDate;
  * 
  * @author skevi
  */
-public class Prestamo {
+public class Loan {
     
     /**
      * El usuario que toma prestado el libro.
      */
-    private Usuario usuario;
+    private User usuario;
     
     /**
      * El libro que se está prestando.
      */
-    private Libro libro;
+    private Book libro;
 
     /**
      * Fecha de devolucion del libro;
@@ -32,17 +32,17 @@ public class Prestamo {
     /**
      * Constructor por defecto de la clase.
      */
-    public Prestamo() {
+    public Loan() {
     }
 
     /**
      * 
      * constructor para inicializar ambos atributos de la clase.
      * 
-     * @param usuario Usuario del prestamo.
-     * @param libro Libro del prestamo.
+     * @param usuario User del prestamo.
+     * @param libro Book del prestamo.
      */
-    public Prestamo(Usuario usuario, Libro libro,LocalDate fechaDevolucion) {
+    public Loan(User usuario, Book libro,LocalDate fechaDevolucion) {
         this.usuario = usuario;
         this.libro = libro;
         this.fechaDevolucion = fechaDevolucion;
@@ -50,36 +50,36 @@ public class Prestamo {
 
     /**
      * Metodo para obtener el usuario.
-     * @return Usuario.
+     * @return User.
      */
-    public Usuario getUsuario() {
+    public User getUsuario() {
         return usuario;
     }
 
     /**
      * Metodo para establecer el usuario.
      * 
-     * @param usuario Usuario a establecer.
+     * @param usuario User a establecer.
      */
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(User usuario) {
         this.usuario = usuario;
     }
 
     /**
      * Metodo para obtener el libro del prestamo.
      * 
-     * @return Libro. 
+     * @return Book. 
      */
-    public Libro getLibro() {
+    public Book getLibro() {
         return libro;
     }
 
     /**
      * Metodo para establecer el libro del prestamo.
      * 
-     * @param libro Libro a establecer.
+     * @param libro Book a establecer.
      */
-    public void setLibro(Libro libro) {
+    public void setLibro(Book libro) {
         this.libro = libro;
     }
 

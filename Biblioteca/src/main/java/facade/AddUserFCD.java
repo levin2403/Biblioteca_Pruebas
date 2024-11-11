@@ -5,8 +5,8 @@
 package facade;
 
 import FacadeInterfaces.IAddUserFCD;
-import dao.UsuarioDAO;
-import entityes.Usuario;
+import dao.UserDAO;
+import entityes.User;
 import exceptions.DAOException;
 import exceptions.FacadeException;
 import java.util.List;
@@ -21,20 +21,20 @@ public class AddUserFCD implements IAddUserFCD {
     /**
      * 
      */
-    private UsuarioDAO userDAO;
+    private UserDAO userDAO;
     
     /**
      * 
      * @param user 
      */
-    private Usuario user; 
+    private User user; 
     
     /**
      * Main method that adds a user in the database
      * 
      * @param user 
      */
-    public void addUser(Usuario user) throws FacadeException{
+    public void addUser(User user) throws FacadeException{
         this.user = user;
         verifyFields();
         determinateId();
@@ -63,7 +63,7 @@ public class AddUserFCD implements IAddUserFCD {
      */
     private void determinateId() throws FacadeException {
         try{
-        int users = userDAO.listaUsuarios().size();
+        int users = userDAO.getUsers().size();
         
         this.user.setId(users + 1);
         
@@ -78,9 +78,9 @@ public class AddUserFCD implements IAddUserFCD {
      */
     private void verifyMailduplicity() throws FacadeException {
         try{
-        List<Usuario> users = userDAO.listaUsuarios();
+        List<User> users = userDAO.getUsers();
         
-            for (Usuario user : users) {
+            for (User user : users) {
                 if (this.user.getCorreo().equalsIgnoreCase(user.getCorreo())) {
                     throw new FacadeException("El mail proporcionado ya "
                             + "existe");
@@ -99,7 +99,7 @@ public class AddUserFCD implements IAddUserFCD {
      */
     private void registerUser() throws FacadeException {
         try{
-            userDAO.registrarUsuario(this.user);
+            userDAO.addUser(this.user);
             JOptionPane.showMessageDialog(null, "Usuario agregado con exito");
         }
         catch(DAOException de){

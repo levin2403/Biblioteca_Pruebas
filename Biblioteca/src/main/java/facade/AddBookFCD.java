@@ -4,8 +4,8 @@
  */
 package facade;
 
-import dao.LibroDAO;
-import entityes.Libro;
+import dao.BookDAO;
+import entityes.Book;
 import exceptions.DAOException;
 import exceptions.FacadeException;
 import interfaces.IValoration;
@@ -19,19 +19,19 @@ public class AddBookFCD implements IValoration{
     /**
      * 
      */
-    LibroDAO bookDAO;
+    BookDAO bookDAO;
 
     /**
      * 
      */
     public AddBookFCD() {
-        this.bookDAO = new LibroDAO();
+        this.bookDAO = new BookDAO();
     }
     
     /**
      * 
      */
-    public void addBook(Libro book) throws FacadeException {
+    public void addBook(Book book) throws FacadeException {
         verifyFields(book);
         addBookInStorage(book);
         sendBookToValorate(book);
@@ -40,7 +40,7 @@ public class AddBookFCD implements IValoration{
     /**
      * 
      */
-    private void verifyFields(Libro libro) throws FacadeException {
+    private void verifyFields(Book libro) throws FacadeException {
         if (libro.getIsbn().isEmpty()) {
             throw new FacadeException("El ISBN no puede estar vacio");
         }
@@ -52,9 +52,9 @@ public class AddBookFCD implements IValoration{
         }
     }
     
-    private void addBookInStorage(Libro book) throws FacadeException {
+    private void addBookInStorage(Book book) throws FacadeException {
         try{
-            bookDAO.agregarLibro(book);
+            bookDAO.addBook(book);
         }
         catch(DAOException de){
             throw new FacadeException();
@@ -67,7 +67,7 @@ public class AddBookFCD implements IValoration{
      * @param book
      * @throws FacadeException 
      */
-    private void sendBookToValorate(Libro book) throws FacadeException {
+    private void sendBookToValorate(Book book) throws FacadeException {
         
     }
     
