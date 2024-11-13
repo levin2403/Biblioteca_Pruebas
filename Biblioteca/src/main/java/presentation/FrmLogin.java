@@ -5,9 +5,9 @@
 package presentation;
 
 import exceptions.FacadeException;
-import fabricas.FabricaBibliotecarios;
-import fabricas.FabricaLibros;
-import fabricas.FabricaUsuarios;
+import fabricas.LibrarianFactory;
+import fabricas.BookFactory;
+import fabricas.UserFactory;
 import facade.LoginFCD;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -31,13 +31,13 @@ public class FrmLogin extends javax.swing.JFrame {
     }
     
     private void loadFactories(){
-        FabricaBibliotecarios fabrica1 = new FabricaBibliotecarios();
-        FabricaLibros fabrica2 = new FabricaLibros();
-        FabricaUsuarios fabrica3 = new FabricaUsuarios();
+        LibrarianFactory fabrica1 = new LibrarianFactory();
+        BookFactory fabrica2 = new BookFactory();
+        UserFactory fabrica3 = new UserFactory();
         
-        fabrica1.fabricarBibliotecarios();
-        fabrica2.fabricarLibros();
-        fabrica3.fabricarUsuarios();
+        fabrica1.fabricateLibrarians();
+        fabrica2.fabricateBooks();
+        fabrica3.fabricateUsers();
       
     }
     

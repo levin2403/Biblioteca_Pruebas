@@ -50,7 +50,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="170" y="0" width="660" height="70"/>
+              <AbsoluteConstraints x="170" y="0" width="730" height="70"/>
             </Constraint>
           </Constraints>
 
@@ -58,7 +58,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="270" max="32767" attributes="0"/>
+                      <EmptySpace pref="340" max="32767" attributes="0"/>
                       <Component id="lblTitle" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="235" max="-2" attributes="0"/>
                   </Group>
@@ -285,7 +285,7 @@
         <Container class="javax.swing.JPanel" name="PnlWindow">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="170" y="70" width="660" height="420"/>
+              <AbsoluteConstraints x="170" y="70" width="730" height="420"/>
             </Constraint>
           </Constraints>
 

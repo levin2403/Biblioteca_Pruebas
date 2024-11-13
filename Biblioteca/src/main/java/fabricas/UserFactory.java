@@ -13,7 +13,7 @@ import daoInterfaces.IUserDAO;
  *
  * @author skevi
  */
-public class FabricaUsuarios {
+public class UserFactory {
 
     /**
      * DAO para gestionar los usuarios.
@@ -23,7 +23,7 @@ public class FabricaUsuarios {
     /**
      * Constructor que inicializa la instancia de UserDAO.
      */
-    public FabricaUsuarios() {
+    public UserFactory() {
         this.usuarioDAO = new UserDAO();
     }
 
@@ -31,7 +31,7 @@ public class FabricaUsuarios {
      * Fabrica 5 distintos usuarios y los agrega a la lista de usuarios 
  de UserDAO.
      */
-    public void fabricarUsuarios() {
+    public void fabricateUsers() {
         try {
             // Crear instancias de User con información única
             usuarioDAO.addUser(new User(1, "Carlos Gómez", "carlos.gomez@example.com", "password123"));

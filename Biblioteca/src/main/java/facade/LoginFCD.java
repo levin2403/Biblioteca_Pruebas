@@ -93,11 +93,11 @@ public class LoginFCD implements ILogginFCD{
         
         String storedHash = bibliotecario.getContrasena();
         
-        if (hasher.verificarContrasena(password, storedHash)) {
-            return true;
+        if (!hasher.verifyPassword(password, storedHash)) {
+            throw new FacadeException("Contraseña incorrecte intente de nuevo");
         }
         else{
-            throw new FacadeException("Contraseña incorrecte intente de nuevo");
+            return true;
         }
     }
     

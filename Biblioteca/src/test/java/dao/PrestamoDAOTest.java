@@ -4,9 +4,9 @@
  */
 package dao;
 
-import entityes.Libro;
-import entityes.Prestamo;
-import entityes.Usuario;
+//import entityes.Libro;
+//import entityes.Prestamo;
+//import entityes.Usuario;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
@@ -20,10 +20,10 @@ import org.junit.jupiter.api.BeforeAll;
  */
 public class PrestamoDAOTest {
 
-    private static PrestamoDAO prestamoDAO; // Instancia del DAO de préstamos
-    private static Libro libro; // Instancia del libro
-    private static Usuario usuario; // Instancia del usuario
-    private static Prestamo prestamo; // Instancia del préstamo
+//    private static PrestamoDAO prestamoDAO; // Instancia del DAO de préstamos
+//    private static Libro libro; // Instancia del libro
+//    private static Usuario usuario; // Instancia del usuario
+//    private static Prestamo prestamo; // Instancia del préstamo
 
     /**
      * Método que se ejecuta una vez antes de todas las pruebas.

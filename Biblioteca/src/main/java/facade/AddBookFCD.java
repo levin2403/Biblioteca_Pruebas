@@ -4,18 +4,19 @@
  */
 package facade;
 
+import FacadeInterfaces.IAddBookFCD;
 import dao.BookDAO;
 import entityes.Book;
 import exceptions.DAOException;
 import exceptions.FacadeException;
-import interfaces.IValoration;
+//import interfaces.IValoration;
 
 /**
  *
  * @author skevi
  */
-public class AddBookFCD implements IValoration{
-    
+public class AddBookFCD implements IAddBookFCD /**IValoration**/{
+
     /**
      * 
      */
@@ -30,7 +31,10 @@ public class AddBookFCD implements IValoration{
     
     /**
      * 
+     * @param book
+     * @throws exceptions.FacadeException
      */
+    @Override
     public void addBook(Book book) throws FacadeException {
         verifyFields(book);
         addBookInStorage(book);
@@ -52,6 +56,11 @@ public class AddBookFCD implements IValoration{
         }
     }
     
+    /**
+     * 
+     * @param book
+     * @throws FacadeException 
+     */
     private void addBookInStorage(Book book) throws FacadeException {
         try{
             bookDAO.addBook(book);

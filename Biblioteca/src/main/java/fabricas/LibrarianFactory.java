@@ -15,7 +15,7 @@ import daoInterfaces.ILibrarianDAO;
  *
  * @author skevi
  */
-public class FabricaBibliotecarios {
+public class LibrarianFactory {
    
     /**
      * 
@@ -30,7 +30,7 @@ public class FabricaBibliotecarios {
     /**
      * Constructor que inicializa la instancia de LibrarianDAO.
      */
-    public FabricaBibliotecarios() {
+    public LibrarianFactory() {
         this.bibliotecarioDAO = new LibrarianDAO();
         this.hasher = hasher = new Hasher();
     }
@@ -40,13 +40,13 @@ public class FabricaBibliotecarios {
      * bibliotecarios.
      * 
      */
-    public void fabricarBibliotecarios(){
+    public void fabricateLibrarians(){
         try{    
         for (int i = 1; i <= 5; i++) {
             // Crear una instancia de Librarian con datos ficticios
             Librarian bibliotecario = new Librarian(
                     "bibliotecario" + i + "@biblioteca.com", // Correo ficticio
-                    hasher.hashearContrasena("contrasena123")
+                    hasher.hashPassword("contrasena123")
             );
             // Agregar el bibliotecario a la lista en LibrarianDAO
             bibliotecarioDAO.addLibrarian(bibliotecario);

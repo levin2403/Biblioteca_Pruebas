@@ -4,10 +4,15 @@
  */
 package FacadeInterfaces;
 
+import entityes.Book;
+import exceptions.FacadeException;
+
 /**
  *
  * @author skevi
  */
 public interface IAddBookFCD {
+    
+    public void addBook(Book book) throws FacadeException;
     
 }

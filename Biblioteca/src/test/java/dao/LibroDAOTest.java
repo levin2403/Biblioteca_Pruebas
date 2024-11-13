@@ -4,7 +4,7 @@
  */
 package dao;
 
-import entityes.Libro;
+//import entityes.Libro;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
@@ -18,9 +18,9 @@ import org.junit.jupiter.api.BeforeAll;
  */
 public class LibroDAOTest {
     
-    private static LibroDAO libroDAO; // Instancia del DAO
-    private static Libro libro1; // Primera instancia de libro
-    private static Libro libro2; // Segunda instancia de libro
+//    private static LibroDAO libroDAO; // Instancia del DAO
+//    private static Libro libro1; // Primera instancia de libro
+//    private static Libro libro2; // Segunda instancia de libro
     
     /**
      * Constructor de la clase LibroTest.

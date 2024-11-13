@@ -13,7 +13,7 @@ import daoInterfaces.IBookDAO;
  *
  * @author skevi
  */
-public class FabricaLibros {
+public class BookFactory {
 
     /**
      * DAO para gestionar los libros.
@@ -24,14 +24,14 @@ public class FabricaLibros {
      * Constructor que inicializa la instancia de BookDAO.
      * 
      */
-    public FabricaLibros() {
+    public BookFactory() {
         this.libroDAO = new BookDAO();
     }
 
     /**
      * Fabrica diez libros y los añade a la lista de libroDAO.
      */
-    public void fabricarLibros() {
+    public void fabricateBooks() {
         try {
             libroDAO.addBook(new Book("978-3-16", 
                                             "Cien años de soledad", 

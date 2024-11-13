@@ -4,6 +4,8 @@
  */
 package presentation.panels;
 
+import utilities.RoundedBorder;
+
 /**
  *
  * @author skevi
@@ -15,6 +17,21 @@ public class PnlBooks extends javax.swing.JPanel {
      */
     public PnlBooks() {
         initComponents();
+        styles();
+    }
+    
+    private void styles(){
+        
+        RoundedBorder border = new RoundedBorder(30);
+        
+        this.btnAnadirLibro.setContentAreaFilled(false);
+        this.btnAnadirLibro.setBorder(border);
+        
+        this.btnActualizarLibro.setContentAreaFilled(false);
+        this.btnActualizarLibro.setBorder(border);
+        
+        this.btnEliminarLibro.setContentAreaFilled(false);
+        this.btnEliminarLibro.setBorder(border);
     }
 
     /**
@@ -26,19 +43,79 @@ public class PnlBooks extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnAnadirLibro = new javax.swing.JButton();
+        btnEliminarLibro = new javax.swing.JButton();
+        btnActualizarLibro = new javax.swing.JButton();
+
+        btnAnadirLibro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnAnadirLibro.setText("Añadir Libro");
+        btnAnadirLibro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAnadirLibro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnadirLibroActionPerformed(evt);
+            }
+        });
+
+        btnEliminarLibro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnEliminarLibro.setText("Eliminar Libro");
+        btnEliminarLibro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminarLibro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarLibroActionPerformed(evt);
+            }
+        });
+
+        btnActualizarLibro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnActualizarLibro.setText("Actualizar Libro");
+        btnActualizarLibro.setToolTipText("");
+        btnActualizarLibro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnActualizarLibro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarLibroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(btnAnadirLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addComponent(btnActualizarLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addComponent(btnEliminarLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(135, 135, 135)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAnadirLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminarLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnActualizarLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnEliminarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarLibroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarLibroActionPerformed
+
+    private void btnActualizarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarLibroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnActualizarLibroActionPerformed
+
+    private void btnAnadirLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirLibroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAnadirLibroActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizarLibro;
+    private javax.swing.JButton btnAnadirLibro;
+    private javax.swing.JButton btnEliminarLibro;
     // End of variables declaration//GEN-END:variables
 }

@@ -19,23 +19,25 @@ public class Hasher {
     }
     
     /**
+     * Hashes the given password in the parameter and return the hashed chain 
+     * in a String type.
      * 
-     * @param contrasena
-     * @return 
+     * @param password Password given by the user int a String type.
+     * @return Hashed password in a String type.
      */
-    public String hashearContrasena(String contrasena) {
-        return BCrypt.hashpw(contrasena, BCrypt.gensalt()); // Genera el hash con un salt aleatorio
+    public String hashPassword(String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt()); // Genera el hash con un salt aleatorio
     }
 
     /**
      * Method that verifies that the string of the password matches the 
-     * hashed password 
+     * stored hashed password of the user.
      *
-     * @param password
-     * @param storedHash
-     * @return 
+     * @param password Password given by the user int a String type.
+     * @param storedHash The stored password of the user.
+     * @return true if the password matches and false if it did not.
      */
-    public boolean verificarContrasena(String password, String storedHash) {
+    public boolean verifyPassword(String password, String storedHash) {
         return BCrypt.checkpw(password, storedHash);
     }
 }

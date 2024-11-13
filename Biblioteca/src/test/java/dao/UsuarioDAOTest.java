@@ -4,7 +4,7 @@
  */
 package dao;
 
-import entityes.Usuario;
+//import entityes.Usuario;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
@@ -18,9 +18,9 @@ import org.junit.jupiter.api.BeforeAll;
  */
 public class UsuarioDAOTest {
 
-    private static UsuarioDAO usuarioDAO; // Instancia del DAO de usuarios
-    private static Usuario usuario1; // Primer usuario para pruebas
-    private static Usuario usuario2; // Segundo usuario para pruebas
+//    private static UsuarioDAO usuarioDAO; // Instancia del DAO de usuarios
+//    private static Usuario usuario1; // Primer usuario para pruebas
+//    private static Usuario usuario2; // Segundo usuario para pruebas
 
     /**
      * Método que se ejecuta una vez antes de todas las pruebas.

@@ -4,10 +4,15 @@
  */
 package FacadeInterfaces;
 
+import entityes.User;
+import exceptions.FacadeException;
+
 /**
  *
  * @author skevi
  */
 public interface IAddUserFCD {
+    
+    public void addUser(User user) throws FacadeException;
     
 }

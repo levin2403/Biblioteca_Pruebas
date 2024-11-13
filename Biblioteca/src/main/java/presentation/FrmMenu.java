@@ -4,15 +4,17 @@
  */
 package presentation;
 
-import fabricas.FabricaBibliotecarios;
-import fabricas.FabricaLibros;
-import fabricas.FabricaUsuarios;
+import fabricas.LibrarianFactory;
+import fabricas.BookFactory;
+import fabricas.UserFactory;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import presentation.panels.PnlBooks;
+import presentation.panels.PnlUser;
 
 /**
  *
@@ -20,19 +22,35 @@ import javax.swing.JPanel;
  */
 public class FrmMenu extends javax.swing.JFrame {
     
+    /**
+     * 
+     */
     public FrmMenu() {
         initComponents();
+        initConfig();
+        loadFactories();
         loadPanel();
     }
 
+    /**
+     * 
+     */
+    private void initConfig(){
+        this.setLocationRelativeTo(this);
+        this.PnlWindow.setLayout(new BorderLayout());
+    }
+    
+    /**
+     * 
+     */
     private void loadFactories(){
-        FabricaBibliotecarios fabrica1 = new FabricaBibliotecarios();
-        FabricaLibros fabrica2 = new FabricaLibros();
-        FabricaUsuarios fabrica3 = new FabricaUsuarios();
+        LibrarianFactory fabrica1 = new LibrarianFactory();
+        BookFactory fabrica2 = new BookFactory();
+        UserFactory fabrica3 = new UserFactory();
         
-        fabrica1.fabricarBibliotecarios();
-        fabrica2.fabricarLibros();
-        fabrica3.fabricarUsuarios();
+        fabrica1.fabricateLibrarians();
+        fabrica2.fabricateBooks();
+        fabrica3.fabricateUsers();
     }
     
     /**
@@ -63,9 +81,12 @@ public class FrmMenu extends javax.swing.JFrame {
         }
     }
     
-    
+    /**
+     * 
+     * @param panel 
+     */
     private void paintPanel(JPanel panel){
-        panel.setSize(860,530);
+        panel.setSize(730, 420);
         panel.setLocation(0,0);
         
         PnlWindow.removeAll();
@@ -108,7 +129,7 @@ public class FrmMenu extends javax.swing.JFrame {
         PnlHeaderLayout.setHorizontalGroup(
             PnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlHeaderLayout.createSequentialGroup()
-                .addContainerGap(270, Short.MAX_VALUE)
+                .addContainerGap(340, Short.MAX_VALUE)
                 .addComponent(lblTitle)
                 .addGap(235, 235, 235))
         );
@@ -120,7 +141,7 @@ public class FrmMenu extends javax.swing.JFrame {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        background.add(PnlHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 660, 70));
+        background.add(PnlHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 730, 70));
 
         PnlSideBar.setBackground(new java.awt.Color(153, 153, 153));
         PnlSideBar.setForeground(new java.awt.Color(204, 204, 204));
@@ -271,7 +292,7 @@ public class FrmMenu extends javax.swing.JFrame {
         background.add(PnlSideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 490));
 
         PnlWindow.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        background.add(PnlWindow, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 660, 420));
+        background.add(PnlWindow, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 730, 420));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -328,15 +349,15 @@ public class FrmMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBusquedasMouseExited
 
     private void lblGestionUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblGestionUsuariosMouseClicked
-//        PnlBuy comprar = new PnlBuy();
-//        
-//        paintPanel(comprar); //paint the panel
+        PnlUser user = new PnlUser();
+        
+        paintPanel(user); //paint the panel
     }//GEN-LAST:event_lblGestionUsuariosMouseClicked
 
     private void lblGestionLibrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblGestionLibrosMouseClicked
-//        PnlSelling vender = new PnlSelling();
-//        
-//        paintPanel(vender); //paint the panel
+        PnlBooks books = new PnlBooks();
+        
+        paintPanel(books); //paint the panel
     }//GEN-LAST:event_lblGestionLibrosMouseClicked
 
     private void lblPrestarLibroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPrestarLibroMouseClicked

@@ -4,6 +4,7 @@
  */
 package facade;
 
+import FacadeInterfaces.IUpdateBookFCD;
 import dao.BookDAO;
 import entityes.Book;
 import exceptions.DAOException;
@@ -14,7 +15,7 @@ import javax.swing.JOptionPane;
  *
  * @author skevi
  */
-public class UpdateBookFCD {
+public class UpdateBookFCD implements IUpdateBookFCD {
     
     /**
      * 
@@ -33,7 +34,8 @@ public class UpdateBookFCD {
      * @param book 
      * @throws exceptions.FacadeException 
      */
-    public void UpdateBook(Book book) throws FacadeException{
+    @Override
+    public void UpdateBook(Book book) throws FacadeException {
         try{
             bookDAO.updateBook(book);
             JOptionPane.showMessageDialog(null, "Exito al actualizar el libro");

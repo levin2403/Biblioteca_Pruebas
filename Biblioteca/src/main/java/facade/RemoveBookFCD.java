@@ -4,6 +4,7 @@
  */
 package facade;
 
+import FacadeInterfaces.IRemoveBookFCD;
 import dao.BookDAO;
 import entityes.Book;
 import exceptions.DAOException;
@@ -14,7 +15,7 @@ import javax.swing.JOptionPane;
  *
  * @author skevi
  */
-public class RemoveBookFCD {
+public class RemoveBookFCD implements IRemoveBookFCD {
     
     /**
      * 
@@ -33,7 +34,8 @@ public class RemoveBookFCD {
      * @param book 
      * @throws exceptions.FacadeException 
      */
-    public void removeBook(Book book) throws FacadeException{
+    @Override
+    public void removeBook(Book book) throws FacadeException {
         try{
             bookDAO.removeBook(book);
             JOptionPane.showMessageDialog(null, "Exito al eliminar el libro");

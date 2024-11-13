@@ -33,7 +33,9 @@ public class AddUserFCD implements IAddUserFCD {
      * Main method that adds a user in the database
      * 
      * @param user 
+     * @throws exceptions.FacadeException 
      */
+    @Override
     public void addUser(User user) throws FacadeException{
         this.user = user;
         verifyFields();

@@ -4,10 +4,15 @@
  */
 package FacadeInterfaces;
 
+import entityes.Book;
+import exceptions.FacadeException;
+
 /**
  *
  * @author skevi
  */
 public interface IRemoveBookFCD {
+    
+    public void removeBook(Book book) throws FacadeException;
     
 }

@@ -4,6 +4,10 @@
  */
 package presentation.panels;
 
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+import utilities.RoundedBorder;
+
 /**
  *
  * @author skevi
@@ -15,8 +19,31 @@ public class PnlUser extends javax.swing.JPanel {
      */
     public PnlUser() {
         initComponents();
+        styles();
     }
 
+    private void styles(){
+        
+        RoundedBorder border = new RoundedBorder(30);
+        
+        this.btnAddUser.setContentAreaFilled(false);
+        this.btnAddUser.setBorder(border);
+        
+        this.btnUpdateUser.setContentAreaFilled(false);
+        this.btnUpdateUser.setBorder(border);
+        
+    }
+    
+    private void paintPanel(JPanel panel){
+        panel.setSize(730, 420);
+        panel.setLocation(0,0);
+        
+        this.removeAll();
+        this.add(panel, BorderLayout.CENTER);
+        this.revalidate();
+        this.repaint();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,19 +53,64 @@ public class PnlUser extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnUpdateUser = new javax.swing.JButton();
+        btnAddUser = new javax.swing.JButton();
+
+        btnUpdateUser.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnUpdateUser.setText("Actualizar Usuario");
+        btnUpdateUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnUpdateUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateUserActionPerformed(evt);
+            }
+        });
+
+        btnAddUser.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnAddUser.setText("Agregar Usuario");
+        btnAddUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAddUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddUserActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(125, Short.MAX_VALUE)
+                .addComponent(btnAddUser, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(102, 102, 102)
+                .addComponent(btnUpdateUser)
+                .addGap(125, 125, 125))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(134, 134, 134)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnUpdateUser, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAddUser, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnUpdateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateUserActionPerformed
+        PnlUpdateUser update = new PnlUpdateUser();
+        
+        paintPanel(update);
+    }//GEN-LAST:event_btnUpdateUserActionPerformed
+
+    private void btnAddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUserActionPerformed
+        PnlAddUser add = new PnlAddUser();
+        
+        paintPanel(add);
+    }//GEN-LAST:event_btnAddUserActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddUser;
+    private javax.swing.JButton btnUpdateUser;
     // End of variables declaration//GEN-END:variables
 }
