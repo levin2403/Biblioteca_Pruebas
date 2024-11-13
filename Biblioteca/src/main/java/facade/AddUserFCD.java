@@ -101,8 +101,20 @@ public class AddUserFCD implements IAddUserFCD {
      */
     private void registerUser() throws FacadeException {
         try{
-            userDAO.addUser(this.user);
-            JOptionPane.showMessageDialog(null, "Usuario agregado con exito");
+            
+            int option = JOptionPane.showConfirmDialog(
+                null, 
+                "¿Esta seguro de querer registrar al usuario?", 
+                "Confirmación", 
+                JOptionPane.YES_NO_OPTION
+            );
+            
+            if (option == JOptionPane.YES_OPTION) {
+                userDAO.addUser(this.user);
+                JOptionPane.showMessageDialog(null, "Usuario agregado con "
+                        + "exito");
+            }
+
         }
         catch(DAOException de){
             throw new FacadeException("");

@@ -37,8 +37,20 @@ public class UpdateBookFCD implements IUpdateBookFCD {
     @Override
     public void UpdateBook(Book book) throws FacadeException {
         try{
-            bookDAO.updateBook(book);
-            JOptionPane.showMessageDialog(null, "Exito al actualizar el libro");
+            
+            int option = JOptionPane.showConfirmDialog(
+                null, 
+                "¿Esta seguro de querer eliminar el libro?", 
+                "Confirmación", 
+                JOptionPane.YES_NO_OPTION
+            );
+            
+            if (option == JOptionPane.YES_OPTION) {
+                bookDAO.updateBook(book);
+                JOptionPane.showMessageDialog(null, "Exito al actualizar "
+                        + "el libro");
+            }
+            
         }
         catch(DAOException de){
             throw new FacadeException(de.getMessage());

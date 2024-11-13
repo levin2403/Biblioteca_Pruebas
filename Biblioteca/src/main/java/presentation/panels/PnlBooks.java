@@ -4,6 +4,9 @@
  */
 package presentation.panels;
 
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+import presentation.FrmUpdateBook;
 import utilities.RoundedBorder;
 
 /**
@@ -24,14 +27,24 @@ public class PnlBooks extends javax.swing.JPanel {
         
         RoundedBorder border = new RoundedBorder(30);
         
-        this.btnAnadirLibro.setContentAreaFilled(false);
-        this.btnAnadirLibro.setBorder(border);
+        this.btnAddBook.setContentAreaFilled(false);
+        this.btnAddBook.setBorder(border);
         
-        this.btnActualizarLibro.setContentAreaFilled(false);
-        this.btnActualizarLibro.setBorder(border);
+        this.btnUpdateBook.setContentAreaFilled(false);
+        this.btnUpdateBook.setBorder(border);
         
-        this.btnEliminarLibro.setContentAreaFilled(false);
-        this.btnEliminarLibro.setBorder(border);
+        this.btnRemoveBook.setContentAreaFilled(false);
+        this.btnRemoveBook.setBorder(border);
+    }
+    
+    private void paintPanel(JPanel panel){
+        panel.setSize(730, 420);
+        panel.setLocation(0,0);
+        
+        this.removeAll();
+        this.add(panel, BorderLayout.CENTER);
+        this.revalidate();
+        this.repaint();
     }
 
     /**
@@ -43,35 +56,35 @@ public class PnlBooks extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnAnadirLibro = new javax.swing.JButton();
-        btnEliminarLibro = new javax.swing.JButton();
-        btnActualizarLibro = new javax.swing.JButton();
+        btnAddBook = new javax.swing.JButton();
+        btnRemoveBook = new javax.swing.JButton();
+        btnUpdateBook = new javax.swing.JButton();
 
-        btnAnadirLibro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnAnadirLibro.setText("Añadir Libro");
-        btnAnadirLibro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAnadirLibro.addActionListener(new java.awt.event.ActionListener() {
+        btnAddBook.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnAddBook.setText("Añadir Libro");
+        btnAddBook.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAddBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnadirLibroActionPerformed(evt);
+                btnAddBookActionPerformed(evt);
             }
         });
 
-        btnEliminarLibro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnEliminarLibro.setText("Eliminar Libro");
-        btnEliminarLibro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEliminarLibro.addActionListener(new java.awt.event.ActionListener() {
+        btnRemoveBook.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnRemoveBook.setText("Eliminar Libro");
+        btnRemoveBook.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRemoveBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarLibroActionPerformed(evt);
+                btnRemoveBookActionPerformed(evt);
             }
         });
 
-        btnActualizarLibro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnActualizarLibro.setText("Actualizar Libro");
-        btnActualizarLibro.setToolTipText("");
-        btnActualizarLibro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnActualizarLibro.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdateBook.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnUpdateBook.setText("Actualizar Libro");
+        btnUpdateBook.setToolTipText("");
+        btnUpdateBook.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnUpdateBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarLibroActionPerformed(evt);
+                btnUpdateBookActionPerformed(evt);
             }
         });
 
@@ -81,11 +94,11 @@ public class PnlBooks extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(btnAnadirLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAddBook, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addComponent(btnActualizarLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnUpdateBook, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
-                .addComponent(btnEliminarLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRemoveBook, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
@@ -93,29 +106,35 @@ public class PnlBooks extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(135, 135, 135)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAnadirLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminarLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnActualizarLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAddBook, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRemoveBook, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdateBook, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(156, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEliminarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarLibroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarLibroActionPerformed
+    private void btnRemoveBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveBookActionPerformed
+        PnlRemoveBook remove = new PnlRemoveBook();
+        
+        paintPanel(remove);
+    }//GEN-LAST:event_btnRemoveBookActionPerformed
 
-    private void btnActualizarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarLibroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnActualizarLibroActionPerformed
+    private void btnUpdateBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateBookActionPerformed
+        FrmUpdateBook update = new FrmUpdateBook();
+        
+        update.setVisible(true);
+    }//GEN-LAST:event_btnUpdateBookActionPerformed
 
-    private void btnAnadirLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirLibroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAnadirLibroActionPerformed
+    private void btnAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBookActionPerformed
+        PnlAddBook add = new PnlAddBook();
+        
+        paintPanel(add);
+    }//GEN-LAST:event_btnAddBookActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizarLibro;
-    private javax.swing.JButton btnAnadirLibro;
-    private javax.swing.JButton btnEliminarLibro;
+    private javax.swing.JButton btnAddBook;
+    private javax.swing.JButton btnRemoveBook;
+    private javax.swing.JButton btnUpdateBook;
     // End of variables declaration//GEN-END:variables
 }

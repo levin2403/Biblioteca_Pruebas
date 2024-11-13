@@ -18,11 +18,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-              <Component id="btnAnadirLibro" min="-2" pref="191" max="-2" attributes="0"/>
+              <Component id="btnAddBook" min="-2" pref="191" max="-2" attributes="0"/>
               <EmptySpace pref="49" max="32767" attributes="0"/>
-              <Component id="btnActualizarLibro" min="-2" pref="191" max="-2" attributes="0"/>
+              <Component id="btnUpdateBook" min="-2" pref="191" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-              <Component id="btnEliminarLibro" min="-2" pref="191" max="-2" attributes="0"/>
+              <Component id="btnRemoveBook" min="-2" pref="191" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -32,9 +32,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnAnadirLibro" alignment="3" min="-2" pref="129" max="-2" attributes="0"/>
-                  <Component id="btnEliminarLibro" alignment="3" min="-2" pref="129" max="-2" attributes="0"/>
-                  <Component id="btnActualizarLibro" alignment="3" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="btnAddBook" alignment="3" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="btnRemoveBook" alignment="3" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="btnUpdateBook" alignment="3" min="-2" pref="129" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="156" max="32767" attributes="0"/>
           </Group>
@@ -42,7 +42,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="btnAnadirLibro">
+    <Component class="javax.swing.JButton" name="btnAddBook">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
@@ -53,10 +53,10 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnadirLibroActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddBookActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnEliminarLibro">
+    <Component class="javax.swing.JButton" name="btnRemoveBook">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
@@ -67,10 +67,10 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarLibroActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoveBookActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnActualizarLibro">
+    <Component class="javax.swing.JButton" name="btnUpdateBook">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
@@ -82,7 +82,7 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnActualizarLibroActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateBookActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

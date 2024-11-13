@@ -62,9 +62,20 @@ public class UpdateUserFCD implements IUpdateUserFCD {
      */
     private void update() throws FacadeException {
         try{
-            userDAO.updateUser(user);
-            JOptionPane.showMessageDialog(null, "Exito al actualizar el "
-                    + "usuario");
+            
+            int option = JOptionPane.showConfirmDialog(
+                null, 
+                "¿Esta seguro de querer eliminar el libro?", 
+                "Confirmación", 
+                JOptionPane.YES_NO_OPTION
+            );
+            
+            if (option == JOptionPane.YES_OPTION) {
+                userDAO.updateUser(user);
+                JOptionPane.showMessageDialog(null, "Exito al actualizar "
+                        + "el usuario");
+            }
+
         }
         catch(DAOException ex){
             throw new FacadeException(ex.getMessage());

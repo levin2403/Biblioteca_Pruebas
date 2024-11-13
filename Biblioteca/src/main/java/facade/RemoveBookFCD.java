@@ -37,8 +37,20 @@ public class RemoveBookFCD implements IRemoveBookFCD {
     @Override
     public void removeBook(Book book) throws FacadeException {
         try{
-            bookDAO.removeBook(book);
-            JOptionPane.showMessageDialog(null, "Exito al eliminar el libro");
+            
+            int option = JOptionPane.showConfirmDialog(
+                null, 
+                "¿Esta seguro de querer eliminar el libro?", 
+                "Confirmación", 
+                JOptionPane.YES_NO_OPTION
+            );
+            
+            if (option == JOptionPane.YES_OPTION) {
+                bookDAO.removeBook(book);
+                JOptionPane.showMessageDialog(null, "Exito al eliminar "
+                        + "el libro");
+            }
+            
         }
         catch(DAOException de){
             throw new FacadeException(de.getMessage());

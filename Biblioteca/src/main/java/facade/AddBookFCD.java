@@ -9,13 +9,14 @@ import dao.BookDAO;
 import entityes.Book;
 import exceptions.DAOException;
 import exceptions.FacadeException;
+import javax.swing.JOptionPane;
 //import interfaces.IValoration;
 
 /**
  *
  * @author skevi
  */
-public class AddBookFCD implements IAddBookFCD /**IValoration**/{
+public class AddBookFCD implements IAddBookFCD/**, IValoration**/{
 
     /**
      * 
@@ -63,7 +64,20 @@ public class AddBookFCD implements IAddBookFCD /**IValoration**/{
      */
     private void addBookInStorage(Book book) throws FacadeException {
         try{
-            bookDAO.addBook(book);
+            
+            int option = JOptionPane.showConfirmDialog(
+                null, 
+                "¿Esta seguro de querer agregar el libro?", 
+                "Confirmación", 
+                JOptionPane.YES_NO_OPTION
+            );
+            
+            if (option == JOptionPane.YES_OPTION) {
+                bookDAO.addBook(book);
+                JOptionPane.showMessageDialog(null, "Libro agregado con "
+                        + "exito");
+            }
+            
         }
         catch(DAOException de){
             throw new FacadeException();

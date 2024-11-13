@@ -128,10 +128,10 @@ public class FrmMenu extends javax.swing.JFrame {
         PnlHeader.setLayout(PnlHeaderLayout);
         PnlHeaderLayout.setHorizontalGroup(
             PnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlHeaderLayout.createSequentialGroup()
-                .addContainerGap(340, Short.MAX_VALUE)
+            .addGroup(PnlHeaderLayout.createSequentialGroup()
+                .addGap(281, 281, 281)
                 .addComponent(lblTitle)
-                .addGap(235, 235, 235))
+                .addContainerGap(294, Short.MAX_VALUE))
         );
         PnlHeaderLayout.setVerticalGroup(
             PnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
