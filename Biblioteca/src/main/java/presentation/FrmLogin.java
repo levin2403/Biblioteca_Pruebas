@@ -12,7 +12,7 @@ import facade.LoginFCD;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import utilities.RoundedBorder;
-import FacadeInterfaces.ILogginFCD;
+import facadeInterfaces.ILogginFCD;
 
 
 /**

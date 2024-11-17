@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package FacadeInterfaces;
+package facadeInterfaces;
 
 import entityes.Book;
 import exceptions.FacadeException;
@@ -11,8 +11,8 @@ import exceptions.FacadeException;
  *
  * @author skevi
  */
-public interface IUpdateBookFCD {
+public interface IRemoveBookFCD {
     
-    public void UpdateBook(Book book) throws FacadeException;
+    public void removeBook(Book book) throws FacadeException;
     
 }

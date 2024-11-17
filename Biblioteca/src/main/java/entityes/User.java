@@ -29,6 +29,18 @@ public class User {
     private String contrasena;
 
     /**
+     * 
+     * @param nombre
+     * @param correo
+     * @param contrasena 
+     */
+    public User(String nombre, String correo, String contrasena) {
+        this.nombre = nombre;
+        this.correo = correo;
+        this.contrasena = contrasena;
+    }
+
+    /**
      * Constructor que inicializa un usuario con un ID, nombre y contraseña.
      * 
      * @param id El identificador único del usuario.
@@ -110,7 +122,7 @@ public class User {
      * 
      * @param contrasena La nueva contraseña del usuario.
      */
-    public void setContraseña(String contrasena) {
+    public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
 

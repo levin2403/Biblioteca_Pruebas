@@ -15,6 +15,7 @@ import java.util.List;
 public interface IUserDAO {
     
     public User getByID(int id) throws DAOException;
+    public User getByMail(String mail) throws DAOException;
     public void addUser(User user) throws DAOException;
     public void updateUser(User user) throws DAOException;
     public List<User> getUsers() throws DAOException;

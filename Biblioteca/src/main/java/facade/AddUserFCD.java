@@ -4,8 +4,9 @@
  */
 package facade;
 
-import FacadeInterfaces.IAddUserFCD;
+import facadeInterfaces.IAddUserFCD;
 import dao.UserDAO;
+import daoInterfaces.IUserDAO;
 import entityes.User;
 import exceptions.DAOException;
 import exceptions.FacadeException;
@@ -21,7 +22,7 @@ public class AddUserFCD implements IAddUserFCD {
     /**
      * 
      */
-    private UserDAO userDAO;
+    private IUserDAO userDAO;
     
     /**
      * 
@@ -38,6 +39,7 @@ public class AddUserFCD implements IAddUserFCD {
     @Override
     public void addUser(User user) throws FacadeException{
         this.user = user;
+        this.userDAO = new UserDAO();
         verifyFields();
         determinateId();
         verifyMailduplicity();

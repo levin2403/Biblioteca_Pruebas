@@ -19,7 +19,6 @@ presentation\panels\PnlAddUser.class
 presentation\FrmMenu$6.class
 presentation\panels\PnlBooks.class
 presentation\panels\PnlLendBook.class
-presentation\FrmUpdateBook$6.class
 facade\AddBookFCD.class
 facade\AddUserFCD.class
 presentation\FrmMenu.class
@@ -27,6 +26,7 @@ FacadeInterfaces\IRemoveBookFCD.class
 dao\LibrarianDAO.class
 presentation\FrmMenu$4.class
 presentation\panels\PnlUser$2.class
+presentation\panels\PnlUpdateUser$3.class
 utilities\Hasher.class
 presentation\panels\PnlRemoveBook.class
 daoInterfaces\ILoanDAO.class
@@ -44,12 +44,15 @@ facade\LoginFCD.class
 presentation\panels\PnlUser$1.class
 presentation\panels\PnlReturnBook.class
 FacadeInterfaces\IUpdateBookFCD.class
+presentation\panels\PnlUpdateUser$1.class
+presentation\panels\PnlUpdateUser$4.class
 exceptions\DAOException.class
 facade\RemoveBookFCD.class
 presentation\panels\PnlLoan.class
 presentation\FrmUpdateBook$1.class
 daoInterfaces\IUserDAO.class
 presentation\FrmUpdateBook$5.class
+dao\NewMain.class
 facade\AddReviewFCD.class
 dao\BookDAO.class
 entityes\User.class
@@ -62,6 +65,7 @@ entityes\Librarian.class
 presentation\FrmLogin$1.class
 presentation\FrmUpdateBook$2.class
 facade\UpdateUserFCD.class
+presentation\panels\PnlUpdateUser$2.class
 presentation\panels\PnlUser.class
 FacadeInterfaces\IAddUserFCD.class
 daoInterfaces\ILibrarianDAO.class

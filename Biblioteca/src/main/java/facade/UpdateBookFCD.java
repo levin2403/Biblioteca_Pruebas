@@ -4,7 +4,7 @@
  */
 package facade;
 
-import FacadeInterfaces.IUpdateBookFCD;
+import facadeInterfaces.IUpdateBookFCD;
 import dao.BookDAO;
 import entityes.Book;
 import exceptions.DAOException;

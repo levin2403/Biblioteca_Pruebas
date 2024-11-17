@@ -4,8 +4,9 @@
  */
 package facade;
 
-import FacadeInterfaces.IUpdateUserFCD;
+import facadeInterfaces.IUpdateUserFCD;
 import dao.UserDAO;
+import daoInterfaces.IUserDAO;
 import entityes.User;
 import exceptions.DAOException;
 import exceptions.FacadeException;
@@ -20,7 +21,7 @@ public class UpdateUserFCD implements IUpdateUserFCD {
     /**
      * 
      */
-    private UserDAO userDAO;
+    private IUserDAO userDAO;
     
     /**
      * 
@@ -35,6 +36,7 @@ public class UpdateUserFCD implements IUpdateUserFCD {
      */
     @Override
     public void UpdateUser(User user) throws FacadeException {
+        this.userDAO = new UserDAO();
         this.user = user;
         verifyFields();
         update();
@@ -65,7 +67,7 @@ public class UpdateUserFCD implements IUpdateUserFCD {
             
             int option = JOptionPane.showConfirmDialog(
                 null, 
-                "¿Esta seguro de querer eliminar el libro?", 
+                "¿Esta seguro de querer actualizar el usuario?", 
                 "Confirmación", 
                 JOptionPane.YES_NO_OPTION
             );

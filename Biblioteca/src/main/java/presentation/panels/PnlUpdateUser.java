@@ -4,6 +4,19 @@
  */
 package presentation.panels;
 
+import dao.UserDAO;
+import daoInterfaces.IUserDAO;
+import entityes.User;
+import exceptions.DAOException;
+import exceptions.FacadeException;
+import facade.UpdateUserFCD;
+import facadeInterfaces.IUpdateUserFCD;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author skevi
@@ -11,18 +24,121 @@ package presentation.panels;
 public class PnlUpdateUser extends javax.swing.JPanel {
 
     /**
+     * 
+     */
+    private IUpdateUserFCD updateUserFCD;
+    
+    /**
+     * 
+     */
+    private IUserDAO userDAO;
+    
+    /**
+     * 
+     */
+    private User user;
+    
+    /**
      * Creates new form PnlUpdateUser
      */
     public PnlUpdateUser() {
         initComponents();
+        initialConfig();
         loadUsersTable();
     }
 
     /**
+     * 
+     */
+    private void initialConfig(){
+        this.updateUserFCD = new UpdateUserFCD();
+        this.userDAO = new UserDAO();
+    }
+    
+    /**
      * Loads the user table in the frame.
      */
     private void loadUsersTable(){
+        // Define las columnas de la tabla.
+        String[] columnNames = {"Nombre", "Correo"};
+        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+
+        try {
+            // Obtén los datos desde la base de datos o fuente de datos.
+            List<User> users = userDAO.getUsers();
+
+            // Agrega los datos al modelo de la tabla.
+            for (User user : users) {
+                Object[] rowData = {user.getNombre(), user.getCorreo()};
+                tableModel.addRow(rowData);
+            }
+
+            // Asigna el modelo a la tabla.
+            this.tblUsers.setModel(tableModel);
+
+        } catch (DAOException e) {
+            JOptionPane.showMessageDialog(this, 
+                    "Error al cargar los usuarios: " + 
+                    e.getMessage(),
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    /**
+     * Cleans the input fields of the frame
+     */
+    private void cleanFields(){
+        this.txfName.setText("");
+        this.txfMail.setText("");
+        this.psfPassword.setText("");
+    }
+    
+    /**
+     * Verifies that there's no more than one selected row in the table
+     * and that there is no less than one selected.
+     */
+    private void validateSelection() {
+        // Obtener el número de filas seleccionadas
+        int selectedRowCount = tblUsers.getSelectedRowCount();
+
+        // Verificar si no se seleccionó ninguna fila
+        if (selectedRowCount == 0) {
+            throw new IllegalStateException("Debe seleccionar al "
+                    + "menos una fila.");
+        }
+
+        // Verificar si hay más de una fila seleccionada
+        if (selectedRowCount > 1) {
+            throw new IllegalStateException("Solo se puede seleccionar "
+                    + "una fila a la vez.");
+        }
         
+    }
+
+    /**
+     * 
+     */
+    private void putSelecteUser() {
+        
+        try{
+        int selecteRow = tblUsers.getSelectedRow();
+        
+        validateSelection();
+        
+        String mail = (String)tblUsers.getValueAt(selecteRow, 1);
+        
+        User user = userDAO.getByMail(mail);
+        this.user = user;
+        
+        this.txfName.setText(user.getNombre());
+        this.txfMail.setText(user.getCorreo());
+        this.psfPassword.setText(user.getContrasena());
+                
+        }catch(DAOException de){
+            JOptionPane.showMessageDialog(this, de.getMessage(), 
+                    "Error al agregar el usuario", JOptionPane.ERROR_MESSAGE);
+        }        
     }
     
     /**
@@ -40,11 +156,11 @@ public class PnlUpdateUser extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        btnUpdate = new javax.swing.JButton();
+        cbxPassword = new javax.swing.JCheckBox();
+        psfPassword = new javax.swing.JPasswordField();
+        txfMail = new javax.swing.JTextField();
+        txfName = new javax.swing.JTextField();
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Nombre"));
@@ -60,6 +176,11 @@ public class PnlUpdateUser extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblUsers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblUsersMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblUsers);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -70,95 +191,159 @@ public class PnlUpdateUser extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Actualizar Usuario");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jButton1.setText("Actualizar");
+        btnUpdate.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnUpdate.setText("Actualizar");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
-        jCheckBox1.setText("Ver");
+        cbxPassword.setText("Ver");
+        cbxPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxPasswordActionPerformed(evt);
+            }
+        });
 
-        jPasswordField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPasswordField1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contraseña", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        psfPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        psfPassword.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contraseña", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        psfPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                psfPasswordActionPerformed(evt);
+            }
+        });
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Correo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        txfMail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfMail.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Correo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        txfName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfName.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(74, 74, 74))
+                        .addGap(59, 59, 59))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(98, 98, 98))
+                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(83, 83, 83))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(15, 15, 15))
+                        .addComponent(cbxPassword)
+                        .addGap(235, 235, 235))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)))
+                            .addComponent(txfName, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txfMail, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(psfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)))
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(174, 174, 174))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(152, 152, 152)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(34, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(28, 28, 28)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox1)
-                                .addGap(25, 25, 25)
-                                .addComponent(jButton1))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 19, Short.MAX_VALUE))
+                        .addGap(32, 32, 32)
+                        .addComponent(jLabel1)
+                        .addGap(12, 12, 12)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(20, 20, 20)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(32, 32, 32)
+                            .addComponent(jLabel2)
+                            .addGap(28, 28, 28)
+                            .addComponent(txfName, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(txfMail, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(psfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(cbxPassword)
+                            .addGap(25, 25, 25)
+                            .addComponent(btnUpdate))))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cbxPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxPasswordActionPerformed
+        if (cbxPassword.isSelected()) {
+            // Mostrar la contraseña en texto plano
+            psfPassword.setEchoChar((char) 0);
+        } else {
+            // Ocultar la contraseña con un carácter de máscara
+            psfPassword.setEchoChar('*');
+        }
+    }//GEN-LAST:event_cbxPasswordActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+            try{
+            
+            int id = this.user.getId();
+                
+            // Collect the user data from the frame.
+            String name = this.txfName.getText();
+            
+            String mail = this.txfMail.getText();
+            
+            // We collect the password data.
+            char[] passwordChars = psfPassword.getPassword();
+            String password = new String(passwordChars);       
+            
+            // Finally we make an instance of the user with the collected data.
+            User user = new User(id, name, mail, password);
+            // Call the the add method from the facade and put the user. 
+            // object in the parameter.
+            this.updateUserFCD.UpdateUser(user);
+            
+            // After updating the user succesfuly, clean the fileds.
+            cleanFields();
+            
+            // After updating the user we refresh the table.
+            loadUsersTable();
+            
+            }catch(FacadeException fe){
+                JOptionPane.showMessageDialog(this, fe.getMessage(), 
+                    "Error al agregar el usuario", JOptionPane.ERROR_MESSAGE);
+            }    
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void psfPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_psfPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_psfPasswordActionPerformed
+
+    private void tblUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsersMouseClicked
+        putSelecteUser();
+    }//GEN-LAST:event_tblUsersMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JCheckBox cbxPassword;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JPasswordField psfPassword;
     private javax.swing.JTable tblUsers;
+    private javax.swing.JTextField txfMail;
+    private javax.swing.JTextField txfName;
     // End of variables declaration//GEN-END:variables
 }

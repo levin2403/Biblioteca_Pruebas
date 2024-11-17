@@ -56,9 +56,25 @@ public class UserDAO implements IUserDAO {
     } 
     
     /**
+     * 
+     * @param mail
+     * @return
+     * @throws DAOException 
+     */
+    @Override
+    public User getByMail(String mail) throws DAOException {
+        for (User user : usuarios) {
+            if (user.getCorreo().equalsIgnoreCase(mail)) {
+                return user;
+            }
+        }
+        return null;
+    }
+    
+    /**
      * Registra un nuevo usuario en la lista.
      * 
-     * @param usuario El usuario que se desea registrar.
+     * @param user
      * @throws exceptions.DAOException
      */
     @Override
@@ -79,17 +95,19 @@ public class UserDAO implements IUserDAO {
      */
     @Override
     public void updateUser(User user) throws DAOException {
-        try{
-        for (int i = 0; i < usuarios.size(); i++) {
-            if (usuarios.get(i).getId() == user.getId()) {
-                // Reemplaza el usuario antiguo por el actualizado
-                usuarios.set(i, user); 
-                return; // Salir una vez que se actualiza
+        boolean userFound = false;
+        for (User usuario : usuarios) {
+            if (usuario.getId() == user.getId()) {
+                usuario.setNombre(user.getNombre());
+                usuario.setCorreo(user.getCorreo());
+                usuario.setContrasena(user.getContrasena());
+                userFound = true;
+                break;
             }
-        }     
-        }catch(Exception ex){
-            throw new DAOException("Error al registrar el usuario: " + 
-                    user, ex);    
+        }
+        if (!userFound) {
+            throw new DAOException("No se encontró un usuario con el ID: " 
+                    + user.getId());
         }
     }
     
@@ -120,7 +138,6 @@ public class UserDAO implements IUserDAO {
         }
         
     }
-
     
 }
 
