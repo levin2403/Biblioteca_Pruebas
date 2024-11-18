@@ -36,6 +36,25 @@ public class RemoveBookFCD implements IRemoveBookFCD {
      */
     @Override
     public void removeBook(Book book) throws FacadeException {
+        verifyDisponibility(book);
+        remove(book);
+    }
+    
+    /**
+     * 
+     * @param book
+     * @throws FacadeException 
+     */
+    private void verifyDisponibility(Book book) throws FacadeException {
+        
+    }
+    
+    /**
+     * 
+     * @param book
+     * @throws FacadeException 
+     */
+    private void remove(Book book) throws FacadeException {
         try{
             
             int option = JOptionPane.showConfirmDialog(

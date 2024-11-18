@@ -4,10 +4,14 @@
  */
 package interfaces;
 
+import entityes.Book;
+
 /**
  *
  * @author skevi
  */
 public interface IValoration {
+    
+    public Book getValoration(String title, String author, String editorial);
     
 }

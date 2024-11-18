@@ -8,6 +8,8 @@ package entityes;
  */
 public class Book {
 
+    
+    
     /**
      * Código ISBN del libro, que sirve como identificador único.
      */
@@ -29,6 +31,11 @@ public class Book {
     private boolean prestado;
 
     /**
+     * 
+     */
+    private Valoration valoration;
+    
+    /**
      * Constructor por defecto que inicializa un nuevo objeto Libro.
      */
     public Book() {
@@ -46,6 +53,29 @@ public class Book {
         this.titulo = titulo;
         this.autor = autor;
         this.prestado = false; // Inicialmente, el libro no está prestado.
+    }
+
+    /**
+     * 
+     * @param isbn   Código ISBN del libro.
+     * @param titulo Título del libro.
+     * @param autor  Autor del libro.
+     * @param prestado Estado de prestamo del libro.
+     */
+    public Book(String isbn, String titulo, String autor, boolean prestado) {
+        this.isbn = isbn;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.prestado = prestado;
+    } 
+
+    public Book(String isbn, String titulo, String autor, 
+            Valoration valoration) {
+        this.isbn = isbn;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.prestado = false;
+        this.valoration = valoration;
     }
 
     /**
@@ -121,14 +151,31 @@ public class Book {
     }
 
     /**
+     * 
+     * @return 
+     */
+    public Valoration getValoration() {
+        return valoration;
+    }
+
+    /**
+     * 
+     * @param valoration 
+     */
+    public void setValoration(Valoration valoration) {
+        this.valoration = valoration;
+    }
+
+    /**
      * Devuelve una representación en forma de cadena del objeto Book.
      *
      * @return String que representa el libro con sus atributos.
      */
     @Override
     public String toString() {
-        return "Libro{" + "isbn=" + isbn + ", titulo=" + titulo + 
-                ", autor=" + autor + ", prestado=" + prestado + '}';
+        return "Book{" + "isbn=" + isbn + ", titulo=" + titulo + 
+                ", autor=" + autor + ", prestado=" + prestado + 
+                ", valoration=" + valoration + '}';
     }
 
 }

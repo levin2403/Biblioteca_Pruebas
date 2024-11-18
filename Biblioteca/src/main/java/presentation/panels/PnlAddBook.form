@@ -42,11 +42,11 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jTextField1" pref="275" max="32767" attributes="0"/>
-                          <Component id="jTextField3" max="32767" attributes="0"/>
+                          <Component id="txfTitle" pref="275" max="32767" attributes="0"/>
+                          <Component id="txfAuthor" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnAgregar" min="-2" pref="152" max="-2" attributes="0"/>
+                      <Component id="btnAdd" min="-2" pref="152" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -62,18 +62,18 @@
               <Component id="txfISBN" min="-2" pref="55" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="btnAgregar" min="-2" pref="55" max="-2" attributes="0"/>
-                  <Component id="jTextField1" min="-2" pref="55" max="-2" attributes="0"/>
+                  <Component id="btnAdd" min="-2" pref="55" max="-2" attributes="0"/>
+                  <Component id="txfTitle" min="-2" pref="55" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-              <Component id="jTextField3" min="-2" pref="55" max="-2" attributes="0"/>
+              <Component id="txfAuthor" min="-2" pref="55" max="-2" attributes="0"/>
               <EmptySpace pref="71" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="txfTitle">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="0"/>
@@ -97,19 +97,19 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField3">
+    <Component class="javax.swing.JTextField" name="txfAuthor">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="0"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Nombre"/>
+            <TitledBorder title="Autor"/>
           </Border>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAgregar">
+    <Component class="javax.swing.JButton" name="btnAdd">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
@@ -117,6 +117,9 @@
         <Property name="text" type="java.lang.String" value="Agregar"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>

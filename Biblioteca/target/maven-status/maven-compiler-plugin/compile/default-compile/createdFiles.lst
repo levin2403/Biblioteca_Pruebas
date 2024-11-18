@@ -8,6 +8,7 @@ fabricas\UserFactory.class
 FacadeInterfaces\IAddBookFCD.class
 FacadeInterfaces\ILogginFCD.class
 utilities\RoundedBorder.class
+presentation\panels\PnlRemoveBook$1.class
 daoInterfaces\IBookDAO.class
 entityes\ValoratedBook.class
 presentation\FrmUpdateBook.class
@@ -52,6 +53,7 @@ presentation\panels\PnlLoan.class
 presentation\FrmUpdateBook$1.class
 daoInterfaces\IUserDAO.class
 presentation\FrmUpdateBook$5.class
+presentation\panels\PnlAddBook$1.class
 dao\NewMain.class
 facade\AddReviewFCD.class
 dao\BookDAO.class

@@ -188,7 +188,7 @@ public class FrmMenu extends javax.swing.JFrame {
         lblPrestarLibro.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         lblPrestarLibro.setForeground(new java.awt.Color(0, 0, 0));
         lblPrestarLibro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblPrestarLibro.setText("Prestamar libro");
+        lblPrestarLibro.setText("Prestar libro");
         lblPrestarLibro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblPrestarLibro.setOpaque(true);
         lblPrestarLibro.addMouseListener(new java.awt.event.MouseAdapter() {

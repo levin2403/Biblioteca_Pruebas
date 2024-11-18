@@ -4,19 +4,107 @@
  */
 package presentation.panels;
 
+import dao.BookDAO;
+import daoInterfaces.IBookDAO;
+import entityes.Book;
+import exceptions.DAOException;
+import exceptions.FacadeException;
+import facade.RemoveBookFCD;
+import facadeInterfaces.IRemoveBookFCD;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author skevi
  */
 public class PnlRemoveBook extends javax.swing.JPanel {
 
+    IBookDAO bookDAO;
+    
+    IRemoveBookFCD removeBookFCD;
+    
     /**
      * Creates new form PnlDelateUser
      */
     public PnlRemoveBook() {
         initComponents();
+        initialConfig();
+        loadTable();
+    }
+    
+    /**
+     * 
+     */
+    private void initialConfig(){
+        this.bookDAO = new BookDAO();
+        this.removeBookFCD = new RemoveBookFCD();
+    }
+    
+    /**
+     * 
+     */
+    private void loadTable(){
+        String[] columns = {"ISBN", "Titulo", "Autor", "Estado"};
+        DefaultTableModel tableModel = new DefaultTableModel(columns, 0);
+        
+        try{
+            List<Book> books = bookDAO.getBooks();
+            
+            for (Book book : books) {
+                Object[] object = {
+                    book.getIsbn(),
+                    book.getTitulo(),
+                    book.getAutor(),
+                    (book.isPrestado() == false) ? "Disponible" : "Prestado"
+                };
+                tableModel.addRow(object);
+            }
+            
+            this.tblBooks.setModel(tableModel);
+            
+        }catch(DAOException de){
+            JOptionPane.showMessageDialog(this, 
+                    "Error al cargar los libros: " + 
+                    de.getMessage(),
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
+    /**
+     * 
+     */
+    private Book getSelectedBook(){
+        try{
+        int selectedRow = this.tblBooks.getSelectedRow();
+        
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, 
+                    "Debe seleccionar un libro para continuar",
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        
+        String isbn = (String)this.tblBooks.getValueAt(selectedRow, 0);
+        
+        Book book = bookDAO.searchByISBN(isbn);
+        
+        return book;
+        
+        }
+        catch(DAOException de){
+            JOptionPane.showMessageDialog(this, 
+                    "Error al cargar los libros: " + 
+                    de.getMessage(),
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        return null;
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,11 +115,11 @@ public class PnlRemoveBook extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblBooks = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblBooks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -42,13 +130,18 @@ public class PnlRemoveBook extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblBooks);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Selecciona un Libro a Eliminar");
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setText("Eliminar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -80,11 +173,24 @@ public class PnlRemoveBook extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try{
+            //removes the book selected by the user in the table.
+            removeBookFCD.removeBook(getSelectedBook());
+            loadTable();
+        }catch(FacadeException fe){
+            JOptionPane.showMessageDialog(this, 
+                     fe.getMessage(),
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblBooks;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,6 +8,7 @@ import dao.BookDAO;
 import entityes.Book;
 import exceptions.DAOException;
 import daoInterfaces.IBookDAO;
+import entityes.Valoration;
 
 /**
  *
@@ -33,36 +34,55 @@ public class BookFactory {
      */
     public void fabricateBooks() {
         try {
+            
+            Valoration valoration1 = new Valoration((byte)5, "Maginifico libro");
+            Valoration valoration2 = new Valoration((byte)3, "Un libro emocionante");
+            Valoration valoration3 = new Valoration((byte)4, "Triste y emotivo en toda la historia");
+            Valoration valoration4 = new Valoration((byte)2, "Cargado de emotividad y reflexion");
+            Valoration valoration5 = new Valoration((byte)4, "Muy interesante y conmovedor");
+//            Valoration valoration6 = new Valoration((byte)3, "lleno de emotividad");
+            
+            
             libroDAO.addBook(new Book("978-3-16", 
                                             "Cien años de soledad", 
-                                            "Gabriel García Márquez"));
+                                            "Gabriel García Márquez",
+                                             valoration1));
             libroDAO.addBook(new Book("978-0-452", 
                                             "Orgullo y prejuicio", 
-                                            "Jane Austen"));
+                                            "Jane Austen",
+                                             valoration2));
             libroDAO.addBook(new Book("978-1-566", 
                                             "1984", 
-                                            "George Orwell"));
+                                            "George Orwell",
+                                             valoration3));
             libroDAO.addBook(new Book("978-0-743", 
                                             "El gran Gatsby", 
-                                            "F. Scott Fitzgerald"));
-            libroDAO.addBook(new Book("978-0-670", 
-                                            "Matar a un ruiseñor", 
-                                            "Harper Lee"));
+                                            "F. Scott Fitzgerald",
+                                             valoration4));
+            libroDAO.addBook(new Book("938-0-143", 
+                                            "El gran Gatsby", 
+                                            "F. Scott Fitzgerald",
+                                             valoration4));
             libroDAO.addBook(new Book("978-0-525", 
                                             "Don Quijote de la Mancha", 
-                                            "Miguel de Cervantes"));
-            libroDAO.addBook(new Book("978-0-394", 
-                                            "El guardián entre el centeno", 
-                                            "J.D. Salinger"));
-            libroDAO.addBook(new Book("978-0-7432", 
-                                            "El código Da Vinci", 
-                                            "Dan Brown"));
+                                            "Miguel de Cervantes",
+                                             valoration3));
+            libroDAO.addBook(new Book("948-1-741", 
+                                            "1984", 
+                                            "George Orwell",
+                                             valoration3));
+            libroDAO.addBook(new Book("578-0-123", 
+                                            "Orgullo y prejuicio", 
+                                            "Jane Austen",
+                                             valoration2));
             libroDAO.addBook(new Book("978-1-4767", 
                                             "Inferno", 
-                                            "Dan Brown"));
-            libroDAO.addBook(new Book("978-0-141", 
-                                            "Crimen y castigo", 
-                                            "Fiódor Dostoyevski"));
+                                            "Dan Brown",
+                                             valoration5));
+            libroDAO.addBook(new Book("978-0-452", 
+                                            "Orgullo y prejuicio", 
+                                            "Jane Austen",
+                                             valoration2));
                 
             //imprimimos para verificar.
             for (Book libro : libroDAO.getBooks()) {

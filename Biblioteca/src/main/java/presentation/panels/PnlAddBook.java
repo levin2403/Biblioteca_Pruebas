@@ -4,17 +4,39 @@
  */
 package presentation.panels;
 
+import entityes.Book;
+import exceptions.FacadeException;
+import facade.AddBookFCD;
+import facadeInterfaces.IAddBookFCD;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author skevi
  */
 public class PnlAddBook extends javax.swing.JPanel {
 
+    private IAddBookFCD addBookFCD;
+    
     /**
      * Creates new form PnlAddBook
      */
     public PnlAddBook() {
         initComponents();
+        initialConfig();
+    }
+    
+    private void initialConfig(){
+        this.addBookFCD = new AddBookFCD();
+    }
+    
+    /**
+     * Cleans the input fields of the frame
+     */
+    private void cleanFields(){
+        this.txfISBN.setText("");
+        this.txfTitle.setText("");
+        this.txfAuthor.setText("");
     }
 
     /**
@@ -28,28 +50,33 @@ public class PnlAddBook extends javax.swing.JPanel {
 
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txfTitle = new javax.swing.JTextField();
         txfISBN = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        btnAgregar = new javax.swing.JButton();
+        txfAuthor = new javax.swing.JTextField();
+        btnAdd = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
         jLabel1.setText("jLabel1");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField1.setBorder(javax.swing.BorderFactory.createTitledBorder("Titulo"));
+        txfTitle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfTitle.setBorder(javax.swing.BorderFactory.createTitledBorder("Titulo"));
 
         txfISBN.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txfISBN.setBorder(javax.swing.BorderFactory.createTitledBorder("ISBN"));
 
-        jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField3.setBorder(javax.swing.BorderFactory.createTitledBorder("Nombre"));
+        txfAuthor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfAuthor.setBorder(javax.swing.BorderFactory.createTitledBorder("Autor"));
 
-        btnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnAgregar.setText("Agregar");
-        btnAgregar.setToolTipText("");
+        btnAdd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnAdd.setText("Agregar");
+        btnAdd.setToolTipText("");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("Agregar Libro");
@@ -70,10 +97,10 @@ public class PnlAddBook extends javax.swing.JPanel {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-                            .addComponent(jTextField3))
+                            .addComponent(txfTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                            .addComponent(txfAuthor))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(100, 100, 100))))
         );
         layout.setVerticalGroup(
@@ -85,22 +112,38 @@ public class PnlAddBook extends javax.swing.JPanel {
                 .addComponent(txfISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txfAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(71, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        try{
+        String isbn = this.txfISBN.getText();
+        String title = this.txfAuthor.getText();
+        String author = this.txfAuthor.getText();
+        
+        Book book = new Book(isbn, title, author);
+        
+        this.addBookFCD.addBook(book);
+        
+        }catch(FacadeException fe){
+            JOptionPane.showMessageDialog(this, fe.getMessage(), 
+                    "Error al agregar el usuario", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnAdd;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField txfAuthor;
     private javax.swing.JTextField txfISBN;
+    private javax.swing.JTextField txfTitle;
     // End of variables declaration//GEN-END:variables
 }

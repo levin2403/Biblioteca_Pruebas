@@ -5,6 +5,7 @@
 package valoration;
 
 import entityes.Book;
+import interfaces.IValoration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author skevi
  */
-public class Valorate {
+public class Valorate implements IValoration{
     
     /**
      * 
@@ -23,31 +24,27 @@ public class Valorate {
      * 
      */
     public Valorate() {
-    }
-    
-    /**
-     * 
-     * @param book 
-     */
-    public void sentBookToValorate(Book book){
         
     }
     
     /**
      * 
-     * @param book 
-     * @param valoration 
-     * @param review 
+     * @param title
+     * @param author
+     * @param editorial
+     * @return 
      */
-    public void sendValoratedBook(Book book, int valoration, String review){
-        
+    @Override
+    public Book getValoration(String title, String author, String editorial) {
+        return null;
     }
-
+    
+    
     /**
      * 
      * @return 
      */
-    public List<Book> getBooks() {
+    public List<Book> getBooksToValorate() {
         return books;
     }
     
