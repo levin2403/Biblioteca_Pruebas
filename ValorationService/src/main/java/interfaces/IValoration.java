@@ -4,7 +4,9 @@
  */
 package interfaces;
 
-import entityes.Book;
+import com.exceptions.SystemNotAvailableException;
+import com.exceptions.ValorationNotFoundException;
+import entityes.Valoration;
 
 /**
  *
@@ -12,6 +14,15 @@ import entityes.Book;
  */
 public interface IValoration {
     
-    public Book getValoration(String title, String author, String editorial);
+    /**
+     *
+     * @param title
+     * @param author
+     * @return
+     * @throws com.exceptions.SystemNotAvailableException
+     * @throws com.exceptions.ValorationNotFoundException
+     */
+    public Valoration getValoration(String title, String author) throws 
+            SystemNotAvailableException, ValorationNotFoundException;
     
 }

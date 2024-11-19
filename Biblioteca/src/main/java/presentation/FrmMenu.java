@@ -109,7 +109,6 @@ public class FrmMenu extends javax.swing.JFrame {
         lblPrestarLibro = new javax.swing.JLabel();
         lblBusquedas = new javax.swing.JLabel();
         lblDevolverLibro = new javax.swing.JLabel();
-        lblResenarLibros = new javax.swing.JLabel();
         PnlWindow = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -241,25 +240,6 @@ public class FrmMenu extends javax.swing.JFrame {
             }
         });
 
-        lblResenarLibros.setBackground(new java.awt.Color(153, 153, 153));
-        lblResenarLibros.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        lblResenarLibros.setForeground(new java.awt.Color(0, 0, 0));
-        lblResenarLibros.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblResenarLibros.setText("Reseñar libro");
-        lblResenarLibros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblResenarLibros.setOpaque(true);
-        lblResenarLibros.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblResenarLibrosMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblResenarLibrosMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblResenarLibrosMouseExited(evt);
-            }
-        });
-
         javax.swing.GroupLayout PnlSideBarLayout = new javax.swing.GroupLayout(PnlSideBar);
         PnlSideBar.setLayout(PnlSideBarLayout);
         PnlSideBarLayout.setHorizontalGroup(
@@ -269,7 +249,6 @@ public class FrmMenu extends javax.swing.JFrame {
             .addComponent(lblGestionUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lblDevolverLibro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lblBusquedas, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-            .addComponent(lblResenarLibros, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         PnlSideBarLayout.setVerticalGroup(
             PnlSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,9 +263,7 @@ public class FrmMenu extends javax.swing.JFrame {
                 .addComponent(lblDevolverLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblBusquedas, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblResenarLibros, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
 
         background.add(PnlSideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 490));
@@ -386,20 +363,6 @@ public class FrmMenu extends javax.swing.JFrame {
         this.lblDevolverLibro.setForeground(Color.BLACK);
     }//GEN-LAST:event_lblDevolverLibroMouseExited
 
-    private void lblResenarLibrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblResenarLibrosMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lblResenarLibrosMouseClicked
-
-    private void lblResenarLibrosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblResenarLibrosMouseEntered
-        this.lblResenarLibros.setBackground(new Color(45, 44, 34));
-        this.lblResenarLibros.setForeground(Color.WHITE);
-    }//GEN-LAST:event_lblResenarLibrosMouseEntered
-
-    private void lblResenarLibrosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblResenarLibrosMouseExited
-        this.lblResenarLibros.setBackground(new Color(153, 153, 153));
-        this.lblResenarLibros.setForeground(Color.BLACK);
-    }//GEN-LAST:event_lblResenarLibrosMouseExited
-
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             new FrmMenu().setVisible(true);
@@ -417,7 +380,6 @@ public class FrmMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lblGestionLibros;
     private javax.swing.JLabel lblGestionUsuarios;
     private javax.swing.JLabel lblPrestarLibro;
-    private javax.swing.JLabel lblResenarLibros;
     private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,7 +4,10 @@
  */
 package valoration;
 
+import com.exceptions.SystemNotAvailableException;
+import com.exceptions.ValorationNotFoundException;
 import entityes.Book;
+import entityes.Valoration;
 import interfaces.IValoration;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,14 +34,30 @@ public class Valorate implements IValoration{
      * 
      * @param title
      * @param author
-     * @param editorial
      * @return 
      */
     @Override
-    public Book getValoration(String title, String author, String editorial) {
-        return null;
+    public Valoration getValoration(String title, String author) throws 
+            SystemNotAvailableException, ValorationNotFoundException {
+        
+        for (Book book : books) {
+            if (book.getTitulo().equalsIgnoreCase(title) &&
+                    book.getAutor().equalsIgnoreCase(author)) {
+                return book.getValoration();
+            }
+        }
+        
+        throw new ValorationNotFoundException("La valoracion para el libro "
+                + "con los campos proporcionados no ha sido encontrado");
     }
     
+    /**
+     * 
+     * @param book 
+     */
+    public void addBook(Book book){
+        Valorate.books.add(book);
+    }
     
     /**
      * 

@@ -20,7 +20,7 @@ public class RemoveBookFCD implements IRemoveBookFCD {
     /**
      * 
      */
-    BookDAO bookDAO;
+    private BookDAO bookDAO;
 
     /**
      * 

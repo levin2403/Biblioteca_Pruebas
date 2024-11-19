@@ -21,7 +21,7 @@ public class LoginFCD implements ILogginFCD{
     /**
      * 
      */
-    ILibrarianDAO bibliotecarioDAO;
+    private ILibrarianDAO bibliotecarioDAO;
     
     /**
      * 
