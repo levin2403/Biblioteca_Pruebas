@@ -175,9 +175,26 @@ public class PnlRemoveBook extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try{
-            //removes the book selected by the user in the table.
-            removeBookFCD.removeBook(getSelectedBook());
-            loadTable();
+            
+            int option = JOptionPane.showConfirmDialog(
+                null, 
+                "¿Esta seguro de querer eliminar el libro?", 
+                "Confirmación", 
+                JOptionPane.YES_NO_OPTION
+            );
+
+            if (option == JOptionPane.YES_OPTION) {
+                //removes the book selected by the user in the table.
+                removeBookFCD.removeBook(getSelectedBook());
+                
+                //the table gets loaded againt to show the changes
+                loadTable(); 
+                
+                //shows a succes message
+                JOptionPane.showMessageDialog(null, "Exito al eliminar "
+                        + "el libro"); 
+            }
+           
         }catch(FacadeException fe){
             JOptionPane.showMessageDialog(this, 
                      fe.getMessage(),

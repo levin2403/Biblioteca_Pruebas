@@ -203,8 +203,6 @@ public class FrmLogin extends javax.swing.JFrame {
             
             String password = new String(passwordChars);
             
-            System.out.println(password);
-            
             if(librarianFacade.loggin(mail, password)){
                 FrmMenu menu = new FrmMenu();
                 menu.setVisible(true);

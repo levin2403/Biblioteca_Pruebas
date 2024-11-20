@@ -9,7 +9,6 @@ import dao.BookDAO;
 import entityes.Book;
 import exceptions.DAOException;
 import exceptions.FacadeException;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -46,7 +45,10 @@ public class RemoveBookFCD implements IRemoveBookFCD {
      * @throws FacadeException 
      */
     private void verifyDisponibility(Book book) throws FacadeException {
-        
+        if (book.isPrestado()) {
+            throw new FacadeException("No se puede eliminar un libro que "
+                    + "se encuentra prestado");
+        }
     }
     
     /**
@@ -56,20 +58,7 @@ public class RemoveBookFCD implements IRemoveBookFCD {
      */
     private void remove(Book book) throws FacadeException {
         try{
-            
-            int option = JOptionPane.showConfirmDialog(
-                null, 
-                "¿Esta seguro de querer eliminar el libro?", 
-                "Confirmación", 
-                JOptionPane.YES_NO_OPTION
-            );
-            
-            if (option == JOptionPane.YES_OPTION) {
                 bookDAO.removeBook(book);
-                JOptionPane.showMessageDialog(null, "Exito al eliminar "
-                        + "el libro");
-            }
-            
         }
         catch(DAOException de){
             throw new FacadeException(de.getMessage());

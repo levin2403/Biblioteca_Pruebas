@@ -44,6 +44,22 @@ public class PnlAddUser extends javax.swing.JPanel {
         this.txfMail.setText("");
         this.psfPassword.setText("");
     }
+    
+    private User getUser(){
+        // Collect the user data from the frame.
+        String name = this.txfName.getText();
+
+        String mail = this.txfMail.getText();
+
+        // We collect the password data
+        char[] passwordChars = psfPassword.getPassword();
+        String password = new String(passwordChars);       
+
+        // Finally we make an instance of the user with the collected data.
+        User user = new User(name, mail, password);
+        
+        return user;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -139,24 +155,29 @@ public class PnlAddUser extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        try{
-            // Collect the user data from the frame.
-            String name = this.txfName.getText();
-            
-            String mail = this.txfMail.getText();
-            
-            // We collect the password data
-            char[] passwordChars = psfPassword.getPassword();
-            String password = new String(passwordChars);       
-            
+        try{    
             // Finally we make an instance of the user with the collected data.
-            User user = new User(name, mail, password);
-            // Call the the add method from the facade and put the user 
-            // object in the parameter.
-            this.addUserFCD.addUser(user);
+            User user = getUser();
             
-            // After adding the user succesfuly clean the fileds 
-            cleanFields();
+            int option = JOptionPane.showConfirmDialog(
+                null, 
+                "¿Esta seguro de querer registrar al usuario?", 
+                "Confirmación", 
+                JOptionPane.YES_NO_OPTION
+            );
+            
+            if (option == JOptionPane.YES_OPTION) {
+                // Call the the add method from the facade and put the user 
+                // object in the parameter.
+                this.addUserFCD.addUser(user);
+
+                // After adding the user succesfuly clean the fileds 
+                cleanFields();
+                
+                //show succes message
+                JOptionPane.showMessageDialog(null, "Usuario agregado con "
+                        + "exito");
+            }
   
         }catch(FacadeException fe){
             JOptionPane.showMessageDialog(this, fe.getMessage(), 

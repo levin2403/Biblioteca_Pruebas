@@ -39,6 +39,15 @@ public class PnlAddBook extends javax.swing.JPanel {
         this.txfAuthor.setText("");
     }
 
+    private Book getBook(){
+        String isbn = this.txfISBN.getText();
+        String title = this.txfAuthor.getText();
+        String author = this.txfAuthor.getText();
+        
+        Book book = new Book(isbn, title, author);
+        return book;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -122,13 +131,21 @@ public class PnlAddBook extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         try{
-        String isbn = this.txfISBN.getText();
-        String title = this.txfAuthor.getText();
-        String author = this.txfAuthor.getText();
+            
+        Book book = getBook();
         
-        Book book = new Book(isbn, title, author);
+        int option = JOptionPane.showConfirmDialog(
+                null, 
+                "¿Esta seguro de querer agregar el libro?", 
+                "Confirmación", 
+                JOptionPane.YES_NO_OPTION
+            );
         
-        this.addBookFCD.addBook(book);
+        if (option == JOptionPane.YES_OPTION) {
+            this.addBookFCD.addBook(book);   
+            JOptionPane.showMessageDialog(null, "Libro agregado con "
+                    + "exito");
+        }
         
         }catch(FacadeException fe){
             JOptionPane.showMessageDialog(this, fe.getMessage(), 

@@ -12,8 +12,6 @@ import exceptions.FacadeException;
 import facade.UpdateUserFCD;
 import facadeInterfaces.IUpdateUserFCD;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -53,6 +51,7 @@ public class PnlUpdateUser extends javax.swing.JPanel {
     private void initialConfig(){
         this.updateUserFCD = new UpdateUserFCD();
         this.userDAO = new UserDAO();
+        this.tblUsers.setEnabled(false);
     }
     
     /**
@@ -139,6 +138,24 @@ public class PnlUpdateUser extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, de.getMessage(), 
                     "Error al agregar el usuario", JOptionPane.ERROR_MESSAGE);
         }        
+    }
+    
+    private User getUpdatedUserData(){
+        int id = this.user.getId();
+                
+        // Collect the user data from the frame.
+        String name = this.txfName.getText();
+
+        String mail = this.txfMail.getText();
+
+        //collect the password data.
+        char[] passwordChars = psfPassword.getPassword();
+        String password = new String(passwordChars);       
+
+        // Finally we make an instance of the user with the collected data.
+        User user = new User(id, name, mail, password);
+        
+        return user;
     }
     
     /**
@@ -294,29 +311,32 @@ public class PnlUpdateUser extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
             try{
-            
-            int id = this.user.getId();
                 
-            // Collect the user data from the frame.
-            String name = this.txfName.getText();
-            
-            String mail = this.txfMail.getText();
-            
-            // We collect the password data.
-            char[] passwordChars = psfPassword.getPassword();
-            String password = new String(passwordChars);       
-            
-            // Finally we make an instance of the user with the collected data.
-            User user = new User(id, name, mail, password);
-            // Call the the add method from the facade and put the user. 
-            // object in the parameter.
-            this.updateUserFCD.UpdateUser(user);
-            
-            // After updating the user succesfuly, clean the fileds.
-            cleanFields();
-            
-            // After updating the user we refresh the table.
-            loadUsersTable();
+            int option = JOptionPane.showConfirmDialog(
+                null, 
+                "¿Esta seguro de querer actualizar el usuario?", 
+                "Confirmación", 
+                JOptionPane.YES_NO_OPTION
+            );     
+                
+            if (option == JOptionPane.YES_OPTION) {
+                
+                //get the user data from the fields with the new user data.
+                User user = getUpdatedUserData();
+                // Call the the add method from the facade and put the user
+                // object in the parameter.
+                this.updateUserFCD.UpdateUser(user);
+
+                // After updating the user succesfuly, clean the fileds.
+                cleanFields();
+
+                // After updating the user we refresh the table.
+                loadUsersTable();
+                
+                //show a succes message.
+                JOptionPane.showMessageDialog(null, "Exito al actualizar "
+                    + "el usuario");
+            }
             
             }catch(FacadeException fe){
                 JOptionPane.showMessageDialog(this, fe.getMessage(), 

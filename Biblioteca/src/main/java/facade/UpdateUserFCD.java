@@ -39,6 +39,7 @@ public class UpdateUserFCD implements IUpdateUserFCD {
         this.userDAO = new UserDAO();
         this.user = user;
         verifyFields();
+        verifyMail();
         update();
     }
     
@@ -64,23 +65,21 @@ public class UpdateUserFCD implements IUpdateUserFCD {
      */
     private void update() throws FacadeException {
         try{
-            
-            int option = JOptionPane.showConfirmDialog(
-                null, 
-                "¿Esta seguro de querer actualizar el usuario?", 
-                "Confirmación", 
-                JOptionPane.YES_NO_OPTION
-            );
-            
-            if (option == JOptionPane.YES_OPTION) {
-                userDAO.updateUser(user);
-                JOptionPane.showMessageDialog(null, "Exito al actualizar "
-                        + "el usuario");
-            }
-
+            userDAO.updateUser(user);
         }
         catch(DAOException ex){
             throw new FacadeException(ex.getMessage());
+        }
+    }
+    
+    /**
+     * 
+     * @throws FacadeException 
+     */
+    private void verifyMail() throws FacadeException {
+        if (!this.user.getCorreo().matches("@gmail\\.com$")) {
+            throw new FacadeException("Se debe de incluir @gmail al final "
+                    + "del correo");
         }
     }
     

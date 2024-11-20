@@ -27,11 +27,6 @@ public class AddBookFCD implements IAddBookFCD{
      * 
      */
     private BookDAO bookDAO;
-
-    /**
-     * 
-     */
-    private Book book;
     
     /**
      * 
@@ -48,23 +43,22 @@ public class AddBookFCD implements IAddBookFCD{
      */
     @Override
     public void addBook(Book book) throws FacadeException {
-        this.book = book;
-        verifyFields();
-        getValoration();
-        addBookInStorage();
+        verifyFields(book);
+        getValoration(book);
+        addBookInStorage(book);
     }
     
     /**
      * 
      */
-    private void verifyFields() throws FacadeException {
-        if (this.book.getIsbn().isEmpty()) {
+    private void verifyFields(Book book) throws FacadeException {
+        if (book.getIsbn().isEmpty()) {
             throw new FacadeException("El ISBN no puede estar vacio");
         }
-        else if (this.book.getTitulo().isEmpty()) {
+        else if (book.getTitulo().isEmpty()) {
             throw new FacadeException("El titulo no puede estar vacio");
         }
-        else if(this.book.getAutor().isEmpty()){
+        else if(book.getAutor().isEmpty()){
             throw new FacadeException("El autor no puede estar vacio");
         }
     }
@@ -74,22 +68,9 @@ public class AddBookFCD implements IAddBookFCD{
      * @param book
      * @throws FacadeException 
      */
-    private void addBookInStorage() throws FacadeException {
+    private void addBookInStorage(Book book) throws FacadeException {
         try{
-            
-            int option = JOptionPane.showConfirmDialog(
-                null, 
-                "¿Esta seguro de querer agregar el libro?", 
-                "Confirmación", 
-                JOptionPane.YES_NO_OPTION
-            );
-            
-            if (option == JOptionPane.YES_OPTION) {
-                bookDAO.addBook(this.book);
-                JOptionPane.showMessageDialog(null, "Libro agregado con "
-                        + "exito");
-            }
-            
+            bookDAO.addBook(book);
         }
         catch(DAOException de){
             throw new FacadeException();
@@ -102,17 +83,17 @@ public class AddBookFCD implements IAddBookFCD{
      * @param book
      * @throws FacadeException 
      */
-    private void getValoration() throws FacadeException {
+    private void getValoration(Book book) throws FacadeException {
         try{
             Valoration valoration =externalSystem.
-                    getValoration(this.book.getTitulo(), this.book.getAutor());
+                    getValoration(book.getTitulo(), book.getAutor());
             
-            this.book.setValoration(valoration);
+            book.setValoration(valoration);
         }
         catch(Exception ex){
 
             //añadimos el libro sin valoracion
-            addBookInStorage();
+            addBookInStorage(book);
             
             //lanzamos la excepcion con el mensaje del error obtenido.
             throw new FacadeException(ex.getMessage());
