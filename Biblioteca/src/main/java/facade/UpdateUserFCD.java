@@ -10,7 +10,6 @@ import daoInterfaces.IUserDAO;
 import entityes.User;
 import exceptions.DAOException;
 import exceptions.FacadeException;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,9 +24,10 @@ public class UpdateUserFCD implements IUpdateUserFCD {
     
     /**
      * 
-     * @param user 
      */
-    private User user; 
+    public UpdateUserFCD() {
+        this.userDAO = new UserDAO();
+    }
     
     /**
      * 
@@ -36,18 +36,16 @@ public class UpdateUserFCD implements IUpdateUserFCD {
      */
     @Override
     public void UpdateUser(User user) throws FacadeException {
-        this.userDAO = new UserDAO();
-        this.user = user;
-        verifyFields();
-        verifyMail();
-        update();
+        verifyFields(user);
+        verifyMail(user);
+        update(user);
     }
     
     /**
      * 
      * @throws FacadeException 
      */
-    private void verifyFields() throws FacadeException {
+    private void verifyFields(User user) throws FacadeException {
         if (user.getNombre().isEmpty()) {
             throw new FacadeException("El nombre no puede estar vacio");
         }
@@ -63,7 +61,7 @@ public class UpdateUserFCD implements IUpdateUserFCD {
      * 
      * @throws FacadeException 
      */
-    private void update() throws FacadeException {
+    private void update(User user) throws FacadeException {
         try{
             userDAO.updateUser(user);
         }
@@ -76,8 +74,8 @@ public class UpdateUserFCD implements IUpdateUserFCD {
      * 
      * @throws FacadeException 
      */
-    private void verifyMail() throws FacadeException {
-        if (!this.user.getCorreo().matches("@gmail\\.com$")) {
+    private void verifyMail(User user) throws FacadeException {
+        if (!user.getCorreo().matches("@gmail\\.com$")) {
             throw new FacadeException("Se debe de incluir @gmail al final "
                     + "del correo");
         }

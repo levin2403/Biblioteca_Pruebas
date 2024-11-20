@@ -30,11 +30,6 @@ public class UpdateBookFCD implements IUpdateBookFCD {
     /**
      * 
      */
-    private Book book;
-
-    /**
-     * 
-     */
     public UpdateBookFCD() {
         this.bookDAO = new BookDAO();
         this.externalSystem = new ExternalSystemIntegration();
@@ -47,15 +42,14 @@ public class UpdateBookFCD implements IUpdateBookFCD {
      */
     @Override
     public void UpdateBook(Book book) throws FacadeException {
-        this.book = book;
-        verifyFields();
-        getValoration();
-        update();
+        verifyFields(book);
+        getValoration(book);
+        update(book);
     }
     
-    private void update() throws FacadeException{
+    private void update(Book book) throws FacadeException{
         try{
-                bookDAO.updateBook(book);
+            bookDAO.updateBook(book);
         }
         catch(DAOException de){
             throw new FacadeException(de.getMessage());
@@ -68,17 +62,17 @@ public class UpdateBookFCD implements IUpdateBookFCD {
      * @param book
      * @throws FacadeException 
      */
-    private void getValoration() throws FacadeException {
+    private void getValoration(Book book) throws FacadeException {
         try{
             Valoration valoration =externalSystem.
-                    getValoration(this.book.getTitulo(), this.book.getAutor());
+                    getValoration(book.getTitulo(), book.getAutor());
             
-            this.book.setValoration(valoration);
+            book.setValoration(valoration);
         }
         catch(Exception ex){
 
             //añadimos el libro sin valoracion
-            update();
+            update(book);
             
             //lanzamos la excepcion con el mensaje del error obtenido.
             throw new FacadeException(ex.getMessage());
@@ -88,14 +82,14 @@ public class UpdateBookFCD implements IUpdateBookFCD {
     /**
      * 
      */
-    private void verifyFields() throws FacadeException {
-        if (this.book.getIsbn().isEmpty()) {
+    private void verifyFields(Book book) throws FacadeException {
+        if (book.getIsbn().isEmpty()) {
             throw new FacadeException("El ISBN no puede estar vacio");
         }
-        else if (this.book.getTitulo().isEmpty()) {
+        else if (book.getTitulo().isEmpty()) {
             throw new FacadeException("El titulo no puede estar vacio");
         }
-        else if(this.book.getAutor().isEmpty()){
+        else if(book.getAutor().isEmpty()){
             throw new FacadeException("El autor no puede estar vacio");
         }
     }
