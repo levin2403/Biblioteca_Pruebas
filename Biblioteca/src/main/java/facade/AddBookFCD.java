@@ -10,7 +10,7 @@ import entityes.Book;
 import entityes.Valoration;
 import exceptions.DAOException;
 import exceptions.FacadeException;
-import javax.swing.JOptionPane;
+import java.util.List;
 
 /**
  *
@@ -21,12 +21,12 @@ public class AddBookFCD implements IAddBookFCD{
     /**
      * 
      */
-    private ExternalSystemIntegration externalSystem;
+    private final ExternalSystemIntegration externalSystem;
     
     /**
      * 
      */
-    private BookDAO bookDAO;
+    private final BookDAO bookDAO;
     
     /**
      * 
@@ -44,6 +44,8 @@ public class AddBookFCD implements IAddBookFCD{
     @Override
     public void addBook(Book book) throws FacadeException {
         verifyFields(book);
+        verifyISBNMatch(book);
+        verifyIsbnDisponibility(book);
         getValoration(book);
         addBookInStorage(book);
     }
@@ -100,4 +102,35 @@ public class AddBookFCD implements IAddBookFCD{
         }
     }
     
+    /**
+     * 
+     * 
+     * @param book
+     * @throws FacadeException 
+     */
+    private void verifyISBNMatch(Book book) throws FacadeException {
+        if (!book.getIsbn().matches("^\\d{3}-\\d-\\d{3}$")) {
+            throw new FacadeException("El ISBN no sigue el formato 000-0-000");
+        }
+    }
+    
+    /**
+     * 
+     * @param book 
+     */
+    private void verifyIsbnDisponibility(Book book) throws FacadeException {
+        try{
+            List<Book> books = bookDAO.getBooks();
+
+            for (Book book1 : books) {
+                if (book1.getIsbn().equalsIgnoreCase(book.getIsbn())) {
+                    throw new FacadeException("El isbn ya esta ocupado "
+                            + "por otro libro");
+                }
+            }
+        
+        }catch(DAOException ex){
+            throw new FacadeException(ex.getMessage());
+        }
+    }
 }

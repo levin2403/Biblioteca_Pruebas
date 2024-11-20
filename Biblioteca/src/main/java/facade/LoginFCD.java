@@ -21,7 +21,7 @@ public class LoginFCD implements ILogginFCD{
     /**
      * 
      */
-    private ILibrarianDAO bibliotecarioDAO;
+    private final ILibrarianDAO bibliotecarioDAO;
     
     /**
      * 
@@ -31,7 +31,7 @@ public class LoginFCD implements ILogginFCD{
     /**
      * 
      */
-    private Hasher hasher;
+    private final Hasher hasher;
 
     /**
      * 

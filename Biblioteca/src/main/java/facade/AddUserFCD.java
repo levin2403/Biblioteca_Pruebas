@@ -11,7 +11,6 @@ import entityes.User;
 import exceptions.DAOException;
 import exceptions.FacadeException;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,7 +21,7 @@ public class AddUserFCD implements IAddUserFCD {
     /**
      * 
      */
-    private IUserDAO userDAO;
+    private final IUserDAO userDAO;
 
     /**
      * 

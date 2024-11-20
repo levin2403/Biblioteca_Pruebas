@@ -10,7 +10,6 @@ import entityes.Book;
 import entityes.Valoration;
 import exceptions.DAOException;
 import exceptions.FacadeException;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,12 +20,12 @@ public class UpdateBookFCD implements IUpdateBookFCD {
     /**
      * 
      */
-    private ExternalSystemIntegration externalSystem;
+    private final ExternalSystemIntegration externalSystem;
     
     /**
      * 
      */
-    private BookDAO bookDAO;
+    private final BookDAO bookDAO;
     
     /**
      * 
@@ -56,11 +55,7 @@ public class UpdateBookFCD implements IUpdateBookFCD {
     
     private void update() throws FacadeException{
         try{
-
                 bookDAO.updateBook(book);
-                JOptionPane.showMessageDialog(null, "Exito al actualizar "
-                        + "el libro");
-            
         }
         catch(DAOException de){
             throw new FacadeException(de.getMessage());

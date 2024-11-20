@@ -16,7 +16,7 @@ import valoration.Valorate;
  */
 public class ExternalSystemIntegration{
 
-    private IValoration valoration;
+    private final IValoration valoration;
 
     public ExternalSystemIntegration() {
         this.valoration = new Valorate();
@@ -27,8 +27,10 @@ public class ExternalSystemIntegration{
      * @param title
      * @param author
      * @return
+     * @throws java.lang.Exception
      */
-    public Valoration getValoration(String title, String author) throws Exception{
+    public Valoration getValoration(String title, String author) 
+            throws Exception{
         try{
             return valoration.getValoration(title, author);
         }

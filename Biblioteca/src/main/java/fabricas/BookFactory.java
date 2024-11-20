@@ -41,7 +41,7 @@ public class BookFactory {
             Valoration valoration4 = new Valoration((byte)2, "Cargado de emotividad y reflexion");
             Valoration valoration5 = new Valoration((byte)4, "Muy interesante y conmovedor");            
             
-            libroDAO.addBook(new Book("978-3-16", 
+            libroDAO.addBook(new Book("978-3-160", 
                                             "Cien años de soledad", 
                                             "Gabriel García Márquez",
                                              valoration1));
