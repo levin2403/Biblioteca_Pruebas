@@ -27,7 +27,7 @@ public class PnlAddBook extends javax.swing.JPanel {
     }
     
     private void initialConfig(){
-        this.addBookFCD = new AddBookFCD();
+//        this.addBookFCD = new AddBookFCD();
     }
     
     /**

@@ -21,8 +21,19 @@ import facadeInterfaces.ILogginFCD;
  */
 public class FrmLogin extends javax.swing.JFrame {
   
+    /**
+     * 
+     */
     private ILogginFCD librarianFacade;
     
+    /**
+     * 
+     */
+    private LoginFCD loginFCD;
+    
+    /**
+     * 
+     */
     public FrmLogin() {
         initComponents();
         intialConfig();
@@ -30,6 +41,9 @@ public class FrmLogin extends javax.swing.JFrame {
         loadFactories();
     }
     
+    /**
+     * 
+     */
     private void loadFactories(){
         LibrarianFactory fabrica1 = new LibrarianFactory();
         BookFactory fabrica2 = new BookFactory();
@@ -41,11 +55,17 @@ public class FrmLogin extends javax.swing.JFrame {
       
     }
     
+    /**
+     * 
+     */
     private void intialConfig(){
         this.setLocationRelativeTo(this);
-        this.librarianFacade = new LoginFCD();
+        this.librarianFacade = loginFCD;
     }
     
+    /**
+     * 
+     */
     private void styles(){
         
         RoundedBorder border = new RoundedBorder(30);

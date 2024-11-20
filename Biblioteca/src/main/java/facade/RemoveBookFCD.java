@@ -6,6 +6,7 @@ package facade;
 
 import facadeInterfaces.IRemoveBookFCD;
 import dao.BookDAO;
+import daoInterfaces.IBookDAO;
 import entityes.Book;
 import exceptions.DAOException;
 import exceptions.FacadeException;
@@ -19,13 +20,13 @@ public class RemoveBookFCD implements IRemoveBookFCD {
     /**
      * 
      */
-    private final BookDAO bookDAO;
+    private final IBookDAO bookDAO;
 
     /**
      * 
      */
-    public RemoveBookFCD() {
-        this.bookDAO = new BookDAO();
+    public RemoveBookFCD(IBookDAO bookDAO) {
+        this.bookDAO = bookDAO;
     }
     
     /**

@@ -12,35 +12,40 @@
         <exec.mainClass>com.mycompany.biblioteca1.Biblioteca1</exec.mainClass>
     </properties>
     <dependencies>
-  	<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
-	<dependency>
-	    <groupId>org.seleniumhq.selenium</groupId>
-	    <artifactId>selenium-java</artifactId>
-	    <version>4.25.0</version>
-	</dependency>
+    <!-- Dependencia para JUnit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.6.0</version>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.0</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Dependencia para Mockito -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <version>5.6.0</version>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.5.0</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Dependencia para integrar Mockito con JUnit 5 -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.6.0</version>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>5.5.0</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Dependencia de jbcrypt (si la usas) -->
         <dependency>
             <groupId>org.mindrot</groupId>
             <artifactId>jbcrypt</artifactId>
             <version>0.4</version>
         </dependency>
+
+        <!-- Dependencia de tu servicio ValorationService -->
+
+        <!-- Dependencia de AbsoluteLayout (si la usas) -->
         <dependency>
             <groupId>unknown.binary</groupId>
             <artifactId>AbsoluteLayout</artifactId>
@@ -52,6 +57,7 @@
             <version>${project.version}</version>
         </dependency>
     </dependencies>
+
     <name>Biblioteca</name>
     <repositories>
         <repository>

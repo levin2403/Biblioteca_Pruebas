@@ -5,7 +5,6 @@
 package facade;
 
 import facadeInterfaces.IAddUserFCD;
-import dao.UserDAO;
 import daoInterfaces.IUserDAO;
 import entityes.User;
 import exceptions.DAOException;
@@ -25,9 +24,10 @@ public class AddUserFCD implements IAddUserFCD {
 
     /**
      * 
+     * @param userDAO
      */
-    public AddUserFCD() {
-        this.userDAO = new UserDAO();
+    public AddUserFCD(IUserDAO userDAO) {
+        this.userDAO = userDAO;
     }
     
     
@@ -40,9 +40,9 @@ public class AddUserFCD implements IAddUserFCD {
     @Override
     public void addUser(User user) throws FacadeException {
         verifyFields(user);
-        verifyMail(user);
+        verifyMail(user);  
+        verifyMailduplicity(user);            
         determinateId(user);
-        verifyMailduplicity(user);
         registerUser(user);
     }
     
@@ -51,13 +51,13 @@ public class AddUserFCD implements IAddUserFCD {
      */
     private void verifyFields(User user) throws FacadeException {
         if (user.getNombre().isEmpty()) {
-            throw new FacadeException("El nombre no puede estar vacio");
+            throw new FacadeException("El nombre no puede estar vacío");
         }
-        else if(user.getCorreo().isEmpty()){
-            throw new FacadeException("El nombre no puede estar vacio");
+        else if (user.getCorreo().isEmpty()) {
+            throw new FacadeException("El correo no puede estar vacío");
         }
-        else if(user.getContrasena().isEmpty()){
-            throw new FacadeException("El nombre no puede estar vacio");
+        else if (user.getContrasena().isEmpty()) {
+            throw new FacadeException("La contraseña no puede estar vacía");
         }
     }
     
@@ -115,10 +115,11 @@ public class AddUserFCD implements IAddUserFCD {
      * @throws FacadeException 
      */
     private void verifyMail(User user) throws FacadeException {
-        if (!user.getCorreo().matches("@gmail\\.com$")) {
-            throw new FacadeException("Se debe de incluir @gmail al final "
-                    + "del correo");
+        if (!user.getCorreo().matches("^[\\w.%+-]+@gmail\\.com$")) {
+            throw new FacadeException("Se debe de incluir @gmail al "
+                    + "final del correo");
         }
     }
+
    
 }

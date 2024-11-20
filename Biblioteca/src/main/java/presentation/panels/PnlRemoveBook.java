@@ -21,9 +21,20 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PnlRemoveBook extends javax.swing.JPanel {
 
-    IBookDAO bookDAO;
+    /**
+     * 
+     */
+    private IBookDAO bookDAO;
     
-    IRemoveBookFCD removeBookFCD;
+    /**
+     * 
+     */
+    private IRemoveBookFCD removeBookFCD;
+    
+    /**
+     * 
+     */
+    private RemoveBookFCD removeBook;
     
     /**
      * Creates new form PnlDelateUser
@@ -39,7 +50,7 @@ public class PnlRemoveBook extends javax.swing.JPanel {
      */
     private void initialConfig(){
         this.bookDAO = new BookDAO();
-        this.removeBookFCD = new RemoveBookFCD();
+        this.removeBookFCD = removeBook;
     }
     
     /**

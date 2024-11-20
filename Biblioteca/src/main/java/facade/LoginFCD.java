@@ -35,9 +35,10 @@ public class LoginFCD implements ILogginFCD{
 
     /**
      * 
+     * @param librarian
      */
-    public LoginFCD() {
-        this.bibliotecarioDAO = new LibrarianDAO();
+    public LoginFCD(ILibrarianDAO librarian) {
+        this.bibliotecarioDAO = librarian;
         this.hasher = new Hasher();
     }
     

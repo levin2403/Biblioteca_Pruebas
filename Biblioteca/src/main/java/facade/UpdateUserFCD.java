@@ -5,7 +5,6 @@
 package facade;
 
 import facadeInterfaces.IUpdateUserFCD;
-import dao.UserDAO;
 import daoInterfaces.IUserDAO;
 import entityes.User;
 import exceptions.DAOException;
@@ -20,13 +19,14 @@ public class UpdateUserFCD implements IUpdateUserFCD {
     /**
      * 
      */
-    private IUserDAO userDAO;
+    private final IUserDAO userDAO;
     
     /**
      * 
+     * @param userDAO
      */
-    public UpdateUserFCD() {
-        this.userDAO = new UserDAO();
+    public UpdateUserFCD(IUserDAO userDAO) {
+        this.userDAO = userDAO;
     }
     
     /**

@@ -30,6 +30,12 @@ public class User {
 
     /**
      * 
+     */
+    public User() {
+    }
+
+    /**
+     * 
      * @param nombre
      * @param correo
      * @param contrasena 

@@ -29,6 +29,11 @@ public class PnlUpdateUser extends javax.swing.JPanel {
     /**
      * 
      */
+    private UpdateUserFCD updateUser;
+    
+    /**
+     * 
+     */
     private IUserDAO userDAO;
     
     /**
@@ -49,7 +54,7 @@ public class PnlUpdateUser extends javax.swing.JPanel {
      * 
      */
     private void initialConfig(){
-        this.updateUserFCD = new UpdateUserFCD();
+        this.updateUserFCD = updateUser;
         this.userDAO = new UserDAO();
         this.tblUsers.setEnabled(false);
     }

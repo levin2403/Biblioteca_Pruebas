@@ -33,7 +33,7 @@ public class PnlAddUser extends javax.swing.JPanel {
      * Initialices the instances of the class;
      */
     private void initialConfig(){
-        this.addUserFCD = new AddUserFCD();
+//        this.addUserFCD = new AddUserFCD();
     }
     
     /**

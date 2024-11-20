@@ -4,19 +4,19 @@
  */
 package valoration;
 
-import com.exceptions.SystemNotAvailableException;
-import com.exceptions.ValorationNotFoundException;
+import com.valorationService.exceptions.SystemNotAvailableException;
+import com.valorationService.exceptions.ValorationNotFoundException;
 import entityes.Book;
 import entityes.Valoration;
-import interfaces.IValoration;
 import java.util.ArrayList;
 import java.util.List;
+import interfaces.IValorate;
 
 /**
  *
  * @author skevi
  */
-public class Valorate implements IValoration{
+public class Valorate implements IValorate{
     
     /**
      * 

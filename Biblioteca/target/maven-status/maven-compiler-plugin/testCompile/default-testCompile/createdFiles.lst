@@ -1,3 +1,10 @@
-dao\LibroDAOTest.class
-dao\PrestamoDAOTest.class
+facade\RemoveBookFCDTest.class
 dao\UsuarioDAOTest.class
+facade\ExternalSystemIntegrationTest.class
+facade\LoginFCDTest.class
+facade\UpdateBookFCDTest.class
+facade\UpdateUserFCDTest.class
+dao\LibroDAOTest.class
+facade\AddUserFCDTest.class
+dao\PrestamoDAOTest.class
+facade\AddBookFCDTest.class

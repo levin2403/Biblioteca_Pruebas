@@ -30,6 +30,11 @@ public class FrmUpdateBook extends javax.swing.JFrame {
      * 
      */
     IUpdateBookFCD updateBookFCD;
+ 
+    /**
+     * 
+     */
+    UpdateBookFCD updateBook;
     
     /**
      * 
@@ -51,7 +56,7 @@ public class FrmUpdateBook extends javax.swing.JFrame {
     private void initialConfig(){
         this.setLocationRelativeTo(this);
         this.bookDAO = new BookDAO();
-        this.updateBookFCD = new UpdateBookFCD();
+        this.updateBookFCD = updateBook;
     }
 
     /**

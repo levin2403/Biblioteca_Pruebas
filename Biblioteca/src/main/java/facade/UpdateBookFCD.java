@@ -4,8 +4,9 @@
  */
 package facade;
 
+import com.valorationService.facadeInterfaces.IValorateFCD;
 import facadeInterfaces.IUpdateBookFCD;
-import dao.BookDAO;
+import daoInterfaces.IBookDAO;
 import entityes.Book;
 import entityes.Valoration;
 import exceptions.DAOException;
@@ -20,19 +21,21 @@ public class UpdateBookFCD implements IUpdateBookFCD {
     /**
      * 
      */
-    private final ExternalSystemIntegration externalSystem;
+    private final IValorateFCD valorate;
     
     /**
      * 
      */
-    private final BookDAO bookDAO;
+    private final IBookDAO bookDAO;
     
     /**
      * 
+     * @param bookDAO
+     * @param valorate
      */
-    public UpdateBookFCD() {
-        this.bookDAO = new BookDAO();
-        this.externalSystem = new ExternalSystemIntegration();
+    public UpdateBookFCD(IBookDAO bookDAO, IValorateFCD valorate) {
+        this.bookDAO = bookDAO;
+        this.valorate = valorate;
     }
     
     /**
@@ -64,7 +67,7 @@ public class UpdateBookFCD implements IUpdateBookFCD {
      */
     private void getValoration(Book book) throws FacadeException {
         try{
-            Valoration valoration =externalSystem.
+            Valoration valoration = valorate.
                     getValoration(book.getTitulo(), book.getAutor());
             
             book.setValoration(valoration);
