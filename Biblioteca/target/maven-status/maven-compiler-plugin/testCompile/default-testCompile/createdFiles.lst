@@ -1,6 +1,5 @@
 facade\RemoveBookFCDTest.class
 dao\UsuarioDAOTest.class
-facade\ExternalSystemIntegrationTest.class
 facade\LoginFCDTest.class
 facade\UpdateBookFCDTest.class
 facade\UpdateUserFCDTest.class

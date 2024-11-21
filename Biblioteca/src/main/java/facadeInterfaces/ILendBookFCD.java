@@ -8,6 +8,6 @@ package facadeInterfaces;
  *
  * @author skevi
  */
-public interface IAddReviewFCD {
+public interface ILendBookFCD {
     
 }

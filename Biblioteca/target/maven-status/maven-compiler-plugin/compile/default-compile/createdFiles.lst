@@ -11,7 +11,6 @@ daoInterfaces\IBookDAO.class
 entityes\ValoratedBook.class
 presentation\FrmUpdateBook.class
 facadeInterfaces\IAddBookFCD.class
-facadeInterfaces\IAddReviewFCD.class
 presentation\FrmUpdateBook$3.class
 presentation\FrmLogin$2.class
 dao\UserDAO.class

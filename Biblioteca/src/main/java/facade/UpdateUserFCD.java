@@ -10,10 +10,6 @@ import entityes.User;
 import exceptions.DAOException;
 import exceptions.FacadeException;
 
-/**
- *
- * @author skevi
- */
 public class UpdateUserFCD implements IUpdateUserFCD {
     
     /**
@@ -23,7 +19,7 @@ public class UpdateUserFCD implements IUpdateUserFCD {
     
     /**
      * 
-     * @param userDAO
+     * @param userDAO 
      */
     public UpdateUserFCD(IUserDAO userDAO) {
         this.userDAO = userDAO;
@@ -31,8 +27,8 @@ public class UpdateUserFCD implements IUpdateUserFCD {
     
     /**
      * 
-     * @param user 
-     * @throws exceptions.FacadeException 
+     * @param user
+     * @throws FacadeException 
      */
     @Override
     public void UpdateUser(User user) throws FacadeException {
@@ -43,42 +39,43 @@ public class UpdateUserFCD implements IUpdateUserFCD {
     
     /**
      * 
+     * @param user
      * @throws FacadeException 
      */
     private void verifyFields(User user) throws FacadeException {
         if (user.getNombre().isEmpty()) {
-            throw new FacadeException("El nombre no puede estar vacio");
+            throw new FacadeException("El nombre no puede estar vacío");
         }
-        else if(user.getCorreo().isEmpty()){
-            throw new FacadeException("El nombre no puede estar vacio");
+        else if (user.getCorreo().isEmpty()) {
+            throw new FacadeException("El correo no puede estar vacío");
         }
-        else if(user.getContrasena().isEmpty()){
-            throw new FacadeException("El nombre no puede estar vacio");
+        else if (user.getContrasena().isEmpty()) {
+            throw new FacadeException("La contraseña no puede estar vacía");
         }
     }
     
     /**
      * 
+     * @param user
      * @throws FacadeException 
      */
     private void update(User user) throws FacadeException {
-        try{
+        try {
             userDAO.updateUser(user);
-        }
-        catch(DAOException ex){
-            throw new FacadeException(ex.getMessage());
+        } catch (DAOException ex) {
+            throw new FacadeException("Error al actualizar el usuario: " + ex.getMessage());
         }
     }
     
     /**
      * 
+     * @param user
      * @throws FacadeException 
      */
     private void verifyMail(User user) throws FacadeException {
-        if (!user.getCorreo().matches("@gmail\\.com$")) {
-            throw new FacadeException("Se debe de incluir @gmail al final "
-                    + "del correo");
+        if (!user.getCorreo().matches(".*@gmail\\.com$")) {
+            throw new FacadeException("El correo debe terminar con '@gmail.com'");
         }
     }
-    
 }
+

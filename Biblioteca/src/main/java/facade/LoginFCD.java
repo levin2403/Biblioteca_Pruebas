@@ -4,7 +4,6 @@
  */
 package facade;
 
-import dao.LibrarianDAO;
 import entityes.Librarian;
 import exceptions.DAOException;
 import exceptions.FacadeException;
@@ -16,17 +15,12 @@ import daoInterfaces.ILibrarianDAO;
  *
  * @author skevi
  */
-public class LoginFCD implements ILogginFCD{
+public class LoginFCD implements ILogginFCD {
 
     /**
      * 
      */
-    private final ILibrarianDAO bibliotecarioDAO;
-    
-    /**
-     * 
-     */
-    private Librarian bibliotecario;
+    private final ILibrarianDAO librarianDAO;
     
     /**
      * 
@@ -35,71 +29,73 @@ public class LoginFCD implements ILogginFCD{
 
     /**
      * 
-     * @param librarian
+     * @param librarianDAO
+     * @param hasher 
      */
-    public LoginFCD(ILibrarianDAO librarian) {
-        this.bibliotecarioDAO = librarian;
-        this.hasher = new Hasher();
+    public LoginFCD(ILibrarianDAO librarianDAO, Hasher hasher) {
+        this.librarianDAO = librarianDAO;
+        this.hasher = hasher;
     }
-    
-    @Override
-    public boolean loggin(String mail, String password)  
-            throws FacadeException {
-        
-        verifyFields(mail, password);
-        VerifyMailExistence(mail);
-        
-        return verifyPassword(password);
-    }
-    
-    /**
-     * Verifies that the mail and password field are not empty 
-     */
-    private void verifyFields(String mail, String password) throws FacadeException{
-        if (mail.isEmpty()) {
-            throw new FacadeException("El correo no puede estar vacio");
-        }
-        else if(password.isEmpty()){
-            throw new FacadeException("la contrseña no puede estar vacia");
-        }
-    }
-    
+
     /**
      * 
      * @param mail
+     * @param password
+     * @return
      * @throws FacadeException 
      */
-    private void VerifyMailExistence(String mail) throws FacadeException {
-       try{
-        Librarian bibliotecario = bibliotecarioDAO.findByMail(mail);
-        
-           if (bibliotecario == null) {
-               throw new FacadeException("El correo ingresado es incorrecto");
-           }
-           else{
-               this.bibliotecario = bibliotecario;
-           }
-       }
-       catch(DAOException ex){
-           throw new FacadeException(ex.getMessage());
-       }
+    @Override
+    public boolean loggin(String mail, String password) throws FacadeException {
+        verifyFields(mail, password);
+        Librarian librarian = VerifyMailExistence(mail);
+        return verifyPassword(password, librarian.getContrasena());
     }
-    
+
+    /**
+     * 
+     * @param mail
+     * @param password
+     * @throws FacadeException 
+     */
+    private void verifyFields(String mail, String password) throws FacadeException {
+        if (mail == null || mail.isEmpty()) {
+            throw new FacadeException("El correo no puede estar vacío");
+        }
+        if (password == null || password.isEmpty()) {
+            throw new FacadeException("La contraseña no puede estar vacía");
+        }
+    }
+
+    /**
+     * 
+     * @param mail
+     * @return
+     * @throws FacadeException 
+     */
+    private Librarian VerifyMailExistence(String mail) throws FacadeException {
+        try {
+            Librarian librarian = librarianDAO.findByMail(mail);
+            if (librarian == null) {
+                throw new FacadeException("El correo ingresado es incorrecto");
+            }
+            return librarian;
+        } catch (DAOException ex) {
+            throw new FacadeException("Error al acceder a la base de datos: " + ex.getMessage());
+        }
+    }
+
     /**
      * 
      * @param password
-     * @return 
+     * @param storedHash
+     * @return
+     * @throws FacadeException 
      */
-    private boolean verifyPassword(String password) throws FacadeException{
-        
-        String storedHash = bibliotecario.getContrasena();
-        
+    private boolean verifyPassword(String password, String storedHash) throws FacadeException {
         if (!hasher.verifyPassword(password, storedHash)) {
-            throw new FacadeException("Contraseña incorrecte intente de nuevo");
+            throw new FacadeException("Contraseña incorrecta, intente de nuevo");
         }
-        else{
-            return true;
-        }
+        return true;
     }
-    
 }
+

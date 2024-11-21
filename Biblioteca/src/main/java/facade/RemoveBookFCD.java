@@ -5,7 +5,6 @@
 package facade;
 
 import facadeInterfaces.IRemoveBookFCD;
-import dao.BookDAO;
 import daoInterfaces.IBookDAO;
 import entityes.Book;
 import exceptions.DAOException;
@@ -24,6 +23,7 @@ public class RemoveBookFCD implements IRemoveBookFCD {
 
     /**
      * 
+     * @param bookDAO
      */
     public RemoveBookFCD(IBookDAO bookDAO) {
         this.bookDAO = bookDAO;
@@ -36,8 +36,20 @@ public class RemoveBookFCD implements IRemoveBookFCD {
      */
     @Override
     public void removeBook(Book book) throws FacadeException {
+        validateBook(book);
         verifyDisponibility(book);
         remove(book);
+    }
+    
+    /**
+     * 
+     * @param book
+     * @throws FacadeException 
+     */
+    private void validateBook(Book book) throws FacadeException {
+        if (book == null) {
+            throw new FacadeException("El libro proporcionado es nulo");
+        }
     }
     
     /**
