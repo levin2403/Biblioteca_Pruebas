@@ -1,4 +1,4 @@
-package  dao;
+package dao;
 
 import entityes.Book;
 import entityes.Loan;
@@ -23,24 +23,31 @@ public class LoanDAOTest {
         loanDAO = new LoanDAO();
     }
 
+    @AfterEach
+    void tearDown() {
+        try {
+            // Limpiar préstamos después de cada prueba
+            for (Loan loan : loanDAO.getLoans()) {
+                loanDAO.registerReturn(loan);
+            }
+        } catch (DAOException e) {
+            System.err.println("Error al limpiar préstamos: " + e.getMessage());
+        }
+    }
+
     /**
      * Verifica que un préstamo se registre correctamente y que el libro se marque como prestado.
      */
     @Test
     void testAddLoan() throws DAOException {
-        // Crear un libro, un usuario y un préstamo
         Book book = new Book("123-456-789", "Clean Code", "Robert C. Martin");
         User user = new User(1, "Carlos Ramirez", "carlos@example.com", "password123");
         Loan loan = new Loan(user, book, LocalDate.of(2024, 12, 20));
 
-        // Verificar que el préstamo se agrega sin errores
-        assertDoesNotThrow(() -> loanDAO.addLoan(loan));
+        assertDoesNotThrow(() -> loanDAO.addLoan(loan), "No debería lanzar excepción al agregar un préstamo válido.");
 
-        // Verificar que el préstamo fue agregado correctamente
         List<Loan> loans = loanDAO.getLoans();
         assertTrue(loans.contains(loan), "El préstamo debe ser agregado a la lista de préstamos.");
-
-        // Verificar que el libro ahora está prestado
         assertTrue(book.isPrestado(), "El libro debe estar marcado como prestado.");
     }
 
@@ -49,26 +56,22 @@ public class LoanDAOTest {
      */
     @Test
     void testAddLoanWithNullLoan() {
-        // Intentar agregar un préstamo nulo y verificar que lanza una excepción
         assertThrows(DAOException.class, () -> loanDAO.addLoan(null), "No debería permitir un préstamo nulo.");
     }
 
     /**
-     * Verifica que un libro pueda ser devuelto y su estado cambie a no prestado.
+     * Verifica que un libro pueda ser devuelto correctamente.
      */
     @Test
-    void testRegisterReturn() {
-        // Crear un libro, un usuario y un préstamo
+    void testRegisterReturn() throws DAOException {
         Book book = new Book("987-654-321", "The Pragmatic Programmer", "Andy Hunt");
         User user = new User(2, "Ana Torres", "ana@example.com", "password456");
         Loan loan = new Loan(user, book, LocalDate.of(2024, 12, 1));
 
-        // Agregar préstamo
-        assertDoesNotThrow(() -> loanDAO.addLoan(loan));
+        loanDAO.addLoan(loan);
         assertTrue(book.isPrestado(), "El libro debe estar prestado después de agregar el préstamo.");
 
-        // Registrar devolución
-        assertDoesNotThrow(() -> loanDAO.registerReturn(loan));
+        loanDAO.registerReturn(loan);
         assertFalse(book.isPrestado(), "El libro debe estar marcado como no prestado después de la devolución.");
     }
 
@@ -77,8 +80,8 @@ public class LoanDAOTest {
      */
     @Test
     void testRegisterReturnWithNullLoan() {
-        // Intentar registrar una devolución con préstamo nulo y verificar que lanza una excepción
-        assertThrows(DAOException.class, () -> loanDAO.registerReturn(null), "No debería permitir una devolución de préstamo nulo.");
+        assertThrows(DAOException.class, () -> loanDAO.registerReturn(null),
+                "No debería permitir una devolución de préstamo nulo.");
     }
 
     /**
@@ -86,7 +89,6 @@ public class LoanDAOTest {
      */
     @Test
     void testGetLoans() throws DAOException {
-        // Crear y agregar libros, usuarios y préstamos
         Book book1 = new Book("111-111-111", "Effective Java", "Joshua Bloch");
         User user1 = new User(3, "Carlos Ramirez", "carlos@example.com", "password123");
 
@@ -96,11 +98,9 @@ public class LoanDAOTest {
         Loan loan1 = new Loan(user1, book1, LocalDate.of(2024, 12, 15));
         Loan loan2 = new Loan(user2, book2, LocalDate.of(2024, 12, 18));
 
-        // Agregar préstamos
-        assertDoesNotThrow(() -> loanDAO.addLoan(loan1));
-        assertDoesNotThrow(() -> loanDAO.addLoan(loan2));
+        loanDAO.addLoan(loan1);
+        loanDAO.addLoan(loan2);
 
-        // Verificar que los préstamos se agregaron correctamente
         List<Loan> loans = loanDAO.getLoans();
         assertEquals(2, loans.size(), "Debería haber dos préstamos registrados.");
         assertTrue(loans.contains(loan1), "El primer préstamo debe estar en la lista.");
@@ -112,8 +112,24 @@ public class LoanDAOTest {
      */
     @Test
     void testGetLoansWhenNoLoansExist() throws DAOException {
-        // Obtener la lista de préstamos cuando no se han registrado préstamos
         List<Loan> loans = loanDAO.getLoans();
         assertTrue(loans.isEmpty(), "La lista de préstamos debería estar vacía cuando no se ha registrado ningún préstamo.");
+    }
+
+    /**
+     * Verifica que no se pueda agregar un préstamo con un libro ya prestado.
+     */
+    @Test
+    void testAddLoanWithAlreadyLoanedBook() throws DAOException {
+        Book book = new Book("333-333-333", "Test Driven Development", "Kent Beck");
+        User user1 = new User(5, "Luis Perez", "luis@example.com", "password789");
+        User user2 = new User(6, "María Lopez", "maria@example.com", "password456");
+
+        Loan loan1 = new Loan(user1, book, LocalDate.of(2024, 12, 10));
+        loanDAO.addLoan(loan1);
+
+        Loan loan2 = new Loan(user2, book, LocalDate.of(2024, 12, 15));
+        assertThrows(DAOException.class, () -> loanDAO.addLoan(loan2),
+                "No debería permitir un préstamo con un libro que ya está prestado.");
     }
 }
