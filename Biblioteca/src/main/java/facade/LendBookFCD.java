@@ -1,57 +1,77 @@
 package facade;
 
+import daoInterfaces.IBookDAO;
 import entityes.Loan;
 import exceptions.FacadeException;
 import daoInterfaces.ILoanDAO;
+import entityes.Book;
+import exceptions.DAOException;
 import facadeInterfaces.ILendBookFCD;
+import java.time.LocalDate;
 
-/**
- * Clase que implementa la fachada para registrar un préstamo de un libro. Esta
- * clase maneja la lógica de negocio para verificar, procesar y registrar el
- * préstamo en el sistema, actualizando el estado del libro y agregándolo a la
- * lista de préstamos.
- */
 public class LendBookFCD implements ILendBookFCD {
 
-    /**
-     * El objeto DAO que maneja las operaciones de acceso a datos para los
-     * préstamos. Es responsable de interactuar con la lista de préstamos en
-     * memoria.
-     */
     private final ILoanDAO loanDAO;
+    private final IBookDAO bookDAO;
 
-    /**
-     * Constructor que inyecta las dependencias necesarias para la fachada.
-     *
-     * @param loanDAO Objeto DAO para realizar las operaciones de préstamo.
-     */
-    public LendBookFCD(ILoanDAO loanDAO) {
+    public LendBookFCD(ILoanDAO loanDAO, IBookDAO bookDAO) {
         this.loanDAO = loanDAO;
+        this.bookDAO = bookDAO;
     }
 
-    /**
-     * Método que se encarga de registrar un préstamo de libro en el sistema.
-     * Realiza la validación del préstamo antes de pasarlo al DAO para su
-     * almacenamiento.
-     *
-     * @param loan El objeto Loan que representa el préstamo de un libro.
-     * @throws FacadeException Si ocurre algún error durante el proceso de
-     * préstamo. Se lanza si el préstamo es nulo o si ocurre un error al
-     * registrar el préstamo.
-     */
     @Override
     public void lendBook(Loan loan) throws FacadeException {
-        // Validación previa para verificar que el préstamo no sea nulo.
+        validateLoan(loan); 
+        validateLoanDate(loan); 
+        updateBookAvailability(loan); 
+        registerLoan(loan); 
+    }
+
+    private void validateLoan(Loan loan) throws FacadeException {
         if (loan == null) {
             throw new FacadeException("El préstamo no puede ser nulo.");
         }
+        if (loan.getLibro() == null) {
+            throw new FacadeException("El libro en el préstamo no puede "
+                    + "ser nulo.");
+        }
+        if (loan.getUsuario() == null) {
+            throw new FacadeException("El usuario en el préstamo no puede "
+                    + "ser nulo.");
+        }
+        if (loan.getFechaDevolucion() == null) {
+            throw new FacadeException("La fecha de devolución no puede "
+                    + "ser nula.");
+        }
+    }
 
+    private void validateLoanDate(Loan loan) throws FacadeException {
+        if (loan.getFechaDevolucion().isBefore(LocalDate.now())) {
+            throw new FacadeException("La fecha de devolución no puede "
+                    + "ser anterior a la fecha actual.");
+        }
+    }
+
+    private void updateBookAvailability(Loan loan) throws FacadeException {
         try {
-            // Se delega el proceso de agregar el préstamo al DAO.
+            Book book = loan.getLibro();
+            if (book.isPrestado()) {
+                throw new FacadeException("El libro ya está prestado.");
+            }
+            book.setPrestado(true);
+            bookDAO.updateBook(book);
+        } catch (DAOException ex) {
+            throw new FacadeException("Error al actualizar la "
+                    + "disponibilidad del libro.", ex);
+        }
+    }
+
+    private void registerLoan(Loan loan) throws FacadeException {
+        try {
             loanDAO.addLoan(loan);
-        } catch (Exception ex) {
-            // Si ocurre un error en el proceso del DAO, se captura y se lanza una excepción de fachada.
-            throw new FacadeException("Error al registrar el préstamo: " + ex.getMessage(), ex);
+        } catch (DAOException ex) {
+            throw new FacadeException("Error al registrar el préstamo.", ex);
         }
     }
 }
+

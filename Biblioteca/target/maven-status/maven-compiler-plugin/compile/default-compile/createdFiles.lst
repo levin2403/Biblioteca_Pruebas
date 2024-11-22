@@ -9,7 +9,6 @@ facadeInterfaces\ISearchByTitle.class
 utilities\RoundedBorder.class
 presentation\panels\PnlRemoveBook$1.class
 daoInterfaces\IBookDAO.class
-entityes\ValoratedBook.class
 presentation\FrmUpdateBook.class
 facadeInterfaces\IAddBookFCD.class
 facade\SearchByAuthorFCD.class
@@ -71,6 +70,7 @@ presentation\FrmLogin$4.class
 presentation\panels\PnlAddUser$2.class
 presentation\panels\PnlBooks$2.class
 facade\UpdateBookFCD.class
+fabricas\FacadeFactory.class
 entityes\Librarian.class
 presentation\FrmLogin$1.class
 presentation\FrmUpdateBook$2.class

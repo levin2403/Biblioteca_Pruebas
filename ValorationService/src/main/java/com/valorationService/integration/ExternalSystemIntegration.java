@@ -9,7 +9,6 @@ import com.valorationService.exceptions.ValorationNotFoundException;
 import com.valorationService.facadeInterfaces.IValorateFCD;
 import entityes.Valoration;
 import interfaces.IValorate;
-import valoration.Valorate;
 
 /**
  *

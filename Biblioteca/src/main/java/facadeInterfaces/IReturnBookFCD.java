@@ -1,6 +1,6 @@
 package facadeInterfaces;
 
-import entityes.Book;
+import entityes.Loan;
 import exceptions.FacadeException;
 
 /**
@@ -11,8 +11,8 @@ public interface IReturnBookFCD {
     /**
      * Permite devolver un libro al sistema.
      *
-     * @param book El libro que se va a devolver.
+     * @param loan
      * @throws FacadeException Si ocurre un error durante la operación.
      */
-    void returnBook(Book book) throws FacadeException;
+    void returnBook(Loan loan) throws FacadeException;
 }

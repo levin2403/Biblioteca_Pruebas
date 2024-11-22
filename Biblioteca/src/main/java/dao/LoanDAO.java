@@ -34,7 +34,7 @@ public class LoanDAO implements ILoanDAO{
      * Registra un préstamo de un libro a un usuario.
      * Establece el estado del libro como prestado.
      * 
-     * @param prestamo El objeto Loan que se desea registrar.
+     * @param loan El objeto Loan que se desea registrar.
      * @throws exceptions.DAOException
      */
     @Override
