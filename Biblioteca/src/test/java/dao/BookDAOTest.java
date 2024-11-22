@@ -6,6 +6,9 @@ import entityes.Book;
 import exceptions.DAOException;
 import java.util.List;
 
+/**
+ * Pruebas unitarias para la clase BookDAO.
+ */
 class BookDAOTest {
     private BookDAO bookDAO;
 
@@ -16,13 +19,14 @@ class BookDAOTest {
 
     @AfterEach
     void tearDown() {
-        try {
-            // Limpiar libros después de cada prueba
-            for (Book book : bookDAO.getBooks()) {
-                bookDAO.removeBook(book);
-            }
-        } catch (DAOException ignored) {
-        }
+//        try {
+//            // Limpiar libros después de cada prueba
+//            for (Book book : bookDAO.getBooks()) {
+//                bookDAO.removeBook(book);
+//            }
+//        } catch (DAOException e) {
+//            System.err.println("Error al limpiar los libros: " + e.getMessage());
+//        }
     }
 
     @Test
@@ -31,6 +35,14 @@ class BookDAOTest {
         bookDAO.addBook(book);
         List<Book> books = bookDAO.getBooks();
         assertTrue(books.contains(book), "El libro debería haberse agregado");
+    }
+
+    @Test
+    void testAddDuplicateBook() throws DAOException {
+        Book book = new Book("123", "Java Basics", "John Doe", false);
+        bookDAO.addBook(book);
+        assertThrows(DAOException.class, () -> bookDAO.addBook(book),
+                "Debería lanzar una excepción al intentar agregar un libro duplicado");
     }
 
     @Test
@@ -102,5 +114,11 @@ class BookDAOTest {
     void testSearchByISBNNotFound() throws DAOException {
         Book foundBook = bookDAO.searchByISBN("999");
         assertNull(foundBook, "No debería encontrar un libro con ISBN inexistente");
+    }
+
+    @Test
+    void testSearchByNullTitleThrowsException() {
+        assertThrows(DAOException.class, () -> bookDAO.searchByTitle(null),
+                "Debería lanzar una excepción si el título es nulo");
     }
 }
