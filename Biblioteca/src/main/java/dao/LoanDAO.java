@@ -10,6 +10,7 @@ import exceptions.DAOException;
 import java.util.ArrayList;
 import java.util.List;
 import daoInterfaces.ILoanDAO;
+import entityes.User;
 
 /**
  * Clase que actúa como el Data Access Object (DAO) para la entidad Prestamo.
@@ -104,6 +105,30 @@ public class LoanDAO implements ILoanDAO{
         }
     }
 
+    /**
+     * 
+     * @param book
+     * @param user
+     * @return
+     * @throws DAOException 
+     */
+    @Override
+    public Loan searchByBookAndUser(Book book, User user) throws DAOException {
+       
+        if (book == null || user == null) {
+            throw new DAOException("Los campos de entrada no pueden "
+                    + "estar vacios");
+        }
+        
+        for (Loan prestamo : prestamos) {
+            if (prestamo.getLibro().equals(book) && 
+                    prestamo.getUsuario().equals(user)) {
+                return prestamo;
+            }
+        }
+        return null;
+    }
+    
 }
 
 

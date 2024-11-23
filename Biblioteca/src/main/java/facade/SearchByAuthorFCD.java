@@ -15,7 +15,8 @@ public class SearchByAuthorFCD implements ISearchByAuthor {
     private final IBookDAO bookDAO;
 
     /**
-     * Constructor para inicializar la fachada con una implementación de IBookDAO.
+     * Constructor para inicializar la fachada con una implementación de 
+     * IBookDAO.
      *
      * @param bookDAO implementación de acceso a datos para libros.
      */
@@ -28,7 +29,8 @@ public class SearchByAuthorFCD implements ISearchByAuthor {
      *
      * @param author el nombre del autor a buscar.
      * @return una lista de libros asociados al autor.
-     * @throws FacadeException si el autor es inválido o ocurre un error al acceder a los datos.
+     * @throws FacadeException si el autor es inválido o ocurre un error 
+     * al acceder a los datos.
      */
     @Override
     public List<Book> searchByAuthor(String author) throws FacadeException {
@@ -44,7 +46,8 @@ public class SearchByAuthorFCD implements ISearchByAuthor {
      */
     private void validateAuthorField(String author) throws FacadeException {
         if (author == null || author.trim().isEmpty()) {
-            throw new FacadeException("El autor no puede estar vacío o contener solo espacios.");
+            throw new FacadeException("El autor no puede estar vacío o "
+                    + "contener solo espacios.");
         }
     }
 
@@ -55,12 +58,15 @@ public class SearchByAuthorFCD implements ISearchByAuthor {
      * @return una lista de libros asociados al autor.
      * @throws FacadeException si ocurre un error en la capa de datos.
      */
-    private List<Book> performSearchByAuthor(String author) throws FacadeException {
+    private List<Book> performSearchByAuthor(String author) 
+            throws FacadeException {
         try {
             return bookDAO.searchByAuthor(author);
         } catch (DAOException e) {
-            throw new FacadeException("Error al buscar los libros del autor: " + author, e);
+            throw new FacadeException("Error al buscar los libros del "
+                    + "autor: " + author, e);
         }
     }
+    
 }
 

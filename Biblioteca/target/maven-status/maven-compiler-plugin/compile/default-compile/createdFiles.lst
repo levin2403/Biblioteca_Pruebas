@@ -63,6 +63,7 @@ facadeInterfaces\ILogginFCD.class
 facadeInterfaces\IReturnBookFCD.class
 presentation\FrmUpdateBook$5.class
 presentation\panels\PnlAddBook$1.class
+dao\NewMain.class
 facade\LendBookFCD.class
 dao\BookDAO.class
 entityes\User.class

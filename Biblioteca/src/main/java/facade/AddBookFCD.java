@@ -113,7 +113,8 @@ public class AddBookFCD implements IAddBookFCD{
      */
     private void verifyISBNMatch(Book book) throws FacadeException {
         if (!book.getIsbn().matches("^\\d{3}-\\d-\\d{3}$")) {
-            throw new FacadeException("El ISBN no sigue el formato 000-0-000");
+            throw new FacadeException("El ISBN no sigue el "
+                    + "formato 000-0-000");
         }
     }
     

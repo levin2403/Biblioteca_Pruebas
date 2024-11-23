@@ -45,7 +45,8 @@ public class LoginFCD implements ILogginFCD {
      * @throws FacadeException 
      */
     @Override
-    public boolean loggin(String mail, String password) throws FacadeException {
+    public boolean loggin(String mail, String password) 
+            throws FacadeException {
         verifyFields(mail, password);
         Librarian librarian = VerifyMailExistence(mail);
         return verifyPassword(password, librarian.getContrasena());
@@ -57,7 +58,8 @@ public class LoginFCD implements ILogginFCD {
      * @param password
      * @throws FacadeException 
      */
-    private void verifyFields(String mail, String password) throws FacadeException {
+    private void verifyFields(String mail, String password)
+            throws FacadeException {
         if (mail == null || mail.isEmpty()) {
             throw new FacadeException("El correo no puede estar vacío");
         }
@@ -80,7 +82,8 @@ public class LoginFCD implements ILogginFCD {
             }
             return librarian;
         } catch (DAOException ex) {
-            throw new FacadeException("Error al acceder a la base de datos: " + ex.getMessage());
+            throw new FacadeException("Error al acceder a la base de datos: " 
+                    + ex.getMessage());
         }
     }
 
@@ -91,9 +94,11 @@ public class LoginFCD implements ILogginFCD {
      * @return
      * @throws FacadeException 
      */
-    private boolean verifyPassword(String password, String storedHash) throws FacadeException {
+    private boolean verifyPassword(String password, String storedHash) 
+            throws FacadeException {
         if (!hasher.verifyPassword(password, storedHash)) {
-            throw new FacadeException("Contraseña incorrecta, intente de nuevo");
+            throw new FacadeException("Contraseña incorrecta, "
+                    + "intente de nuevo");
         }
         return true;
     }

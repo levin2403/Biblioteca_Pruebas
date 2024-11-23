@@ -51,7 +51,8 @@ public class SearchByTitle implements ISearchByTitle {
         try {
             return bookDAO.searchByTitle(title);
         } catch (DAOException e) {
-            throw new FacadeException("Error al buscar los libros con el título '" + title + "'.", e);
+            throw new FacadeException("Error al buscar los libros con "
+                    + "el título '" + title + "'.", e);
         }
     }
     

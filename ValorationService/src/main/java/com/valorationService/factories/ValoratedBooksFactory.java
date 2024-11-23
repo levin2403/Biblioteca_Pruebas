@@ -33,7 +33,7 @@ public class ValoratedBooksFactory {
     public void fabricateValoratedBooks(){
         
             Valoration valoration1 = new Valoration((byte)5, 
-                    "Maginifico libro");
+                    "Magnifico libro");
             Valoration valoration2 = new Valoration((byte)3, 
                     "Un libro emocionante");
             Valoration valoration3 = new Valoration((byte)4, 

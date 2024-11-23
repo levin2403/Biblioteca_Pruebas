@@ -31,7 +31,8 @@ public class RemoveBookFCD implements IRemoveBookFCD {
      */
     public RemoveBookFCD(final IBookDAO bookDAO) {
         if (bookDAO == null) {
-            throw new IllegalArgumentException("El DAO de libros no puede ser nulo.");
+            throw new IllegalArgumentException("El DAO de libros no "
+                    + "puede ser nulo.");
         }
         this.bookDAO = bookDAO;
     }
@@ -40,7 +41,8 @@ public class RemoveBookFCD implements IRemoveBookFCD {
      * Elimina un libro del sistema después de validar que no esté prestado.
      *
      * @param book el libro a eliminar.
-     * @throws FacadeException si el libro es nulo o está prestado, o si ocurre un error en el DAO.
+     * @throws FacadeException si el libro es nulo o está prestado, o 
+     * si ocurre un error en el DAO.
      */
     @Override
     public void removeBook(final Book book) throws FacadeException {
@@ -69,7 +71,8 @@ public class RemoveBookFCD implements IRemoveBookFCD {
      */
     private void verifyDisponibility(final Book book) throws FacadeException {
         if (book.isPrestado()) {
-            throw new FacadeException("No se puede eliminar un libro que se encuentra prestado.");
+            throw new FacadeException("No se puede eliminar un libro "
+                    + "que se encuentra prestado.");
         }
     }
 
@@ -83,9 +86,11 @@ public class RemoveBookFCD implements IRemoveBookFCD {
         try {
             bookDAO.removeBook(book);
         } catch (DAOException de) {
-            throw new FacadeException("Error al eliminar el libro: " + de.getMessage(), de);
+            throw new FacadeException("Error al eliminar el libro: " + 
+                    de.getMessage(), de);
         }
     }
+
 }
 
 

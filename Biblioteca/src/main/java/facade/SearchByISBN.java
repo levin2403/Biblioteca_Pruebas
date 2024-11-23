@@ -56,7 +56,8 @@ public class SearchByISBN implements ISearchByISBN {
      *
      * @param isbn Código ISBN del libro a buscar.
      * @return Libro encontrado.
-     * @throws FacadeException Si ocurre un error en el DAO o no se encuentra el libro.
+     * @throws FacadeException Si ocurre un error en el DAO o no se 
+     * encuentra el libro.
      */
     private Book search(String isbn) throws FacadeException {
         try {
@@ -64,13 +65,16 @@ public class SearchByISBN implements ISearchByISBN {
             Book book = bookDAO.searchByISBN(isbn);
 
             if (book == null) {
-                throw new FacadeException("No se encontró un libro con el ISBN: " + isbn);
+                throw new FacadeException("No se encontró un libro con "
+                        + "el ISBN: " + isbn);
             }
 
             return book;
         } catch (DAOException e) {
-            throw new FacadeException("Error al buscar el libro con ISBN: " + isbn, e);
+            throw new FacadeException("Error al buscar el libro con "
+                    + "ISBN: " + isbn, e);
         }
     }
+    
 }
 

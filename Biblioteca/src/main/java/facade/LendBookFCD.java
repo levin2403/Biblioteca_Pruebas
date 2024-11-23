@@ -9,6 +9,10 @@ import exceptions.DAOException;
 import facadeInterfaces.ILendBookFCD;
 import java.time.LocalDate;
 
+/**
+ * 
+ * @author skevi
+ */
 public class LendBookFCD implements ILendBookFCD {
 
     private final ILoanDAO loanDAO;

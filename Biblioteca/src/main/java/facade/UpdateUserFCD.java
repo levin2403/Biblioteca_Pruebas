@@ -63,7 +63,8 @@ public class UpdateUserFCD implements IUpdateUserFCD {
         try {
             userDAO.updateUser(user);
         } catch (DAOException ex) {
-            throw new FacadeException("Error al actualizar el usuario: " + ex.getMessage());
+            throw new FacadeException("Error al actualizar el usuario: " + 
+                    ex.getMessage());
         }
     }
     
@@ -74,7 +75,8 @@ public class UpdateUserFCD implements IUpdateUserFCD {
      */
     private void verifyMail(User user) throws FacadeException {
         if (!user.getCorreo().matches(".*@gmail\\.com$")) {
-            throw new FacadeException("El correo debe terminar con '@gmail.com'");
+            throw new FacadeException("El correo debe terminar "
+                    + "con '@gmail.com'");
         }
     }
 }

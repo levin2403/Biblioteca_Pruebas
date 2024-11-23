@@ -54,21 +54,26 @@ public class ReturnBookFCD implements IReturnBookFCD {
      * @throws FacadeException si algún campo del préstamo es inválido.
      */
     private void verifyFields(Loan loan) throws FacadeException {
+        if (loan == null) {
+            throw new FacadeException("El libro asociado al "
+                    + "préstamo es nulo.");
+        }
         // Verificar si el libro existe
         if (loan.getLibro() == null) {
-            throw new FacadeException("El libro asociado al préstamo"
-                    + " es nulo.");
+            throw new FacadeException("El libro asociado al "
+                    + "préstamo es nulo.");
         }
         // Verificar si el usuario existe
         if (loan.getUsuario() == null) {
-            throw new FacadeException("El usuario asociado al préstamo "
-                    + "es nulo.");
+            throw new FacadeException("El usuario asociado al "
+                    + "préstamo es nulo.");
         }
         // Verificar si la fecha de devolución es válida
         if (loan.getFechaDevolucion() == null) {
             throw new FacadeException("La fecha de devolución es nula.");
         }
     }
+
 
     /**
      * Realiza la devolución del libro, marcándolo como no prestado y 
@@ -105,5 +110,6 @@ public class ReturnBookFCD implements IReturnBookFCD {
                     loan.getLibro().getIsbn(), e);
         }
     }
+    
 }
 
