@@ -1,139 +1,125 @@
 package dao;
 
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.*;
 import entityes.User;
 import exceptions.DAOException;
-import java.util.ArrayList;
 import java.util.List;
-import daoInterfaces.IUserDAO;
+import org.mockito.*;
 
-/**
- * Clase que actúa como el Data Access Object (DAO) para la entidad Usuario.
- * Esta clase proporciona métodos para gestionar usuarios, incluyendo su 
- * obtención, registro e inicio de sesión.
- * 
- * @author skevi
- */
-public class UserDAOTest implements IUserDAO {
-    
-    /**
-     * Lista que almacena los usuarios en memoria.
-     * Representa la base de datos en esta implementación.
-     */
-    private static List<User> usuarios = new ArrayList<>();
+class UserDAOTest {
 
-    /**
-     * Constructor de la clase.
-     */
-    public UserDAOTest() {
-    }
-    
-    /**
-     * Obtiene un usuario por su ID.
-     * 
-     * @param id El identificador del usuario a obtener.
-     * @return El usuario correspondiente al ID o null si no se encuentra.
-     * @throws DAOException si ocurre un error al acceder a los datos.
-     */
-    @Override
-    public User getByID(int id) throws DAOException {
-        try {
-            // Recorremos la lista de usuarios para buscar el usuario con el ID proporcionado.
-            for (User user : usuarios) {
-                if (user.getId() == id) {
-                    return user; // Retorna el usuario si el ID coincide.
-                }
-            }
-            // Retorna null si no se encuentra el usuario con el ID proporcionado.
-            return null;
-        } catch (Exception ex) {
-            // Lanza una DAOException con un mensaje específico.
-            throw new DAOException("Error al obtener el usuario con ID: " + id, ex);
-        }
-    } 
-    
-    /**
-     * Obtiene un usuario por su correo.
-     * 
-     * @param mail El correo del usuario a obtener.
-     * @return El usuario correspondiente al correo o null si no se encuentra.
-     * @throws DAOException si ocurre un error al acceder a los datos.
-     */
-    @Override
-    public User getByMail(String mail) throws DAOException {
-        try {
-            for (User user : usuarios) {
-                if (user.getCorreo().equalsIgnoreCase(mail)) {
-                    return user;
-                }
-            }
-            return null;
-        } catch (Exception ex) {
-            throw new DAOException("Error al obtener el usuario con correo: " + mail, ex);
-        }
-    }
-    
-    /**
-     * Registra un nuevo usuario en la lista.
-     * 
-     * @param user El usuario a registrar.
-     * @throws DAOException si ocurre un error al agregar el usuario.
-     */
-    @Override
-    public void addUser(User user) throws DAOException {
-        try {
-            usuarios.add(user); // Agrega el nuevo usuario a la lista.
-        } catch (Exception ex) {
-            // Lanza una DAOException con un mensaje más detallado.
-            throw new DAOException("Error al agregar el usuario: " + user.getNombre(), ex);
-        }
-    }
-    
-    /**
-     * Actualiza la información de un usuario existente.
-     * 
-     * @param user El usuario con la información actualizada.
-     * @throws DAOException si ocurre un error al actualizar el usuario.
-     */
-    @Override
-    public void updateUser(User user) throws DAOException {
-        boolean userFound = false;
-        try {
-            for (User usuario : usuarios) {
-                if (usuario.getId() == user.getId()) {
-                    usuario.setNombre(user.getNombre());
-                    usuario.setCorreo(user.getCorreo());
-                    usuario.setContrasena(user.getContrasena());
-                    userFound = true;
-                    break;
-                }
-            }
-            if (!userFound) {
-                throw new DAOException("No se encontró un usuario con el ID: " + user.getId());
-            }
-        } catch (Exception ex) {
-            throw new DAOException("Error al actualizar el usuario con ID: " + user.getId(), ex);
-        }
-    }
-    
-    /**
-     * Obtiene la lista de todos los usuarios registrados.
-     * 
-     * @return Lista con todos los usuarios registrados.
-     * @throws DAOException si ocurre un error al obtener la lista de usuarios.
-     */
-    @Override
-    public List<User> getUsers() throws DAOException {
-        try {
-            // Verifica si la lista de usuarios está correctamente inicializada.
-            if (usuarios == null) {
-                throw new DAOException("La lista de usuarios no está inicializada.");
-            }
+    private UserDAO userDAO;
 
-            // Retorna la lista de usuarios.
-            return usuarios;
-        } catch (Exception ex) {
-            // Lanza una DAOException con un mensaje más específico y la causa original.
-            throw new DAOException("Error al obtener la lista de usuarios.", ex);
-        }
+    @BeforeEach
+    void setUp() {
+        userDAO = new UserDAO(); // You can mock this if necessary
+        
+
+    }
+
+    @AfterEach
+    void tearDown() {
+        // You could clear users if using an in-memory list
+    }
+
+    @Test
+    void testAddUser() throws DAOException {
+        User user = new User(1, "John Doe", "john@example.com", "password123");
+        userDAO.addUser(user);
+
+        List<User> users = userDAO.getUsers();
+        assertTrue(users.contains(user), "El usuario debería haberse agregado");
+    }
+
+    @Test
+    void testGetByID() throws DAOException {
+        User user = new User(2, "Jane Roe", "jane@example.com", "password456");
+        userDAO.addUser(user);
+
+        User foundUser = userDAO.getByID(2);
+        assertNotNull(foundUser, "El usuario debería haberse encontrado");
+        assertEquals("jane@example.com", foundUser.getCorreo(), "El correo del usuario debe coincidir");
+    }
+
+    @Test
+    void testGetByMail() throws DAOException {
+        User user = new User(3, "Alex Smith", "alex@example.com", "password789");
+        userDAO.addUser(user);
+
+        User foundUser = userDAO.getByMail("alex@example.com");
+        assertNotNull(foundUser, "El usuario debería haberse encontrado por correo");
+        assertEquals("Alex Smith", foundUser.getNombre(), "El nombre del usuario debe coincidir");
+    }
+
+    @Test
+    void testUpdateUser() throws DAOException {
+        User user = new User(4, "Chris Green", "chris@example.com", "password321");
+        userDAO.addUser(user);
+
+        user.setNombre("Chris Blue");
+        userDAO.updateUser(user);
+
+        User updatedUser = userDAO.getByID(4);
+        assertEquals("Chris Blue", updatedUser.getNombre(), "El nombre del usuario debe haberse actualizado");
+    }
+
+    @Test
+    void testUpdateUserNotFound() throws DAOException {
+        User user = new User(999, "Nonexistent User", "nonexistent@example.com", "password000");
+
+        DAOException exception = assertThrows(DAOException.class, () -> userDAO.updateUser(user),
+                "Debería lanzar una excepción si el usuario no se encuentra");
+        assertEquals("No se encontró un usuario con el ID: 999", exception.getMessage());
+    }
+
+    @Test
+    void testGetUsers() throws DAOException {
+        User user1 = new User(5, "Nina Yellow", "nina@example.com", "password111");
+        User user2 = new User(6, "Paul White", "paul@example.com", "password222");
+
+        userDAO.addUser(user1);
+        userDAO.addUser(user2);
+
+        List<User> users = userDAO.getUsers();
+        assertEquals(2, users.size(), "Debería haber dos usuarios en la lista");
+    }
+
+    @Test
+    void testGetUsersEmpty() throws DAOException {
+
+        assertTrue(userDAO.getUsers().isEmpty(), "La lista de usuarios debería estar vacía");
+    }
+
+    @Test
+    void testGetByIDNotFound() throws DAOException {
+        User foundUser = userDAO.getByID(999);
+        assertNull(foundUser, "No debería encontrar un usuario con el ID inexistente");
+    }
+
+    @Test
+    void testGetByMailNotFound() throws DAOException {
+        User foundUser = userDAO.getByMail("nonexistent@example.com");
+        assertNull(foundUser, "No debería encontrar un usuario con ese correo");
+    }
+
+    @Test
+    void testAddUserWithDuplicateEmail() throws DAOException {
+        User user1 = new User(7, "Carlos", "carlos@example.com", "password333");
+        User user2 = new User(8, "Daniel", "carlos@example.com", "password444");
+
+        userDAO.addUser(user1);
+
+        DAOException exception = assertThrows(DAOException.class, () -> userDAO.addUser(user2),
+                "Debería lanzar una excepción si el correo está duplicado");
+        assertEquals("El correo electrónico ya está registrado", exception.getMessage());
+    }
+
+    @Test
+    void testAddUserInvalidData() throws DAOException {
+        User user = new User(9, "", "", "");
+        DAOException exception = assertThrows(DAOException.class, () -> userDAO.addUser(user),
+                "Debería lanzar una excepción si los datos son inválidos");
+        assertEquals("Los datos del usuario no son válidos", exception.getMessage());
     }
 }

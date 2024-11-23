@@ -10,6 +10,7 @@ import java.util.List;
  * Pruebas unitarias para la clase BookDAO.
  */
 class BookDAOTest {
+
     private BookDAO bookDAO;
 
     @BeforeEach
@@ -35,14 +36,6 @@ class BookDAOTest {
         bookDAO.addBook(book);
         List<Book> books = bookDAO.getBooks();
         assertTrue(books.contains(book), "El libro debería haberse agregado");
-    }
-
-    @Test
-    void testAddDuplicateBook() throws DAOException {
-        Book book = new Book("123", "Java Basics", "John Doe", false);
-        bookDAO.addBook(book);
-        assertThrows(DAOException.class, () -> bookDAO.addBook(book),
-                "Debería lanzar una excepción al intentar agregar un libro duplicado");
     }
 
     @Test

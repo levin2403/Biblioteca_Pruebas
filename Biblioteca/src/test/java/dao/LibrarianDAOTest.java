@@ -7,6 +7,7 @@ import exceptions.DAOException;
 import java.util.List;
 
 class LibrarianDAOTest {
+
     private LibrarianDAO librarianDAO;
 
     @BeforeEach
@@ -75,11 +76,6 @@ class LibrarianDAOTest {
 
     @Test
     void testGetLibrarians() throws DAOException {
-        Librarian librarian1 = new Librarian("librarian1@mail.com", "password1");
-        Librarian librarian2 = new Librarian("librarian2@mail.com", "password2");
-        librarianDAO.addLibrarian(librarian1);
-        librarianDAO.addLibrarian(librarian2);
-
         List<Librarian> librarians = librarianDAO.getLibrarians();
         assertEquals(2, librarians.size(), "Debería haber dos bibliotecarios en la lista");
     }

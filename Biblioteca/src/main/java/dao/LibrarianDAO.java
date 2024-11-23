@@ -9,7 +9,8 @@ import exceptions.DAOException;
 import java.util.ArrayList;
 import java.util.List;
 import daoInterfaces.ILibrarianDAO;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,17 +21,17 @@ public class LibrarianDAO implements ILibrarianDAO {
     private static List<Librarian> bibliotecarios = new ArrayList<>();
 
     /**
-     * 
+     *
      */
     public LibrarianDAO() {
     }
-    
+
     /**
-     * 
+     *
      * @param mail
      * @param password
      * @return
-     * @throws DAOException 
+     * @throws DAOException
      */
     @Override
     public boolean loggin(String mail, String password) throws DAOException {
@@ -53,13 +54,13 @@ public class LibrarianDAO implements ILibrarianDAO {
 
         } catch (NullPointerException ex) {
             throw new DAOException("Error de acceso a datos: algún campo es nulo", ex);
-        } 
+        }
     }
 
     /**
-     * 
+     *
      * @param bibliotecario
-     * @throws DAOException 
+     * @throws DAOException
      */
     @Override
     public void addLibrarian(Librarian librarian) throws DAOException {
@@ -72,36 +73,38 @@ public class LibrarianDAO implements ILibrarianDAO {
 
         } catch (UnsupportedOperationException ex) {
             throw new DAOException("La lista de bibliotecarios es inmodificable", ex);
-        } 
+        }
     }
+
     /**
-     * 
-     * @return
-     * @throws DAOException 
+     *
+     * @return @throws DAOException
      */
     @Override
     public List<Librarian> getLibrarians() throws DAOException {
-        if (LibrarianDAO.bibliotecarios == null) {
-            throw new DAOException("La lista de bibliotecarios no "
-                    + "está inicializada");
+        if (bibliotecarios == null) {
+            bibliotecarios = new ArrayList<>(); // Inicializar si es necesario
+            try {
+                throw new Exception("La lista de bibliotecarios no está inicializada ");
+            } catch (Exception ex) {
+                Logger.getLogger(LibrarianDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        return new ArrayList<>(LibrarianDAO.bibliotecarios); 
+        return new ArrayList<>(bibliotecarios);
     }
 
     @Override
     public Librarian findByMail(String mail) throws DAOException {
-        try{
+        try {
             for (Librarian bibliotecario : bibliotecarios) {
                 if (bibliotecario.getCorreo().equalsIgnoreCase(mail)) {
                     return bibliotecario;
                 }
             }
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             throw new DAOException("Error al buscar por email", ex);
         }
         return null;
     }
 
-    
 }

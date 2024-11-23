@@ -25,18 +25,18 @@ public class LoanDAOTest {
 
     @AfterEach
     void tearDown() {
+        // Limpiar la lista de préstamos entre pruebas
         try {
-            // Limpiar préstamos después de cada prueba
-            for (Loan loan : loanDAO.getLoans()) {
-                loanDAO.registerReturn(loan);
-            }
+            loanDAO.getLoans().clear();
         } catch (DAOException e) {
-            System.err.println("Error al limpiar préstamos: " + e.getMessage());
+            // Manejo de excepción si ocurre un error al limpiar
+            e.printStackTrace();
         }
     }
 
     /**
-     * Verifica que un préstamo se registre correctamente y que el libro se marque como prestado.
+     * Verifica que un préstamo se registre correctamente y que el libro se
+     * marque como prestado.
      */
     @Test
     void testAddLoan() throws DAOException {
