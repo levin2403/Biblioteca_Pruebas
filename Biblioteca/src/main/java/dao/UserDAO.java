@@ -8,28 +8,28 @@ import daoInterfaces.IUserDAO;
 
 /**
  * Clase que actúa como el Data Access Object (DAO) para la entidad Usuario.
- * Esta clase proporciona métodos para gestionar usuarios, incluyendo su 
+ * Esta clase proporciona métodos para gestionar usuarios, incluyendo su
  * obtención, registro e inicio de sesión.
- * 
+ *
  * @author skevi
  */
 public class UserDAO implements IUserDAO {
-    
+
     /**
-     * Lista que almacena los usuarios en memoria.
-     * Representa la base de datos en esta implementación.
+     * Lista que almacena los usuarios en memoria. Representa la base de datos
+     * en esta implementación.
      */
     private static List<User> usuarios = new ArrayList<>();
 
     /**
-     * 
+     *
      */
     public UserDAO() {
     }
-    
+
     /**
      * Obtiene un usuario por su ID.
-     * 
+     *
      * @param id El identificador del usuario a obtener.
      * @return El usuario correspondiente al ID o null si no se encuentra.
      * @throws exceptions.DAOException
@@ -53,13 +53,13 @@ public class UserDAO implements IUserDAO {
             throw new DAOException("Error al obtener el "
                     + "usuario con ID: " + id, ex);
         }
-    } 
-    
+    }
+
     /**
-     * 
+     *
      * @param mail
      * @return
-     * @throws DAOException 
+     * @throws DAOException
      */
     @Override
     public User getByMail(String mail) throws DAOException {
@@ -70,26 +70,26 @@ public class UserDAO implements IUserDAO {
         }
         return null;
     }
-    
+
     /**
      * Registra un nuevo usuario en la lista.
-     * 
+     *
      * @param user
      * @throws exceptions.DAOException
      */
     @Override
     public void addUser(User user) throws DAOException {
-        try{
-        usuarios.add(user); // Agrega el nuevo usuario a la lista.
-        
-        }catch(Exception ex){
+        try {
+            usuarios.add(user); // Agrega el nuevo usuario a la lista.
+
+        } catch (Exception ex) {
             throw new DAOException();
         }
     }
-    
+
     /**
      * Actualiza la información de un usuario existente.
-     * 
+     *
      * @param user El usuario con la información actualizada.
      * @throws exceptions.DAOException
      */
@@ -106,16 +106,16 @@ public class UserDAO implements IUserDAO {
             }
         }
         if (!userFound) {
-            throw new DAOException("No se encontró un usuario con el ID: " 
+            throw new DAOException("No se encontró un usuario con el ID: "
                     + user.getId());
         }
     }
-    
+
     /**
      * Metodo para obtener la lista de todos los usuarios registrados.
-     * 
+     *
      * @return Lista con todos los usuarios registrados.
-     * @throws exceptions.DAOException 
+     * @throws exceptions.DAOException
      */
     @Override
     public List<User> getUsers() throws DAOException {
@@ -136,8 +136,11 @@ public class UserDAO implements IUserDAO {
             throw new DAOException("Error al obtener la lista de "
                     + "usuarios.", ex);
         }
-        
-    }
-    
-}
 
+    }
+
+    public void remove() {
+        usuarios.clear();
+    }
+
+}

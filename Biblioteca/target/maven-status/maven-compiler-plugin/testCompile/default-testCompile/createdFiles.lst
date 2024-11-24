@@ -5,6 +5,7 @@ dao\BookDAOTest.class
 facade\AddUserFCDTest.class
 facade\AddBookFCDTest.class
 IntegrationTests\LendBookFCDIntegration.class
+dao\UserDAOTest.class
 facade\SearchByTitleTest.class
 IntegrationTests\UpdateBookFCDIntegration.class
 IntegrationTests\RemoveBookFCDIntegration.class
