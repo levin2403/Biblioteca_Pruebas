@@ -4,6 +4,19 @@
  */
 package presentation.panels;
 
+import dao.BookDAO;
+import dao.LoanDAO;
+import dao.UserDAO;
+import entityes.Book;
+import entityes.Loan;
+import entityes.User;
+import exceptions.DAOException;
+import exceptions.FacadeException;
+import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author skevi
@@ -13,6 +26,10 @@ public class PnlLendBook extends javax.swing.JPanel {
     /**
      * Creates new form PnlLendBook
      */
+    BookDAO libros = new BookDAO();
+    UserDAO users = new UserDAO();
+    LoanDAO loan = new LoanDAO();
+
     public PnlLendBook() {
         initComponents();
     }
@@ -26,19 +43,125 @@ public class PnlLendBook extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
+        btnPrestar = new javax.swing.JButton();
+        txfISBN = new javax.swing.JTextField();
+        txfID = new javax.swing.JTextField();
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel2.setText("Prestar Libro");
+
+        btnPrestar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnPrestar.setText("Prestar");
+        btnPrestar.setToolTipText("");
+        btnPrestar.setAlignmentX(0.5F);
+        btnPrestar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrestarActionPerformed(evt);
+            }
+        });
+
+        txfISBN.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfISBN.setBorder(javax.swing.BorderFactory.createTitledBorder("ISBN"));
+        txfISBN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfISBNActionPerformed(evt);
+            }
+        });
+
+        txfID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfID.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuario"));
+        txfID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfIDActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(115, 115, 115)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txfID, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(59, 59, 59)
+                .addComponent(btnPrestar)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addComponent(btnPrestar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txfISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)))
+                .addComponent(txfID, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(99, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void crearPrestamo() {
+        Book libro;
+        try {
+            libro = libros.searchByISBN(txfISBN.getText());
+            User user = users.getByID(Integer.parseInt(txfID.getText()));
+
+            Loan loan = new Loan(user, libro, LocalDate.now());
+            this.loan.addLoan(loan);
+
+            System.out.println("PRESTADO");
+            System.out.println(loan.toString());
+        } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(),
+                    "Error al prestar el libro.", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    private void btnPrestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrestarActionPerformed
+
+        int option = JOptionPane.showConfirmDialog(
+                null,
+                "¿Esta seguro de querer prestar el libro?",
+                "Confirmación",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (option == JOptionPane.YES_OPTION) {
+            crearPrestamo();
+            JOptionPane.showMessageDialog(null, "Libro prestado con "
+                    + "exito");
+        }
+
+        cleanFields();
+    }//GEN-LAST:event_btnPrestarActionPerformed
+    private void cleanFields() {
+        this.txfISBN.setText("");
+        this.txfID.setText("");
+    }
+    private void txfISBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfISBNActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfISBNActionPerformed
+
+    private void txfIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfIDActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnPrestar;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField txfID;
+    private javax.swing.JTextField txfISBN;
     // End of variables declaration//GEN-END:variables
 }

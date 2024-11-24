@@ -14,6 +14,8 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import presentation.panels.PnlBooks;
+import presentation.panels.PnlLendBook;
+import presentation.panels.PnlReturnBook;
 import presentation.panels.PnlUser;
 
 /**
@@ -21,9 +23,9 @@ import presentation.panels.PnlUser;
  * @author skevi
  */
 public class FrmMenu extends javax.swing.JFrame {
-    
+
     /**
-     * 
+     *
      */
     public FrmMenu() {
         initComponents();
@@ -33,17 +35,17 @@ public class FrmMenu extends javax.swing.JFrame {
     }
 
     /**
-     * 
+     *
      */
-    private void initConfig(){
+    private void initConfig() {
         this.setLocationRelativeTo(this);
         this.PnlWindow.setLayout(new BorderLayout());
     }
-    
+
     /**
-     * 
+     *
      */
-    private void loadFactories(){
+    private void loadFactories() {
         LibrarianFactory fabrica1 = new LibrarianFactory();
         BookFactory fabrica2 = new BookFactory();
         UserFactory fabrica3 = new UserFactory();
@@ -52,49 +54,48 @@ public class FrmMenu extends javax.swing.JFrame {
         fabrica2.fabricateBooks();
         fabrica3.fabricateUsers();
     }
-    
+
     /**
-     * 
+     *
      */
-    private void loadPanel(){
- 
+    private void loadPanel() {
+        
     }
-    
+
     /**
-     * 
+     *
      * @param path
-     * @return 
+     * @return
      */
-    private ImageIcon createImageIcon(String path, int x, int y, 
+    private ImageIcon createImageIcon(String path, int x, int y,
             String extension) {
-        URL imgURL = FrmMenu.class.getResource("/icons/" + path + "." + 
-                extension);
+        URL imgURL = FrmMenu.class.getResource("/icons/" + path + "."
+                + extension);
         if (imgURL != null) {
             ImageIcon originalIcon = new ImageIcon(imgURL);
-            Image image = originalIcon.getImage().getScaledInstance(x, y, 
+            Image image = originalIcon.getImage().getScaledInstance(x, y,
                     Image.SCALE_SMOOTH);
             return new ImageIcon(image);
         } else {
-            System.err.println("No se pudo encontrar el archivo de imagen: " + 
-                    path);
+            System.err.println("No se pudo encontrar el archivo de imagen: "
+                    + path);
             return null;
         }
     }
-    
+
     /**
-     * 
-     * @param panel 
+     *
+     * @param panel
      */
-    private void paintPanel(JPanel panel){
+    private void paintPanel(JPanel panel) {
         panel.setSize(730, 420);
-        panel.setLocation(0,0);
+        panel.setLocation(0, 0);
         
         PnlWindow.removeAll();
         PnlWindow.add(panel, BorderLayout.CENTER);
         PnlWindow.revalidate();
         PnlWindow.repaint();
     }
-    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -338,9 +339,9 @@ public class FrmMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_lblGestionLibrosMouseClicked
 
     private void lblPrestarLibroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPrestarLibroMouseClicked
-//        PnlRecords historial = new PnlRecords();
-//        
-//        paintPanel(historial); //paint the panel
+        PnlLendBook lend = new PnlLendBook();
+        
+        paintPanel(lend); //paint the panel
     }//GEN-LAST:event_lblPrestarLibroMouseClicked
 
     private void lblBusquedasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBusquedasMouseClicked
@@ -350,6 +351,10 @@ public class FrmMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBusquedasMouseClicked
 
     private void lblDevolverLibroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDevolverLibroMouseClicked
+        
+        PnlReturnBook regresar = new PnlReturnBook();
+        
+        paintPanel(regresar);
         
     }//GEN-LAST:event_lblDevolverLibroMouseClicked
 
@@ -362,13 +367,13 @@ public class FrmMenu extends javax.swing.JFrame {
         this.lblDevolverLibro.setBackground(new Color(153, 153, 153));
         this.lblDevolverLibro.setForeground(Color.BLACK);
     }//GEN-LAST:event_lblDevolverLibroMouseExited
-
+    
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             new FrmMenu().setVisible(true);
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PnlHeader;

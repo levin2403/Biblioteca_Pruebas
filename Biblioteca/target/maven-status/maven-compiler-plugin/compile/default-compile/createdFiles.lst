@@ -20,6 +20,9 @@ facade\ReturnBookFCD.class
 presentation\panels\PnlBooks.class
 presentation\panels\PnlLendBook.class
 facade\SearchByTitle.class
+presentation\panels\PnlLendBook$1.class
+presentation\panels\PnlLendBook$2.class
+presentation\panels\PnlReturnBook$1.class
 facade\AddBookFCD.class
 facade\AddUserFCD.class
 presentation\FrmMenu.class
@@ -47,6 +50,8 @@ facadeInterfaces\IUpdateUserFCD.class
 fabricas\LibrarianFactory.class
 presentation\panels\PnlBooks$1.class
 presentation\FrmUpdateBook$4.class
+presentation\panels\PnlLendBook$3.class
+presentation\panels\PnlReturnBook$2.class
 presentation\FrmMenu$1.class
 facadeInterfaces\ISearchByAuthor.class
 facade\LoginFCD.class
@@ -56,7 +61,6 @@ presentation\panels\PnlUpdateUser$1.class
 presentation\panels\PnlUpdateUser$4.class
 exceptions\DAOException.class
 facade\RemoveBookFCD.class
-presentation\panels\PnlLoan.class
 presentation\FrmUpdateBook$1.class
 daoInterfaces\IUserDAO.class
 facadeInterfaces\ILogginFCD.class
@@ -72,6 +76,7 @@ presentation\panels\PnlAddUser$2.class
 presentation\panels\PnlBooks$2.class
 facade\UpdateBookFCD.class
 fabricas\FacadeFactory.class
+presentation\panels\PnlReturnBook$3.class
 entityes\Librarian.class
 presentation\FrmLogin$1.class
 presentation\FrmUpdateBook$2.class

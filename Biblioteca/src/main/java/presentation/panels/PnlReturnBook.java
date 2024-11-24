@@ -4,14 +4,31 @@
  */
 package presentation.panels;
 
+import dao.BookDAO;
+import dao.LoanDAO;
+import dao.UserDAO;
+import entityes.Book;
+import entityes.Loan;
+import entityes.User;
+import exceptions.DAOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author skevi
  */
 public class PnlReturnBook extends javax.swing.JPanel {
 
+    BookDAO libros = new BookDAO();
+    UserDAO users = new UserDAO();
+    LoanDAO loan = new LoanDAO();
+    Book libro;
+    User user;
+
     /**
-     * Creates new form PnlReturnBook
+     * Creates new form PnlLendBook
      */
     public PnlReturnBook() {
         initComponents();
@@ -26,19 +43,133 @@ public class PnlReturnBook extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
+        btnReturn = new javax.swing.JButton();
+        txfISBN = new javax.swing.JTextField();
+        txfID = new javax.swing.JTextField();
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel2.setText("Regresar Libro");
+
+        btnReturn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnReturn.setText("Regresar");
+        btnReturn.setToolTipText("");
+        btnReturn.setAlignmentX(0.5F);
+        btnReturn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReturnActionPerformed(evt);
+            }
+        });
+
+        txfISBN.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfISBN.setBorder(javax.swing.BorderFactory.createTitledBorder("ISBN"));
+        txfISBN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfISBNActionPerformed(evt);
+            }
+        });
+
+        txfID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfID.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuario"));
+        txfID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfIDActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(115, 115, 115)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txfID, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(73, 73, 73)))
+                .addGap(59, 59, 59)
+                .addComponent(btnReturn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(158, 158, 158)
+                        .addComponent(btnReturn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txfISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)))
+                .addComponent(txfID, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void regresarLibro() {
+        try {
+            libro = libros.searchByISBN(txfISBN.getText());
+            user = users.getByID(Integer.parseInt(txfID.getText()));
+
+            Loan prestamo = loan.searchByBookAndUser(libro, user);
+
+            loan.registerReturn(prestamo);
+
+        } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(),
+                    "Error al regresar el libro.", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+
+    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
+
+        int option = JOptionPane.showConfirmDialog(
+                null,
+                "¿Esta seguro de querer regresar el libro?",
+                "Confirmación",
+                JOptionPane.YES_NO_OPTION
+        );
+ 
+        try {
+            if (option == JOptionPane.YES_OPTION) {
+                regresarLibro();
+                JOptionPane.showMessageDialog(null, "Libro regresado con exito");
+
+                System.out.println("Prestamos actuales");
+
+                System.out.println(loan.getLoans().toString());
+            }
+        } catch (DAOException ex) {
+            Logger.getLogger(PnlReturnBook.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        clearFields();
+    }//GEN-LAST:event_btnReturnActionPerformed
+    private void clearFields() {
+        this.txfISBN.setText("");
+        this.txfID.setText("");
+    }
+    private void txfISBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfISBNActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfISBNActionPerformed
+
+    private void txfIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfIDActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnReturn;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField txfID;
+    private javax.swing.JTextField txfISBN;
     // End of variables declaration//GEN-END:variables
 }
