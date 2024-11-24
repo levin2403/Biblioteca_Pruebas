@@ -7,10 +7,15 @@ package presentation.panels;
 import dao.BookDAO;
 import dao.LoanDAO;
 import dao.UserDAO;
+import daoInterfaces.IBookDAO;
+import daoInterfaces.ILoanDAO;
 import entityes.Book;
 import entityes.Loan;
 import entityes.User;
 import exceptions.DAOException;
+import exceptions.FacadeException;
+import facade.ReturnBookFCD;
+import facadeInterfaces.IReturnBookFCD;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -21,17 +26,21 @@ import javax.swing.JOptionPane;
  */
 public class PnlReturnBook extends javax.swing.JPanel {
 
-    BookDAO libros = new BookDAO();
-    UserDAO users = new UserDAO();
-    LoanDAO loan = new LoanDAO();
-    Book libro;
-    User user;
+    private static IReturnBookFCD returnBookFCD;
+    private static IBookDAO bookDAO;
+    private static ILoanDAO loanDAO;
+    private static UserDAO userDAO;
 
     /**
      * Creates new form PnlLendBook
      */
     public PnlReturnBook() {
         initComponents();
+        bookDAO = new BookDAO();
+        loanDAO = new LoanDAO();
+        userDAO = new UserDAO();
+
+        returnBookFCD = new ReturnBookFCD(bookDAO, loanDAO);
     }
 
     /**
@@ -112,14 +121,14 @@ public class PnlReturnBook extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public void regresarLibro() {
+    public void regresarLibro() throws FacadeException, DAOException {
         try {
-            libro = libros.searchByISBN(txfISBN.getText());
-            user = users.getByID(Integer.parseInt(txfID.getText()));
+            Book book = bookDAO.searchByISBN(txfISBN.getText());
+            User user = userDAO.getByID(Integer.parseInt(txfID.getText()));
 
-            Loan prestamo = loan.searchByBookAndUser(libro, user);
+            Loan prestamo = loanDAO.searchByBookAndUser(book, user);
 
-            loan.registerReturn(prestamo);
+            returnBookFCD.returnBook(prestamo);
 
         } catch (DAOException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
@@ -137,16 +146,15 @@ public class PnlReturnBook extends javax.swing.JPanel {
                 "Confirmación",
                 JOptionPane.YES_NO_OPTION
         );
- 
+
         try {
             if (option == JOptionPane.YES_OPTION) {
                 regresarLibro();
                 JOptionPane.showMessageDialog(null, "Libro regresado con exito");
 
-                System.out.println("Prestamos actuales");
-
-                System.out.println(loan.getLoans().toString());
             }
+        } catch (FacadeException ex) {
+            Logger.getLogger(PnlReturnBook.class.getName()).log(Level.SEVERE, null, ex);
         } catch (DAOException ex) {
             Logger.getLogger(PnlReturnBook.class.getName()).log(Level.SEVERE, null, ex);
         }

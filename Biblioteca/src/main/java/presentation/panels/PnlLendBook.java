@@ -1,17 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package presentation.panels;
 
 import dao.BookDAO;
 import dao.LoanDAO;
 import dao.UserDAO;
+import daoInterfaces.IBookDAO;
+import daoInterfaces.ILoanDAO;
+import daoInterfaces.IUserDAO;
 import entityes.Book;
 import entityes.Loan;
 import entityes.User;
 import exceptions.DAOException;
 import exceptions.FacadeException;
+import facade.LendBookFCD;
+import facadeInterfaces.ILendBookFCD;
 import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,12 +27,20 @@ public class PnlLendBook extends javax.swing.JPanel {
     /**
      * Creates new form PnlLendBook
      */
-    BookDAO libros = new BookDAO();
-    UserDAO users = new UserDAO();
-    LoanDAO loan = new LoanDAO();
+    private static ILendBookFCD lendBookFCD;
+    private static ILoanDAO loanDAO;
+    private static IBookDAO bookDAO;
+    private static IUserDAO userDAO;
 
     public PnlLendBook() {
         initComponents();
+
+        loanDAO = new LoanDAO();
+        bookDAO = new BookDAO();
+        userDAO = new UserDAO();
+
+        // Instanciamos la fachada
+        lendBookFCD = new LendBookFCD(loanDAO, bookDAO);
     }
 
     /**
@@ -110,37 +119,37 @@ public class PnlLendBook extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void crearPrestamo() {
-        Book libro;
-        try {
-            libro = libros.searchByISBN(txfISBN.getText());
-            User user = users.getByID(Integer.parseInt(txfID.getText()));
+    private void crearPrestamo() throws FacadeException, DAOException {
 
-            Loan loan = new Loan(user, libro, LocalDate.now());
-            this.loan.addLoan(loan);
+        Book book = bookDAO.searchByISBN(txfISBN.getText());
+        User user = userDAO.getByID(Integer.parseInt(txfID.getText()));
 
-            System.out.println("PRESTADO");
-            System.out.println(loan.toString());
-        } catch (DAOException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(),
-                    "Error al prestar el libro.", JOptionPane.ERROR_MESSAGE);
-        }
+        bookDAO.addBook(book); // Añadimos el libro
+        userDAO.addUser(user); // Añadimos el usuario
+
+        Loan loan = new Loan(user, book, LocalDate.now().plusDays(10));
+
+        lendBookFCD.lendBook(loan);
 
     }
 
     private void btnPrestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrestarActionPerformed
 
-        int option = JOptionPane.showConfirmDialog(
-                null,
-                "¿Esta seguro de querer prestar el libro?",
-                "Confirmación",
-                JOptionPane.YES_NO_OPTION
-        );
+        try {
+            int option = JOptionPane.showConfirmDialog(
+                    null,
+                    "¿Esta seguro de querer prestar el libro?",
+                    "Confirmación",
+                    JOptionPane.YES_NO_OPTION
+            );
 
-        if (option == JOptionPane.YES_OPTION) {
-            crearPrestamo();
-            JOptionPane.showMessageDialog(null, "Libro prestado con "
-                    + "exito");
+            if (option == JOptionPane.YES_OPTION) {
+                crearPrestamo();
+                JOptionPane.showMessageDialog(null, "Libro prestado con exito");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(btnPrestar, e, "Error", HEIGHT);
+
         }
 
         cleanFields();
