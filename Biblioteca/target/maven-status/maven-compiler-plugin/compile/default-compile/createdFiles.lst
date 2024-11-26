@@ -1,3 +1,4 @@
+presentation\panels\PnlBookSearch$1.class
 presentation\panels\PnlBookSearch.class
 dao\LoanDAO.class
 daoInterfaces\IBookDAO.class
@@ -54,6 +55,7 @@ dao\UserDAO.class
 presentation\panels\PnlLendBook.class
 facade\SearchByTitle.class
 presentation\panels\PnlLendBook$2.class
+presentation\panels\PnlBookSearch$2.class
 presentation\FrmMenu.class
 facade\SearchByISBN.class
 dao\LibrarianDAO.class
@@ -71,6 +73,7 @@ facadeInterfaces\ISearchByAuthor.class
 facade\LoginFCD.class
 presentation\panels\PnlUser$1.class
 presentation\panels\PnlUpdateUser$1.class
+presentation\panels\PnlBookSearch$3.class
 facadeInterfaces\ILogginFCD.class
 facadeInterfaces\IReturnBookFCD.class
 presentation\FrmUpdateBook$5.class
@@ -86,5 +89,6 @@ fabricas\FacadeFactory.class
 facade\UpdateUserFCD.class
 presentation\panels\PnlUpdateUser$2.class
 presentation\panels\PnlUser.class
+presentation\panels\PnlBookSearch$4.class
 daoInterfaces\ILibrarianDAO.class
 presentation\panels\PnlAddBook.class

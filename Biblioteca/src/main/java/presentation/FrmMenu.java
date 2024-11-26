@@ -13,6 +13,7 @@ import java.awt.Image;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import presentation.panels.PnlBookSearch;
 import presentation.panels.PnlBooks;
 import presentation.panels.PnlLendBook;
 import presentation.panels.PnlReturnBook;
@@ -345,9 +346,9 @@ public class FrmMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_lblPrestarLibroMouseClicked
 
     private void lblBusquedasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBusquedasMouseClicked
-//        PnlSavedSell saved = new PnlSavedSell();
-//        
-//        paintPanel(saved); 
+        PnlBookSearch busqueda = new PnlBookSearch();
+        
+        paintPanel(busqueda);
     }//GEN-LAST:event_lblBusquedasMouseClicked
 
     private void lblDevolverLibroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDevolverLibroMouseClicked

@@ -1,8 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package presentation.panels;
+
+import dao.BookDAO;
+import daoInterfaces.IBookDAO;
+import entityes.Book;
+import exceptions.FacadeException;
+import facade.SearchByAuthorFCD;
+import facade.SearchByISBN;
+import facade.SearchByTitle;
+import facadeInterfaces.ISearchByAuthor;
+import facadeInterfaces.ISearchByISBN;
+import facadeInterfaces.ISearchByTitle;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -10,11 +21,27 @@ package presentation.panels;
  */
 public class PnlBookSearch extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PnlBookSearch
-     */
+    private static ISearchByISBN searchByISBNFCD;
+    private static ISearchByTitle searchByTitleFCD;
+    private static ISearchByAuthor searchByAuthor;
+
+    private static IBookDAO bookDAO;
+    private String seleccion = "";
+
     public PnlBookSearch() {
         initComponents();
+
+        bookDAO = new BookDAO();
+
+        //Fachadas
+        searchByISBNFCD = new SearchByISBN(bookDAO);
+        searchByTitleFCD = new SearchByTitle(bookDAO);
+        searchByAuthor = new SearchByAuthorFCD(bookDAO);
+
+        //Tabla
+        this.tblBooks.setEnabled(false);
+        DefaultTableModel tableModel = new DefaultTableModel();
+        this.tblBooks.setModel(tableModel);
     }
 
     /**
@@ -26,19 +53,220 @@ public class PnlBookSearch extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnByISBN = new javax.swing.JButton();
+        btnByAutor = new javax.swing.JButton();
+        btnByTitulo = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblBooks = new javax.swing.JTable();
+
+        btnByISBN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnByISBN.setText("ISBN");
+        btnByISBN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnByISBN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnByISBNActionPerformed(evt);
+            }
+        });
+
+        btnByAutor.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnByAutor.setText("Autor");
+        btnByAutor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnByAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnByAutorActionPerformed(evt);
+            }
+        });
+
+        btnByTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnByTitulo.setText("Título");
+        btnByTitulo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnByTitulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnByTituloActionPerformed(evt);
+            }
+        });
+
+        tblBooks.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblBooks.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblBooksMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblBooks);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(btnByISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(btnByTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(btnByAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(185, 185, 185)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(56, 56, 56))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnByISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnByTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnByAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void setBookToTable(String data) throws FacadeException {
+        List<Book> foundBooks = new ArrayList<>();
+
+        try {
+
+            // Define las columnas de la tabla.
+            String[] columnNames = {"ISBN", "Titulo", "Autor", "Prestado", "Review", "Puntaje"};
+            DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+
+            //Se realiza la busqueda dependiendo el tipo de busqueda.
+            switch (seleccion) {
+                case ("ISBN"):
+                    foundBooks.add(searchByISBNFCD.searchByISBN(data));
+                    break;
+                case ("Titulo"):
+                    foundBooks = searchByTitleFCD.searchByTitle(data);
+                    break;
+                case ("Autor"):
+                    foundBooks = searchByAuthor.searchByAuthor(data);
+                    break;
+
+            }
+
+            //Agrega los datos a la tabla.
+            for (Book book : foundBooks) {
+                Object[] rowData = {
+                    book.getIsbn(),
+                    book.getTitulo(),
+                    book.getAutor(),
+                    (book.isPrestado() ? "Sí" : "No"),
+                    book.getValoration().getReview(),
+                    book.getValoration().getScore()};
+                tableModel.addRow(rowData);
+            }
+
+            this.tblBooks.setModel(tableModel);
+
+        } catch (FacadeException e) {
+            System.out.println(e);
+        }
+    }
+
+    private void btnByISBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnByISBNActionPerformed
+
+        try {
+            // Mostrar un diálogo de entrada
+            String data = JOptionPane.showInputDialog(this,
+                    "Introduce un ISBN:",
+                    "ISBN",
+                    JOptionPane.PLAIN_MESSAGE);
+
+            // Verificar si el usuario ingresó algo
+            if (data != null && !data.isEmpty() && (data.matches("\\d{3}-\\d{1}-\\d{3}"))) {
+                seleccion = "ISBN";
+                setBookToTable(data);
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "Utiliza el formato 000-0-000",
+                        "Error",
+                        JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (FacadeException e) {
+            System.out.println(e);
+        }
+
+
+    }//GEN-LAST:event_btnByISBNActionPerformed
+
+    private void btnByAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnByAutorActionPerformed
+        try {
+            // Mostrar un diálogo de entrada
+            String data = JOptionPane.showInputDialog(this,
+                    "Introduce un Autor:",
+                    "Autor",
+                    JOptionPane.PLAIN_MESSAGE);
+
+            // Verificar si el usuario ingresó algo
+            if (data != null && !data.isEmpty() && (data.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+"))) {
+                seleccion = "Autor";
+                setBookToTable(data);
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "No se introdujo un valor válido.",
+                        "Error",
+                        JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (FacadeException e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_btnByAutorActionPerformed
+
+    private void btnByTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnByTituloActionPerformed
+        try {
+            // Mostrar un diálogo de entrada
+            String data = JOptionPane.showInputDialog(this,
+                    "Introduce un Titulo:",
+                    "Titulo",
+                    JOptionPane.PLAIN_MESSAGE);
+
+            // Verificar si el usuario ingresó algo
+            if (data != null && !data.isEmpty()) {
+                seleccion = "Titulo";
+                setBookToTable(data);
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "No se introdujo un valor válido.",
+                        "Error",
+                        JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (FacadeException e) {
+            System.out.println(e);
+        }
+
+    }//GEN-LAST:event_btnByTituloActionPerformed
+
+    private void tblBooksMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBooksMouseClicked
+        //putSelecteUser();
+    }//GEN-LAST:event_tblBooksMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddBook;
+    private javax.swing.JButton btnAddBook1;
+    private javax.swing.JButton btnAddBook2;
+    private javax.swing.JButton btnAddBook3;
+    private javax.swing.JButton btnByAutor;
+    private javax.swing.JButton btnByISBN;
+    private javax.swing.JButton btnByTitulo;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tblBooks;
+    private javax.swing.JTable tblUsers;
     // End of variables declaration//GEN-END:variables
 }
