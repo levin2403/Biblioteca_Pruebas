@@ -6,7 +6,7 @@ package presentation.panels;
 
 import entityes.Book;
 import exceptions.FacadeException;
-import facade.AddBookFCD;
+import fabricas.FacadeFactory;
 import facadeInterfaces.IAddBookFCD;
 import javax.swing.JOptionPane;
 
@@ -27,7 +27,7 @@ public class PnlAddBook extends javax.swing.JPanel {
     }
     
     private void initialConfig(){
-//        this.addBookFCD = new AddBookFCD();
+        this.addBookFCD = FacadeFactory.fabricateAddBookFCD();
     }
     
     /**
@@ -41,7 +41,7 @@ public class PnlAddBook extends javax.swing.JPanel {
 
     private Book getBook(){
         String isbn = this.txfISBN.getText();
-        String title = this.txfAuthor.getText();
+        String title = this.txfTitle.getText();
         String author = this.txfAuthor.getText();
         
         Book book = new Book(isbn, title, author);
@@ -143,6 +143,7 @@ public class PnlAddBook extends javax.swing.JPanel {
         
         if (option == JOptionPane.YES_OPTION) {
             this.addBookFCD.addBook(book);   
+            cleanFields();
             JOptionPane.showMessageDialog(null, "Libro agregado con "
                     + "exito");
         }

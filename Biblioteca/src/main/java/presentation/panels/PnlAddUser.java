@@ -4,6 +4,7 @@
  */
 package presentation.panels;
 
+import dao.UserDAO;
 import entityes.User;
 import exceptions.FacadeException;
 import facade.AddUserFCD;
@@ -33,7 +34,8 @@ public class PnlAddUser extends javax.swing.JPanel {
      * Initialices the instances of the class;
      */
     private void initialConfig(){
-//        this.addUserFCD = new AddUserFCD();
+        UserDAO userDAO = new UserDAO();
+        this.addUserFCD = new AddUserFCD(userDAO);
     }
     
     /**

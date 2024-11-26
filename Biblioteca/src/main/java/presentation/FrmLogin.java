@@ -4,6 +4,8 @@
  */
 package presentation;
 
+import com.valorationService.factories.ValoratedBooksFactory;
+import dao.LibrarianDAO;
 import exceptions.FacadeException;
 import fabricas.LibrarianFactory;
 import fabricas.BookFactory;
@@ -13,6 +15,8 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 import utilities.RoundedBorder;
 import facadeInterfaces.ILogginFCD;
+import utilities.Hasher;
+import valoration.Valorate;
 
 
 /**
@@ -24,7 +28,7 @@ public class FrmLogin extends javax.swing.JFrame {
     /**
      * 
      */
-    private ILogginFCD librarianFacade;
+    private ILogginFCD librarianFCD;
     
     /**
      * 
@@ -36,9 +40,21 @@ public class FrmLogin extends javax.swing.JFrame {
      */
     public FrmLogin() {
         initComponents();
+        initialInstances();
         intialConfig();
         styles();
         loadFactories();
+    }
+    
+    /**
+     * 
+     */
+    private void initialInstances(){
+        LibrarianDAO librarianDAO = new LibrarianDAO();
+        Hasher hasher = new Hasher();
+        this.librarianFCD = new LoginFCD(librarianDAO, hasher);
+        
+        
     }
     
     /**
@@ -48,10 +64,14 @@ public class FrmLogin extends javax.swing.JFrame {
         LibrarianFactory fabrica1 = new LibrarianFactory();
         BookFactory fabrica2 = new BookFactory();
         UserFactory fabrica3 = new UserFactory();
+        Valorate valorate = new Valorate();
+        ValoratedBooksFactory valoratedBooks = 
+                new ValoratedBooksFactory(valorate);
         
         fabrica1.fabricateLibrarians();
         fabrica2.fabricateBooks();
         fabrica3.fabricateUsers();
+        valoratedBooks.fabricateValoratedBooks();
       
     }
     
@@ -60,7 +80,6 @@ public class FrmLogin extends javax.swing.JFrame {
      */
     private void intialConfig(){
         this.setLocationRelativeTo(this);
-        this.librarianFacade = loginFCD;
     }
     
     /**
@@ -214,8 +233,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         try{
-            System.out.println(this.txfCorreo.getText());
-            
+     
             String mail = this.txfCorreo.getText();
             
             char[] passwordChars = psfContrasena.getPassword();
@@ -223,10 +241,11 @@ public class FrmLogin extends javax.swing.JFrame {
             
             String password = new String(passwordChars);
             
-            if(librarianFacade.loggin(mail, password)){
+            if(librarianFCD.loggin(mail, password)){
                 FrmMenu menu = new FrmMenu();
                 menu.setVisible(true);
-                this.dispose();            }
+                this.dispose();            
+            }
                 
         }
         catch(FacadeException fe){

@@ -31,7 +31,6 @@ public class FrmMenu extends javax.swing.JFrame {
     public FrmMenu() {
         initComponents();
         initConfig();
-        loadFactories();
         loadPanel();
     }
 
@@ -41,19 +40,6 @@ public class FrmMenu extends javax.swing.JFrame {
     private void initConfig() {
         this.setLocationRelativeTo(this);
         this.PnlWindow.setLayout(new BorderLayout());
-    }
-
-    /**
-     *
-     */
-    private void loadFactories() {
-        LibrarianFactory fabrica1 = new LibrarianFactory();
-        BookFactory fabrica2 = new BookFactory();
-        UserFactory fabrica3 = new UserFactory();
-        
-        fabrica1.fabricateLibrarians();
-        fabrica2.fabricateBooks();
-        fabrica3.fabricateUsers();
     }
 
     /**
@@ -369,11 +355,6 @@ public class FrmMenu extends javax.swing.JFrame {
         this.lblDevolverLibro.setForeground(Color.BLACK);
     }//GEN-LAST:event_lblDevolverLibroMouseExited
     
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(() -> {
-            new FrmMenu().setVisible(true);
-        });
-    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

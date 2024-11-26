@@ -52,7 +52,7 @@ public class UpdateBookFCD implements IUpdateBookFCD {
     
     private void update(Book book) throws FacadeException{
         try{
-//            System.out.println("Lo que se envia a actualizar " + book.toString());
+            System.out.println("Lo que se envia a actualizar " + book.toString());
             bookDAO.updateBook(book);
         }
         catch(DAOException de){
@@ -71,14 +71,12 @@ public class UpdateBookFCD implements IUpdateBookFCD {
             Valoration valoration = valorate.
                     getValoration(book.getTitulo(), book.getAutor());
             
-//            System.out.println(valoration.toString());
-            
             book.setValoration(valoration);
             
-//            System.out.println("Lo que se obtiene en la valoracion: " + book.toString());
         }
         catch(Exception ex){
 
+            book.setValoration(null);
             //añadimos el libro sin valoracion
             update(book);
             

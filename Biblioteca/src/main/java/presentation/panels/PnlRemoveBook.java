@@ -30,11 +30,7 @@ public class PnlRemoveBook extends javax.swing.JPanel {
      * 
      */
     private IRemoveBookFCD removeBookFCD;
-    
-    /**
-     * 
-     */
-    private RemoveBookFCD removeBook;
+   
     
     /**
      * Creates new form PnlDelateUser
@@ -50,14 +46,14 @@ public class PnlRemoveBook extends javax.swing.JPanel {
      */
     private void initialConfig(){
         this.bookDAO = new BookDAO();
-        this.removeBookFCD = removeBook;
+        this.removeBookFCD = new RemoveBookFCD(this.bookDAO);
     }
     
     /**
      * 
      */
     private void loadTable(){
-        String[] columns = {"ISBN", "Titulo", "Autor", "Estado"};
+        String[] columns = {"ISBN", "Titulo", "Autor", "Estado", "Valorado"};
         DefaultTableModel tableModel = new DefaultTableModel(columns, 0);
         
         try{
@@ -68,7 +64,8 @@ public class PnlRemoveBook extends javax.swing.JPanel {
                     book.getIsbn(),
                     book.getTitulo(),
                     book.getAutor(),
-                    (book.isPrestado() == false) ? "Disponible" : "Prestado"
+                    (book.isPrestado() == false) ? "Disponible" : "Prestado",
+                    (book.getValoration() != null) ? "SI" : "NO"  
                 };
                 tableModel.addRow(object);
             }
@@ -159,17 +156,17 @@ public class PnlRemoveBook extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(99, Short.MAX_VALUE)
+                .addContainerGap(63, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(191, 191, 191))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(81, 81, 81))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(292, 292, 292))))
+                        .addGap(292, 292, 292))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
