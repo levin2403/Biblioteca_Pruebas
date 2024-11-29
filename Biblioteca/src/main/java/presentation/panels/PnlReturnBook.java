@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package presentation.panels;
 
 import dao.BookDAO;
@@ -71,7 +67,14 @@ public class PnlReturnBook extends javax.swing.JPanel {
         });
 
         txfISBN.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfISBN.setText("000-0-000");
+        txfISBN.setToolTipText("");
         txfISBN.setBorder(javax.swing.BorderFactory.createTitledBorder("ISBN"));
+        txfISBN.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txfISBNFocusGained(evt);
+            }
+        });
         txfISBN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txfISBNActionPerformed(evt);
@@ -79,7 +82,13 @@ public class PnlReturnBook extends javax.swing.JPanel {
         });
 
         txfID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfID.setText("ID");
         txfID.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuario"));
+        txfID.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txfIDFocusGained(evt);
+            }
+        });
         txfID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txfIDActionPerformed(evt);
@@ -90,34 +99,27 @@ public class PnlReturnBook extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(115, 115, 115)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txfID, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(73, 73, 73)))
-                .addGap(59, 59, 59)
-                .addComponent(btnReturn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(150, 150, 150)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txfID, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                    .addComponent(txfISBN, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnReturn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(158, 158, 158)
-                        .addComponent(btnReturn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txfISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)))
+                .addGap(25, 25, 25)
+                .addComponent(jLabel2)
+                .addGap(50, 50, 50)
+                .addComponent(txfISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
                 .addComponent(txfID, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addComponent(btnReturn)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -136,7 +138,6 @@ public class PnlReturnBook extends javax.swing.JPanel {
         }
 
     }
-
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
 
@@ -161,10 +162,12 @@ public class PnlReturnBook extends javax.swing.JPanel {
 
         clearFields();
     }//GEN-LAST:event_btnReturnActionPerformed
+
     private void clearFields() {
         this.txfISBN.setText("");
         this.txfID.setText("");
     }
+
     private void txfISBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfISBNActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txfISBNActionPerformed
@@ -172,6 +175,14 @@ public class PnlReturnBook extends javax.swing.JPanel {
     private void txfIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txfIDActionPerformed
+
+    private void txfIDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfIDFocusGained
+        txfID.setText("");
+    }//GEN-LAST:event_txfIDFocusGained
+
+    private void txfISBNFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfISBNFocusGained
+        txfISBN.setText("");
+    }//GEN-LAST:event_txfISBNFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

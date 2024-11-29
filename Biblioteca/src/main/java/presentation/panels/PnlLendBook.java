@@ -55,7 +55,7 @@ public class PnlLendBook extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         btnPrestar = new javax.swing.JButton();
         txfISBN = new javax.swing.JTextField();
-        txfID = new javax.swing.JTextField();
+        txfMail = new javax.swing.JTextField();
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("Prestar Libro");
@@ -71,18 +71,31 @@ public class PnlLendBook extends javax.swing.JPanel {
         });
 
         txfISBN.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfISBN.setText("000-0-000");
         txfISBN.setBorder(javax.swing.BorderFactory.createTitledBorder("ISBN"));
+        txfISBN.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txfISBNFocusGained(evt);
+            }
+        });
         txfISBN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txfISBNActionPerformed(evt);
             }
         });
 
-        txfID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txfID.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuario"));
-        txfID.addActionListener(new java.awt.event.ActionListener() {
+        txfMail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfMail.setText("Email");
+        txfMail.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuario"));
+        txfMail.setName("Email"); // NOI18N
+        txfMail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txfMailFocusGained(evt);
+            }
+        });
+        txfMail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfIDActionPerformed(evt);
+                txfMailActionPerformed(evt);
             }
         });
 
@@ -90,42 +103,41 @@ public class PnlLendBook extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(115, 115, 115)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txfID, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(59, 59, 59)
-                .addComponent(btnPrestar)
-                .addContainerGap(60, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(150, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnPrestar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txfMail, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                    .addComponent(txfISBN, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(24, 24, 24)
                 .addComponent(jLabel2)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(btnPrestar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txfISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)))
-                .addComponent(txfID, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addGap(59, 59, 59)
+                .addComponent(txfISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(txfMail, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(btnPrestar)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
+
+        txfMail.getAccessibleContext().setAccessibleName("Email");
     }// </editor-fold>//GEN-END:initComponents
 
     private void crearPrestamo() throws FacadeException, DAOException {
 
         Book book = bookDAO.searchByISBN(txfISBN.getText());
-        User user = userDAO.getByID(Integer.parseInt(txfID.getText()));
+        User user = userDAO.getByMail(txfMail.getText());
 
         bookDAO.addBook(book); // Añadimos el libro
         userDAO.addUser(user); // Añadimos el usuario
+
+        System.out.println(book.toString() + user.toString());
 
         Loan loan = new Loan(user, book, LocalDate.now().plusDays(10));
 
@@ -154,23 +166,32 @@ public class PnlLendBook extends javax.swing.JPanel {
 
         cleanFields();
     }//GEN-LAST:event_btnPrestarActionPerformed
+
     private void cleanFields() {
         this.txfISBN.setText("");
-        this.txfID.setText("");
+        this.txfMail.setText("");
     }
+    
     private void txfISBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfISBNActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txfISBNActionPerformed
 
-    private void txfIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfIDActionPerformed
+    private void txfMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfMailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txfIDActionPerformed
+    }//GEN-LAST:event_txfMailActionPerformed
 
+    private void txfISBNFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfISBNFocusGained
+       txfISBN.setText("");
+    }//GEN-LAST:event_txfISBNFocusGained
+
+    private void txfMailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfMailFocusGained
+        txfMail.setText("");
+    }//GEN-LAST:event_txfMailFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPrestar;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField txfID;
     private javax.swing.JTextField txfISBN;
+    private javax.swing.JTextField txfMail;
     // End of variables declaration//GEN-END:variables
 }
