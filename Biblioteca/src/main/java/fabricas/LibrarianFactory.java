@@ -5,23 +5,22 @@
 package fabricas;
 
 import dao.LibrarianDAO;
+import daoInterfaces.ILibrarianDAO;
 import entityes.Librarian;
 import exceptions.DAOException;
-import java.util.List;
 import utilities.Hasher;
-import daoInterfaces.ILibrarianDAO;
 
 /**
  *
  * @author skevi
  */
 public class LibrarianFactory {
-   
+
     /**
      * 
      */
     private ILibrarianDAO bibliotecarioDAO;
-    
+
     /**
      * 
      */
@@ -40,23 +39,22 @@ public class LibrarianFactory {
      * bibliotecarios.
      * 
      */
-    public void fabricateLibrarians(){
-        try{    
-        for (int i = 1; i <= 5; i++) {
-            // Crear una instancia de Librarian con datos ficticios
-            Librarian bibliotecario = new Librarian(
-                    "bibliotecario" + i + "@biblioteca.com", // Correo ficticio
-                    hasher.hashPassword("contrasena123")
-            );
-            // Agregar el bibliotecario a la lista en LibrarianDAO
-            bibliotecarioDAO.addLibrarian(bibliotecario);
+    public void fabricateLibrarians() {
+        try {
+            for (int i = 1; i <= 5; i++) {
+                // Crear una instancia de Librarian con datos ficticios
+                Librarian bibliotecario = new Librarian(
+                        "bibliotecario" + i + "@biblioteca.com", // Correo ficticio
+                        hasher.hashPassword("contrasena123"));
+                // Agregar el bibliotecario a la lista en LibrarianDAO
+                bibliotecarioDAO.addLibrarian(bibliotecario);
             }
-        
-            //imprimimos la lista de bibliotecarios para verificar 
+
+            // imprimimos la lista de bibliotecarios para verificar
             for (Librarian bibliotecariolist : bibliotecarioDAO.getLibrarians()) {
                 System.out.println(bibliotecariolist.toString());
             }
-        }catch(DAOException ex){
+        } catch (DAOException ex) {
             System.out.println("error al fabricar los bibliotecarios");
         }
     }

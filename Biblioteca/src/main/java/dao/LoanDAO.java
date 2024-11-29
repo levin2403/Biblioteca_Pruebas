@@ -1,16 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
-import entityes.Book;
-import entityes.Loan;
-import exceptions.DAOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import daoInterfaces.ILoanDAO;
+import entityes.Book;
+import entityes.Loan;
 import entityes.User;
+import exceptions.DAOException;
 
 /**
  * Clase que actúa como el Data Access Object (DAO) para la entidad Prestamo.
@@ -23,7 +20,7 @@ public class LoanDAO implements ILoanDAO {
      * Lista que almacena los préstamos en memoria. Representa la base de datos
      * en esta implementación.
      */
-    private static List<Loan> prestamos = new ArrayList<>();
+    private static final List<Loan> prestamos = new ArrayList<>();
 
     /**
      *
@@ -53,7 +50,7 @@ public class LoanDAO implements ILoanDAO {
             // Agregar el préstamo a la lista de préstamos
             prestamos.add(loan);
 
-        } catch (Exception ex) {
+        } catch (DAOException ex) {
             throw new DAOException("Error al registrar el préstamo", ex);
         }
     }
@@ -76,7 +73,7 @@ public class LoanDAO implements ILoanDAO {
             Book libro = loan.getLibro();
             libro.setPrestado(false); // Cambia el estado del libro a no prestado
 
-        } catch (Exception ex) {
+        } catch (DAOException ex) {
             throw new DAOException("Error al registrar la devolución del "
                     + "libro", ex);
         }
@@ -88,7 +85,7 @@ public class LoanDAO implements ILoanDAO {
      */
     public List<Loan> getLoans() throws DAOException {
         try {
-            // Verificamos si la lista de préstamos es nula antes de 
+            // Verificamos si la lista de préstamos es nula antes de
             // devolverla.
             if (LoanDAO.prestamos == null) {
                 throw new DAOException("La lista de préstamos no está "
@@ -96,7 +93,7 @@ public class LoanDAO implements ILoanDAO {
             }
             return LoanDAO.prestamos;
 
-        } catch (Exception ex) {
+        } catch (DAOException ex) {
 
             throw new DAOException("Error al obtener la "
                     + "lista de préstamos", ex);
@@ -128,6 +125,6 @@ public class LoanDAO implements ILoanDAO {
     }
 
     public void reset() {
-        this.prestamos.clear();
+        prestamos.clear();
     }
 }

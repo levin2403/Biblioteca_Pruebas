@@ -121,13 +121,4 @@ public class LoanDAOTest {
         assertTrue(loans.isEmpty(), "La lista de préstamos debería estar vacía cuando no se ha registrado ningún préstamo.");
     }
 
-    /**
-     * Verifica que no se pueda obtener préstamos si el DAO está en un estado
-     * inconsistente.
-     */
-    @Test
-    void testGetLoansWhenDAOIsInconsistent() {
-        // Aquí podrías simular un fallo en el DAO para probar manejo de excepciones
-    }
-
 }

@@ -20,14 +20,7 @@ class BookDAOTest {
 
     @AfterEach
     void tearDown() {
-//        try {
-//            // Limpiar libros después de cada prueba
-//            for (Book book : bookDAO.getBooks()) {
-//                bookDAO.removeBook(book);
-//            }
-//        } catch (DAOException e) {
-//            System.err.println("Error al limpiar los libros: " + e.getMessage());
-//        }
+
     }
 
     @Test
